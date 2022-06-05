@@ -1,38 +1,70 @@
-.App {
+
+.page-ctn {
+  width: 80%;
+  margin: 0 auto 30px auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .page-ctn {
+    width: 95%;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+a {
+  color: #0069c2;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* .detail-ctn > span, p, div{
+  font-family: inherit !important;
+  font-size: inherit !important;
+} */
+
+table.greyGridTable {
+  border: 2px solid #666;
+  width: 100%;
   text-align: center;
+  border-collapse: collapse;
+}
+table.greyGridTable td, table.greyGridTable th {
+  border: 1px solid #666;
+  padding: 3px 4px;
+}
+table.greyGridTable tbody td {
+  font-size: 15px;
+}
+table.greyGridTable tr:nth-child(even) {
+  background: #EBEBEB;
+}
+table.greyGridTable thead {
+  /* background: #FFFFFF; */
+  background: #EBEBEB;
+  border-bottom: 1.5px solid #333333;
+}
+table.greyGridTable thead th {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 1.5px solid #333333;
+}
+table.greyGridTable thead th:first-child {
+  border-left: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+table.greyGridTable tfoot {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333333;
+  border-top: 1.5px solid #333333;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table.greyGridTable tfoot td {
+  font-size: 15px;
 }
