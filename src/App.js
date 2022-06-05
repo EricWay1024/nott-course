@@ -1,5 +1,5 @@
 import "./App.css";
-import courseData from "./assets/Course_United Kingdom_2022.json";
+import courseData from "./assets/courseData.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 import React from "react";
 import { useEffect } from 'react'
@@ -89,7 +89,7 @@ function Table(props) {
             {keys.map((key, index) => (
               <td key={key} className={index === 0 && noHead ? 'bold' : ''}>
                 {links[key] ? 
-                  (<Link to={`/${links[key]}/${item[key]}`}>{item[key]}</Link>) : 
+                  (<Link to={`/${links[key]}/${item[key]}`}>{processStr(item[key])}</Link>) : 
                   processStr(item[key])}
               </td>
             ))}
@@ -159,7 +159,7 @@ function CoursePage(props) {
 
 const CourseList = (props) => {
   const { offering } = {...useParams(), ...props};
-  useDocumentTitle(`${offering} - Course List`);
+  useDocumentTitle(`${processStr(offering)} - Course List`);
   
   const courses = courseData.data
     .filter((course) => course.offering === offering)
@@ -173,7 +173,7 @@ const CourseList = (props) => {
     }))
     .sort((a, b) => a.code > b.code);
   return (<div className="page-ctn">
-    <h1>{offering}</h1>
+    <h1>{processStr(offering)}</h1>
     <Table data={courses} links={{code: "module"}}/>
   </div>);
 }
