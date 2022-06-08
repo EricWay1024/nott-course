@@ -1,8 +1,8 @@
 import "./App.css";
 import courseData from "./assets/courseData.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
-import React from "react";
-import { useEffect } from 'react'
+import React, {useState, useEffect} from "react";
+import Select from 'react-select';
 
 function useDocumentTitle(title) {
   useEffect(() => {
@@ -157,83 +157,80 @@ function CoursePage(props) {
 }
 
 
-const CourseList = (props) => {
-  const { offering } = {...useParams(), ...props};
-  useDocumentTitle(`${processStr(offering)} - Course List`);
-  
-  const courses = courseData.data
-    .filter((course) => course.offering === offering)
-    .map((course) => ({
-      id: course.code,
-      code: course.code,
-      title: course.title,
-      credits: course.credits,
-      // level: course.level,
-      semester: course.semester,
+let AllSchools = [];
+
+function generateSchoolList(){
+  AllSchools = courseData.data
+  .map((course) => (course.offering))
+  .filter((x, i, a) => a.indexOf(x) === i)
+  .sort();
+
+  AllSchools = AllSchools.map( (school) => {
+    return {value: school, label : school}
+  } );
+}
+
+const AllCourseList = () => {
+
+
+  useDocumentTitle("Courses");
+  const allCourses = courseData.data
+  .map((course) => ({
+    id: course.code,
+    code: course.code,
+    title: course.title,
+    credits: course.credits,
+    offering: course.offering,
+    semester: course.semester,
+  }))
+  .sort((a, b) => a.code > b.code);
+
+  // let courses = allCourses;
+  const[courses, setCourses] = useState(allCourses);
+
+  generateSchoolList();
+
+  const processChange = (selectedSchools) => {
+
+    // console.log(selectedCourses.map(e => e.value));
+
+    setCourses(allCourses.filter((course) => {
+      if(selectedSchools.length === 0)
+        return true
+      return selectedSchools.map(e => e.value).includes(course.offering);
     }))
-    .sort((a, b) => a.code > b.code);
+    // console.log(courses)
+  }
+
   return (<div className="page-ctn">
-    <h1>{processStr(offering)}</h1>
+    <h1>Courses</h1>
+    <h3>Schools</h3>
+    <Select
+        closeMenuOnSelect={false}
+        isMulti
+        onChange={ selectedSchools => processChange(selectedSchools)}
+        options={AllSchools}
+      />
+    <br></br>
+
     <Table data={courses} links={{code: "module"}}/>
   </div>);
 }
 
 
-const SchoolList = () => {
-  useDocumentTitle("Schools");
-  let schools = courseData.data
-    .map((course) => (course.offering))
-    .filter((x, i, a) => a.indexOf(x) === i)
-    .sort();
-  schools = addKeys(schools.map(school => ({school})));
-  return (<div className="page-ctn">
-    <h1>Schools</h1>
-    <Table data={schools} links={{school: "school"}}/>
-  </div>);
-}
-
-// const sampleTable = [
-//   {
-//     id: 1,
-//     name: "John",
-//     age: 30,
-//     job: "teacher",
-//   },
-//   {
-//     id: 2,
-//     name: "Jane",
-//     age: 25,
-//     job: "designer",
-//   },
-//   {
-//     id: 3,
-//     name: "Bob",
-//     age: 20,
-//     job: "builder",
-//   },
-// ];
 function App() {
-  // const courses = courseData.data;
+
   return (
     <div className="App">
-      {/* {courses.map((course) => (
-        <div key={course.code}>
-          <span>{`${course.code} ${course.title}`}</span>
-        </div>
-      ))} */}
-      {/* <Table data={sampleTable}/> */}
-      
-      {/* <CoursePage code="ECON2001" /> */}
-      {/* <CourseList offering="Mathematical Sciences" /> */}
       <Router>
         <Routes>
-          <Route path="/" element={<SchoolList />}/>
-          <Route path="/school/:offering" element={<CourseList />}/>
+          <Route path="/" element={<AllCourseList />}/>
           <Route path="/module/:code" element={<CoursePage />}/>
         </Routes>
       </Router>
     </div>
   );
 }
+
 
 export default App;
