@@ -1,8 +1,9 @@
 import "./App.css";
 import courseData from "./assets/courseData.json";
+import planData from "./assets/planData.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 import React from "react";
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 function useDocumentTitle(title) {
   useEffect(() => {
@@ -52,6 +53,7 @@ const processStr = (str) => {
 };
 
 const camelCaseToWords = function(str){
+  if (str === "ucasCode") return "UCAS Code";
   return str.match(/^[a-z]+|[A-Z][a-z]*/g).map(function(x){
       return x[0].toUpperCase() + x.substr(1).toLowerCase();
   }).join(' ');
@@ -61,14 +63,32 @@ const camelCaseToWords = function(str){
 const RenderHtml = (props) => {
   // convert html to a react element
   let { html } = props;
-  html = html.replace(/(style|face|color)="[^"]*"/g, "");
+  if (!html) { return <div></div>; }
+  html = html.replace(/(style|face|color|width|height|class)="[^"]*"/g, ""); // remove styles
+  html = html.replace(/<img[^>]*>/g, ""); // remove images
+  html = html.replace(/(<br>)+/g, "<br>"); // remove multiple brs
+
+  const id2class = (idRegex, className) => {
+    html = html.replace(new RegExp(`id="${idRegex}"`, "g"), `class="${className}"`);
+  }
+
+  // style education aims for plan
+  id2class("win0divUN_PAM_AIMS_VW_SEQNBR\\\$[0-9]+", "hidden");
+  id2class("UN_PAM_AIMS_VW_UN_AIMS\\\$[0-9]+", "aims-item");
+
+  // style learning outcomes for plan
+  id2class("win0divUN_QA_LRN_OUTCO_UN_LEARN_OUTCOME_T\\\$[0-9]+", "lo-title");
+  id2class("win0divUN_QAA_LRN_OUTC\\\$[0-9]+", "lo-content");
+  id2class("win0divUN_QAA_LRN_OUTCGP\\\$[0-9]+", "hidden");
+  id2class("win0divUN_QA_LRN_OUTCO_UN_TEACH_LRN_ASSMN\\\$[0-9]+", "lo-content");
+
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 function Table(props) {
   const data = addKeys(props.data);
   if (!data.length) return (<div>None</div>);
-  const { noHead } = props;
+  const { noHead, noBold } = props;
   const links = props.links || {};
   const keys = Object.keys(data[0]).filter((key) => key !== "id");
   return (
@@ -87,7 +107,7 @@ function Table(props) {
         {data.map((item) => (
           <tr key={item.id}>
             {keys.map((key, index) => (
-              <td key={key} className={index === 0 && noHead ? 'bold' : ''}>
+              <td key={key} className={index === 0 && noHead && !noBold ? 'bold' : ''}>
                 {links[key] ? 
                   (<Link to={`/${links[key]}/${item[key]}`}>{processStr(item[key])}</Link>) : 
                   processStr(item[key])}
@@ -103,13 +123,13 @@ function Table(props) {
 function CoursePage(props) {
   const { code } = {...useParams(), ...props};
   useDocumentTitle(`${code} - Module Details`);
-  const course = courseData.data.find((course) => course.code === code);
+  const course = courseData.find((course) => course.code === code);
   if (!course) return <div>Course code not found</div>;
 
   return (
     <div className="page-ctn">
       <h1>{`${course.code} - ${course.title}`}</h1>
-      <Table data={addKeys([{
+      <Table data={([{
         key: "Code",
         value: course.code
       },
@@ -126,7 +146,7 @@ function CoursePage(props) {
         value: course.level
       },
       {
-        key: "Offering",
+        key: "Offering School",
         value: course.offering
       },
       {
@@ -134,24 +154,30 @@ function CoursePage(props) {
         value: course.semester
       }
       ])} noHead/>
-      <h2>Assessment</h2>
-      <Table data={course.assessment} />
+      <h2>Target Students</h2>
+      <RenderHtml html={course.targetStudents} />
+      <h2>Summary of Content</h2>
+      <RenderHtml html={course.summary} />
+      <h2>Course Web Links</h2>
+      <Table data={course.courseWebLinks}/>
+      <h2>Education Aims</h2>
+      <RenderHtml html={course.aims} />
+      <h2>Convenor</h2>
+      <Table data={course.convenor} />
       <h2>Requisites</h2>
       <Table data={course.requisites} links={{subject: "module"}}/>
       <h2>Additional Requirements</h2>
       <Table data={course.additionalRequirements} />
-      <h2>Class</h2>
+      <h2>Method and Frequency of Class</h2>
       <Table data={course.class} />
-      <h2>Summary</h2>
-      <RenderHtml html={course.summary} />
-      <h2>Aims</h2>
-      <RenderHtml html={course.aims} />
-      <h2>Outcome</h2>
+      <h2>Method of Assessment</h2>
+      <Table data={course.assessment} />
+      <h2>Assessment Period</h2>
+      <RenderHtml html={course.assessmentPeriod} />
+      <h2>Learning Outcome</h2>
       <RenderHtml html={course.outcome} />
-      <h2>Convenor</h2>
-      <Table data={course.convenor} />
-      <h2>Belongs To</h2>
-      <Table data={[course.belongsTo]} />
+      {/* <h2>Belongs to</h2>
+      <Table data={[course.belongsTo]} /> */}
     </div>
   );
 }
@@ -161,7 +187,7 @@ const CourseList = (props) => {
   const { offering } = {...useParams(), ...props};
   useDocumentTitle(`${processStr(offering)} - Course List`);
   
-  const courses = courseData.data
+  const courses = courseData
     .filter((course) => course.offering === offering)
     .map((course) => ({
       id: course.code,
@@ -181,7 +207,7 @@ const CourseList = (props) => {
 
 const SchoolList = () => {
   useDocumentTitle("Schools");
-  let schools = courseData.data
+  let schools = courseData
     .map((course) => (course.offering))
     .filter((x, i, a) => a.indexOf(x) === i)
     .sort();
@@ -192,44 +218,197 @@ const SchoolList = () => {
   </div>);
 }
 
-// const sampleTable = [
-//   {
-//     id: 1,
-//     name: "John",
-//     age: 30,
-//     job: "teacher",
-//   },
-//   {
-//     id: 2,
-//     name: "Jane",
-//     age: 25,
-//     job: "designer",
-//   },
-//   {
-//     id: 3,
-//     name: "Bob",
-//     age: 20,
-//     job: "builder",
-//   },
-// ];
+
+const PlanPage = (props) => {
+  const { code } = {...useParams(), ...props };
+  useDocumentTitle(`${code} - Plan Details`);
+  const plan = planData.find((plan) => plan.academicPlanCode === code);
+  if (!plan) return <div>Plan code not found</div>;
+
+  console.log(Object.keys(plan));
+
+  return (
+    <div className="page-ctn">
+      <h1>{`${plan.title}`}</h1>
+
+      <h2>Basic Information</h2>
+      <Table data={[{
+        key: "Title",
+        value: plan.title
+      }, {
+        key: "Academic Plan Code",
+        value: plan.academicPlanCode
+      }, {
+        key: "UCAS Code",
+        value: plan.ucasCode
+      }, {
+        key: "Plan Type",
+        value: plan.planType
+      }, {
+        key: "Academic Load",
+        value: plan.academicLoad
+      }, {
+        key: "Delivery Mode",
+        value: plan.deliveryMode
+      }]} noHead />
+
+      <h3>School(s) Responsible For Management</h3>
+      <Table data={plan.school} />
+
+      <h3>Plan Accreditation</h3>
+      <Table data={plan.planAccreditation} noHead noBold />
+
+      <h3>Relevant QAA Subject Benchmark(s)</h3>
+      <Table data={plan.subjectBenchmark} noHead noBold />
+
+      <h2>General Information</h2>
+      <h3>Educational Aims</h3>
+      <RenderHtml html={plan.educationalAimsIntro} />
+      <RenderHtml html={plan.educationalAims} />
+      <h3>Outline Description</h3>
+      <RenderHtml html={plan.outlineDescription} />
+
+      <h3>Distinguishing Features</h3>
+      <RenderHtml html={plan.distinguishingFeatures} />
+
+      <h3>Further Information</h3>
+      <RenderHtml html={plan.furtherInformation} />
+
+      <h2>Admission Requirements</h2>
+      <Table data={[{
+        key: "Plan Requirements",
+        value: plan.planRequirements
+      }, {
+        key: "Including Subjects",
+        value: plan.includingSubjects
+      }, {
+        key: "Excluding Subjects",
+        value: plan.excludingSubjects
+      }, {
+        key: "Other Requirements",
+        value: plan.otherRequirements
+      }, {
+        key: "IELTS Requirements",
+        value: plan.ieltsRequirements
+      }]} noHead/>
+      <h3>General Information</h3>
+      <RenderHtml html={plan.generalInformation} />
+
+      <h2>Plan Structure</h2>
+      <div className="struct-ctn">
+        {plan.modules.map(year => (
+          <div class='year-ctn'>
+            <h3>{year.title}</h3>
+            {year.groups.map(group => (
+              <div class='group-ctn'>
+                <h4>{processStr(`${group.title}`)}</h4>
+                {/* <h4>{processStr(`${group.type} - ${group.title}`)}</h4> */}
+                <RenderHtml html={group.message} />
+                <div className="group-table-ctn">
+                  <Table data={group.modules} links={{code: "module"}}/>
+                </div>
+              </div>
+            ))}
+            {year.additionalCourseChoice && (
+              <div class='group-ctn'>
+                <h4>Additional course choice</h4>
+                <RenderHtml html={year.additionalCourseChoice} />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <h2>Assessment</h2>
+      <RenderHtml html={plan.assessment} />
+      <h3>Assessment Marking Criteria</h3>
+      <RenderHtml html={plan.assessmentMarking} />
+      <h3>Progression Information</h3>
+      <RenderHtml html={plan.progressionInformation} />
+      <h3>Borderline Criteria</h3>
+      <RenderHtml html={plan.borderlineCriteria} />
+      <h3>Degree Information</h3>
+      <RenderHtml html={plan.degreeInformation} />
+      <h3>Course Weightings</h3>
+      <Table data={plan.courseWeightings} noHead />
+      <h3>Degree Calculation Model</h3>
+      <Table data={plan.degreeCalculationModel} noHead noBold />
+
+      <h2>Other Regulations</h2>
+      <RenderHtml html={plan.otherRegulations} />
+      <h3>Notwithstanding Regulations</h3>
+      <RenderHtml html={plan.notwithstandingRegulations} />
+
+      <h2>Learning Outcomes</h2>
+      <RenderHtml html={plan.overview} />
+      <RenderHtml html={plan.assessmentMethods} />
+
+      <h3>Teaching and Learning</h3>
+      <RenderHtml html={plan.teachingAndLearning} />
+      <RenderHtml html={plan.learningOutcomes} />
+
+    </div>
+  );
+}
+
+const PlanList = () => {
+  useDocumentTitle("Plans");
+  const [keyword, setKeyword] = useState("");
+  const contains = (str, keyword) => {
+    return str.toLowerCase().includes(keyword.toLowerCase());
+  }
+
+  const plans = planData
+    .filter(plan => contains(plan.title, keyword) 
+      || contains(plan.academicPlanCode, keyword) 
+      || contains(plan.ucasCode, keyword))
+    .map((plan) => ({
+      title: plan.title,
+      academicPlanCode: plan.academicPlanCode,
+      ucasCode: plan.ucasCode,
+    }))
+    .sort((a, b) => a.ucasCode > b.ucasCode);
+  return (<div className="page-ctn">
+    <h1>Plan List</h1>
+    <div className="input-ctn">
+      <input className="search-input" type="text" placeholder="Search" value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
+    </div>
+    <Table data={plans} links={{academicPlanCode: "plan"}}/>
+  </div>);
+
+}
+
+const IndexPage = () => {
+  useDocumentTitle("Nott Course Catalog");
+  return (
+  <div className="page-ctn">
+    <h1>Nott Course Catalog</h1>
+    <p>
+      This is a catalog of courses offered at the <a href="https://www.nottingham.ac.uk/">Nottingham University</a>.
+    </p>
+    <p>
+      This catalogue provides details of the curriculum content – both plans and courses (modules) delivered to students in current and previous academic sessions. Content may change in order to better reflect changes in curriculum and developments in the subject area. This catalogue is therefore a record of current and previous years’ content and should not be relied upon as a definitive guide of what will be delivered in future years.
+    </p>
+    <div>
+      <Link to="/course-index">Courses</Link>
+    </div>
+    <div>
+      <Link to="/plan-index">Plans</Link>
+    </div>
+  </div>);
+}
+
 function App() {
-  // const courses = courseData.data;
   return (
     <div className="App">
-      {/* {courses.map((course) => (
-        <div key={course.code}>
-          <span>{`${course.code} ${course.title}`}</span>
-        </div>
-      ))} */}
-      {/* <Table data={sampleTable}/> */}
-      
-      {/* <CoursePage code="ECON2001" /> */}
-      {/* <CourseList offering="Mathematical Sciences" /> */}
       <Router>
         <Routes>
-          <Route path="/" element={<SchoolList />}/>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/course-index" element={<SchoolList />}/>
+          <Route path="/plan-index" element={<PlanList />}/>
           <Route path="/school/:offering" element={<CourseList />}/>
           <Route path="/module/:code" element={<CoursePage />}/>
+          <Route path="/plan/:code" element={<PlanPage />}/>
         </Routes>
       </Router>
     </div>
