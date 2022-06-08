@@ -73,14 +73,14 @@ const RenderHtml = (props) => {
   }
 
   // style education aims for plan
-  id2class("win0divUN_PAM_AIMS_VW_SEQNBR\\\$[0-9]+", "hidden");
-  id2class("UN_PAM_AIMS_VW_UN_AIMS\\\$[0-9]+", "aims-item");
+  id2class("win0divUN_PAM_AIMS_VW_SEQNBR\\$[0-9]+", "hidden");
+  id2class("UN_PAM_AIMS_VW_UN_AIMS\\$[0-9]+", "aims-item");
 
   // style learning outcomes for plan
-  id2class("win0divUN_QA_LRN_OUTCO_UN_LEARN_OUTCOME_T\\\$[0-9]+", "lo-title");
-  id2class("win0divUN_QAA_LRN_OUTC\\\$[0-9]+", "lo-content");
-  id2class("win0divUN_QAA_LRN_OUTCGP\\\$[0-9]+", "hidden");
-  id2class("win0divUN_QA_LRN_OUTCO_UN_TEACH_LRN_ASSMN\\\$[0-9]+", "lo-content");
+  id2class("win0divUN_QA_LRN_OUTCO_UN_LEARN_OUTCOME_T\\$[0-9]+", "lo-title");
+  id2class("win0divUN_QAA_LRN_OUTC\\$[0-9]+", "lo-content");
+  id2class("win0divUN_QAA_LRN_OUTCGP\\$[0-9]+", "hidden");
+  id2class("win0divUN_QA_LRN_OUTCO_UN_TEACH_LRN_ASSMN\\$[0-9]+", "lo-content");
 
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
