@@ -158,22 +158,38 @@ function CoursePage(props) {
 
 
 let AllSchools = [];
+let AllCredits = [];
+let AllLevels = [];
+let AllSemesters = [];
 
-function generateSchoolList(){
+function generateList(){
   AllSchools = courseData.data
   .map((course) => (course.offering))
   .filter((x, i, a) => a.indexOf(x) === i)
-  .sort();
+  .sort()
+  .map( (school) => {return {value: school, label : school}});
 
-  AllSchools = AllSchools.map( (school) => {
-    return {value: school, label : school}
-  } );
+  AllCredits = [...new Set(courseData.data.map((course) => (course.credits)))]
+  .sort((a, b)=> a - b)
+  .map((credit) => {return {value: credit, label: credit}});
+
+  AllLevels = [...new Set(courseData.data.map((course) => (course.level)))]
+  .sort((a, b)=> a - b)
+  .map((level) => {return {value: level, label: level}});
+
+  AllSemesters = [...new Set(courseData.data.map((course) => (course.semester)))]
+  .sort()
+  .map((semester) => {return {value: semester, label: semester}});
+
 }
 
+let schoolFilters = [];
+let creditFilters = [];
+let levelFilters = [];
+let semesterFilters = [];
+
+
 const AllCourseList = () => {
-
-
-  useDocumentTitle("Courses");
   const allCourses = courseData.data
   .map((course) => ({
     id: course.code,
@@ -181,25 +197,58 @@ const AllCourseList = () => {
     title: course.title,
     credits: course.credits,
     offering: course.offering,
+    level: course.level,
     semester: course.semester,
   }))
   .sort((a, b) => a.code > b.code);
+  useDocumentTitle("Courses");
 
-  // let courses = allCourses;
+  // console.log(allCourses)
+
   const[courses, setCourses] = useState(allCourses);
 
-  generateSchoolList();
+  generateList();
 
-  const processChange = (selectedSchools) => {
-
-    // console.log(selectedCourses.map(e => e.value));
-
-    setCourses(allCourses.filter((course) => {
-      if(selectedSchools.length === 0)
+  const updateCourses = () => {
+    setCourses(allCourses
+      .filter((course) => {
+        if(schoolFilters.length === 0)
+          return true
+        return schoolFilters.includes(course.offering);})
+      .filter((course) => {
+        if(creditFilters.length === 0)
         return true
-      return selectedSchools.map(e => e.value).includes(course.offering);
-    }))
-    // console.log(courses)
+      return creditFilters.includes(course.credits);})
+      .filter((course) => {
+        if(levelFilters.length === 0)
+        return true
+      return levelFilters.includes(course.level);})
+      .filter((course) => {
+        if(semesterFilters.length === 0)
+        return true
+      return semesterFilters.includes(course.semester);})
+    )
+  }
+
+  const schoolSelection = (selectedSchools) => {
+    schoolFilters = selectedSchools.map(e => e.value)
+    updateCourses();
+
+  }
+
+  const creditSelection = (selectedCredits) => {
+    creditFilters = selectedCredits.map(e => e.value)
+    updateCourses();
+  }
+
+  const levelSelection = (selectedLevels) => {
+    levelFilters = selectedLevels.map(e => e.value)
+    updateCourses();
+  }
+
+  const semesterSelection = (selectedSemesters) => {
+    semesterFilters = selectedSemesters.map(e => e.value)
+    updateCourses();
   }
 
   return (<div className="page-ctn">
@@ -208,9 +257,31 @@ const AllCourseList = () => {
     <Select
         closeMenuOnSelect={false}
         isMulti
-        onChange={ selectedSchools => processChange(selectedSchools)}
+        onChange={ selectedSchools => schoolSelection(selectedSchools)}
         options={AllSchools}
       />
+    <h3>Credit</h3>
+    <Select
+        closeMenuOnSelect={false}
+        isMulti
+        onChange={ selectedCredits => creditSelection(selectedCredits)}
+        options={AllCredits}
+      />
+    <h3>Level</h3>
+    <Select
+        closeMenuOnSelect={false}
+        isMulti
+        onChange={ selectedLevels => levelSelection(selectedLevels)}
+        options={AllLevels}
+      />
+    <h3>Semester</h3>
+    <Select
+        closeMenuOnSelect={false}
+        isMulti
+        onChange={ selectedSemesters => semesterSelection(selectedSemesters)}
+        options={AllSemesters}
+      />
+
     <br></br>
 
     <Table data={courses} links={{code: "module"}}/>
