@@ -39,10 +39,10 @@
     <!-- <br /> -->
     <!-- <a href="https://github.com/EricWay1024/nott-course"><strong>Explore the docs »</strong></a> -->
     <br />
-    <!-- <br />
-    <a href="https://nott-course.pages.dev/">View Site</a>
+    <br />
+    <a href="https://nott-course.pages.dev/">View Current Build</a>
     ·
-    <a href="https://github.com/EricWay1024/nott-course/issues">Open Issues</a> -->
+    <a href="https://github.com/EricWay1024/nott-course/issues">Open Issues</a>
   </p>
 </div>
 
