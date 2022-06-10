@@ -10,6 +10,7 @@
 .page-ctn {
   width: 80%;
   margin: 0 auto 30px auto;
+  overflow-x: hidden;
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,45 +116,3 @@ a:hover {
   font-family: inherit !important;
   font-size: inherit !important;
 } */
-
-table.greyGridTable {
-  border: 2px solid #666;
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.greyGridTable td, table.greyGridTable th {
-  border: 1px solid #666;
-  padding: 3px 4px;
-}
-table.greyGridTable tbody td {
-  font-size: 15px;
-}
-table.greyGridTable tr:nth-child(even) {
-  background: #EBEBEB;
-}
-table.greyGridTable thead {
-  /* background: #FFFFFF; */
-  background: #EBEBEB;
-  border-bottom: 1.5px solid #333333;
-}
-table.greyGridTable thead th {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333333;
-  text-align: center;
-  border-left: 1.5px solid #333333;
-}
-table.greyGridTable thead th:first-child {
-  border-left: none;
-}
-
-table.greyGridTable tfoot {
-  font-size: 15px;
-  font-weight: bold;
-  color: #333333;
-  border-top: 1.5px solid #333333;
-}
-table.greyGridTable tfoot td {
-  font-size: 15px;
-}
