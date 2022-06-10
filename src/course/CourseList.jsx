@@ -6,7 +6,7 @@ import Table from '../components/Table';
 
 function CourseList(props) {
   const { offering } = { ...useParams(), ...props };
-  useDocumentTitle(`${processStr(offering)} - Course List`);
+  useDocumentTitle(`${processStr(offering)} - Course List - Nott Course`);
 
   const [courses, setCourses] = useState([]);
   const [searched, setSearched] = useState(false);

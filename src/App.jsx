@@ -11,7 +11,7 @@ import PlanPage from './plan/PlanPage';
 import PlanList from './plan/PlanList';
 
 function IndexPage() {
-  useDocumentTitle('Nott Course Catalog');
+  useDocumentTitle('Nott Course');
   return (
     <div className="page-ctn">
       <div className="index-ctn">

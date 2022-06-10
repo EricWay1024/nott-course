@@ -4,7 +4,7 @@ import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
 
 function PlanList() {
-  useDocumentTitle('Plans');
+  useDocumentTitle('Plan List - Nott Course');
   const [keyword, setKeyword] = useState('');
   const contains = (str, word) => str.toLowerCase().includes(word.toLowerCase());
 

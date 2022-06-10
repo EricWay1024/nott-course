@@ -4,7 +4,7 @@ import { useDocumentTitle, addKeys } from '../utils/helper';
 import Table from '../components/Table';
 
 function SchoolList() {
-  useDocumentTitle('Schools');
+  useDocumentTitle('School List - Nott Course');
   const [schools, setSchools] = useState([]);
   const [searched, setSearched] = useState(false);
 

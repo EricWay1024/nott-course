@@ -7,7 +7,7 @@ import Table from '../components/Table';
 
 function PlanPage(props) {
   const { code } = { ...useParams(), ...props };
-  useDocumentTitle(`${code} - Plan Details`);
+  useDocumentTitle(`${code} - Plan Details - Nott Course`);
 
   const [plan, setPlan] = useState(null);
   const [searched, setSearched] = useState(false);

@@ -7,7 +7,7 @@ import Table from '../components/Table';
 
 function CoursePage(props) {
   const { code } = { ...useParams(), ...props };
-  useDocumentTitle(`${code} - Module Details`);
+  useDocumentTitle(`${code} - Module Details - Nott Course`);
 
   const [course, setCourse] = useState(null);
   const [searched, setSearched] = useState(false);
