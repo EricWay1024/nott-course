@@ -32,17 +32,17 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-<h3 align="center">Nott Course</h3>
+<h3 align="center"><a href="https://nott-course.pages.dev/">Nott Course</a></h3>
 
   <p align="center">
     An UNOFFICIAL enhancement of the course catalogue offered by University of Nottingham
     <!-- <br /> -->
     <!-- <a href="https://github.com/EricWay1024/nott-course"><strong>Explore the docs »</strong></a> -->
     <br />
-    <br />
+    <!-- <br />
     <a href="https://nott-course.pages.dev/">View Site</a>
     ·
-    <a href="https://github.com/EricWay1024/nott-course/issues">Open Issues</a>
+    <a href="https://github.com/EricWay1024/nott-course/issues">Open Issues</a> -->
   </p>
 </div>
 
@@ -54,19 +54,19 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
+      <!-- <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
+      <!-- <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -81,10 +81,10 @@
 
 Better UX for course catalogue of University of Nottingham. <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">The original website</a> contains abundant useful information regarding modules and academic plans, but is extremely frustrating to use. Built for potential or current students to better utilise publicly available data for their plan or module choices, this project, Nott Course, is featured with
 
-- [ x ] FULL data of current year's catalogue;
-- [ x ]Responsive UI design;
-- [ x ]Free navigation from plans to modules;
-- [   ] Advanced filters for modules and plans;
+- FULL data of current year's catalogue;
+- Responsive UI design;
+- Free navigation from plans to modules;
+- Advanced filters for modules and plans;
 - and more.
 
 See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
@@ -147,14 +147,14 @@ npm start
 
 
 <!-- ROADMAP -->
-## Roadmap
+<!-- ## Roadmap
 
 - [ ] Feature 1
 - [ ] Feature 2
 - [ ] Feature 3
     - [ ] Nested Feature
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
 
@@ -202,6 +202,7 @@ Project Link: [https://github.com/EricWay1024/nott-course](https://github.com/Er
 * [uFair-Tech/uCourse-crawler](https://github.com/uFair-Tech/uCourse-crawler)
 * [Course Extract](https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL)
 * [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [Favicon Generator - Text to Favicon - favicon.io](https://favicon.io/favicon-generator/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
