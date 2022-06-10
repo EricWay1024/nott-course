@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addKeys, processStr, camelCaseToWords } from '../utils/helper';
+import './Table.css';
 
 function Table(props) {
   const {
-    noHead, noBold, data, links,
+    noHead, noBold, data, links, keyMap,
   } = props;
   if (!data) return <div />;
   if (!data.length) return <div>None</div>;
@@ -14,38 +15,40 @@ function Table(props) {
     (key) => key !== 'id' && key !== '_id',
   );
   return (
-    <table className="greyGridTable">
-      {!noHead && (
+    <div className="table-ctn">
+      <table className="greyGridTable">
+        {!noHead && (
         <thead>
           <tr>
             {keys.map((key) => (
-              <th key={key}>{camelCaseToWords(key)}</th>
+              <th key={key}>{keyMap[key] || camelCaseToWords(key)}</th>
             ))}
           </tr>
         </thead>
-      )}
+        )}
 
-      <tbody>
-        {dataWithId.map((item) => (
-          <tr key={item.id}>
-            {keys.map((key, index) => (
-              <td
-                key={key}
-                className={index === 0 && noHead && !noBold ? 'bold' : ''}
-              >
-                {links[key] ? (
-                  <Link to={`/${links[key]}/${item[key]}`}>
-                    {processStr(item[key])}
-                  </Link>
-                ) : (
-                  processStr(item[key])
-                )}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        <tbody>
+          {dataWithId.map((item) => (
+            <tr key={item.id}>
+              {keys.map((key, index) => (
+                <td
+                  key={key}
+                  className={index === 0 && noHead && !noBold ? 'bold' : ''}
+                >
+                  {links[key] ? (
+                    <Link to={`/${links[key]}/${item[key]}`}>
+                      {processStr(item[key])}
+                    </Link>
+                  ) : (
+                    processStr(item[key])
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -53,6 +56,7 @@ Table.defaultProps = {
   noHead: false,
   noBold: false,
   links: {},
+  keyMap: {},
 };
 
 Table.propTypes = {
@@ -60,6 +64,7 @@ Table.propTypes = {
   noHead: PropTypes.bool,
   noBold: PropTypes.bool,
   links: PropTypes.shape({}),
+  keyMap: PropTypes.shape({}),
 };
 
 export default Table;
