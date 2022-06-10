@@ -47,35 +47,6 @@
 </div>
 
 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <!-- <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul> -->
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <!-- <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul> -->
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -84,13 +55,13 @@ Better UX for course catalogue of University of Nottingham. <a href="https://cam
 - FULL data of current year's catalogue;
 - Responsive UI design;
 - Free navigation from plans to modules;
-- Advanced filters for modules and plans;
+- Advanced filters for modules and plans (available soon);
 - and more.
 
-See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
+This project is still under development. See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -100,7 +71,7 @@ See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a f
 
 This repo is hosted on [Cloudflare Pages](https://pages.dev/).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -130,7 +101,7 @@ This is an example of how to list things you need to use the software and how to
    npm install
    ```
    
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -142,7 +113,7 @@ Start a local server:
 npm start
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -154,7 +125,7 @@ npm start
 - [ ] Feature 3
     - [ ] Nested Feature
 
-<p align="right">(<a href="#top">back to top</a>)</p> -->
+ -->
 
 
 
@@ -172,7 +143,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -181,7 +152,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
@@ -191,8 +162,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Eric Way - ericway1024@gmail.com
 
 Project Link: [https://github.com/EricWay1024/nott-course](https://github.com/EricWay1024/nott-course)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -204,7 +173,7 @@ Project Link: [https://github.com/EricWay1024/nott-course](https://github.com/Er
 * [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 * [Favicon Generator - Text to Favicon - favicon.io](https://favicon.io/favicon-generator/)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
