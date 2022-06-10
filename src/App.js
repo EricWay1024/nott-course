@@ -1,9 +1,9 @@
 import "./App.css";
-import courseData from "./assets/courseData.json";
-import planData from "./assets/planData.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 import React from "react";
 import { useEffect, useState } from 'react'
+import { getCourse, getCourseList, getSchoolList } from './services/course';
+import { getPlan, getPlanList } from './services/plan';
 
 function useDocumentTitle(title) {
   useEffect(() => {
@@ -11,12 +11,11 @@ function useDocumentTitle(title) {
   }, [title]);
 }
 
-
 const addKeys = (data) => {
   if (!data.length) return [];
   if (data[0].id) return data;
   return data.map((item, index) => {
-    return { ...item, id: index };
+    return { ...item, id: item._id || index };
   });
 };
 
@@ -86,11 +85,12 @@ const RenderHtml = (props) => {
 }
 
 function Table(props) {
+  if (!props.data) return (<div/>);
   const data = addKeys(props.data);
   if (!data.length) return (<div>None</div>);
   const { noHead, noBold } = props;
   const links = props.links || {};
-  const keys = Object.keys(data[0]).filter((key) => key !== "id");
+  const keys = Object.keys(data[0]).filter((key) => key !== "id" && key !=="_id");
   return (
     <table className="greyGridTable">
       {!noHead && (
@@ -123,8 +123,20 @@ function Table(props) {
 function CoursePage(props) {
   const { code } = {...useParams(), ...props};
   useDocumentTitle(`${code} - Module Details`);
-  const course = courseData.find((course) => course.code === code);
-  if (!course) return <div>Course code not found</div>;
+
+  const [course, setCourse] = useState(null);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedCourse = await getCourse(code);
+      setSearched(true);
+      setCourse(fetchedCourse);
+    })();
+  }, [code]);
+  
+  if (!course && !searched) return <div>Loading course...</div>;
+  if (!course && searched) return <div>Course code not found</div>;
 
   return (
     <div className="page-ctn">
@@ -186,35 +198,47 @@ function CoursePage(props) {
 const CourseList = (props) => {
   const { offering } = {...useParams(), ...props};
   useDocumentTitle(`${processStr(offering)} - Course List`);
+
+  const [courses, setCourses] = useState([]);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedCourses = await getCourseList(offering);
+      setCourses(addKeys(fetchedCourses));
+      setSearched(true);
+    })();
+  }, [offering]);
   
-  const courses = courseData
-    .filter((course) => course.offering === offering)
-    .map((course) => ({
-      id: course.code,
-      code: course.code,
-      title: course.title,
-      credits: course.credits,
-      // level: course.level,
-      semester: course.semester,
-    }))
-    .sort((a, b) => a.code > b.code);
   return (<div className="page-ctn">
     <h1>{processStr(offering)}</h1>
-    <Table data={courses} links={{code: "module"}}/>
+    {!searched ?
+      <div>Loading courses...</div> :
+      <Table data={courses} links={{code: "module"}}/>
+    } 
   </div>);
 }
 
 
 const SchoolList = () => {
   useDocumentTitle("Schools");
-  let schools = courseData
-    .map((course) => (course.offering))
-    .filter((x, i, a) => a.indexOf(x) === i)
-    .sort();
-  schools = addKeys(schools.map(school => ({school})));
+  const [schools, setSchools] = useState([]);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedSchools = await getSchoolList();
+      setSchools(addKeys(fetchedSchools.map(s => ({ school: s}))));
+      setSearched(true);
+    })();
+  }, []);
+
   return (<div className="page-ctn">
     <h1>Schools</h1>
-    <Table data={schools} links={{school: "school"}}/>
+    {!searched ?
+      <div>Loading schools...</div> :
+      <Table data={schools} links={{school: "school"}}/>
+    }
   </div>);
 }
 
@@ -222,10 +246,20 @@ const SchoolList = () => {
 const PlanPage = (props) => {
   const { code } = {...useParams(), ...props };
   useDocumentTitle(`${code} - Plan Details`);
-  const plan = planData.find((plan) => plan.academicPlanCode === code);
-  if (!plan) return <div>Plan code not found</div>;
 
-  console.log(Object.keys(plan));
+  const [plan, setPlan] = useState(null);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedPlan = await getPlan(code);
+      setSearched(true);
+      setPlan(fetchedPlan);
+    })();
+  }, [code]);
+
+  if (!searched) return <div>Loading plan...</div>;
+  if (!plan) return <div>Plan code not found</div>;
 
   return (
     <div className="page-ctn">
@@ -302,7 +336,6 @@ const PlanPage = (props) => {
             {year.groups.map(group => (
               <div class='group-ctn'>
                 <h4>{processStr(`${group.title}`)}</h4>
-                {/* <h4>{processStr(`${group.type} - ${group.title}`)}</h4> */}
                 <RenderHtml html={group.message} />
                 <div className="group-table-ctn">
                   <Table data={group.modules} links={{code: "module"}}/>
@@ -358,7 +391,18 @@ const PlanList = () => {
     return str.toLowerCase().includes(keyword.toLowerCase());
   }
 
-  const plans = planData
+  const [plans, setPlans] = useState([]);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedPlans = await getPlanList();
+      setSearched(true);
+      setPlans(fetchedPlans);
+    })();
+  }, []);
+
+  const displayedPlans = plans
     .filter(plan => contains(plan.title, keyword) 
       || contains(plan.academicPlanCode, keyword) 
       || contains(plan.ucasCode, keyword))
@@ -368,12 +412,15 @@ const PlanList = () => {
       ucasCode: plan.ucasCode,
     }))
     .sort((a, b) => a.ucasCode > b.ucasCode);
+  
+  if (!searched) return <div>Loading plans...</div>;
+
   return (<div className="page-ctn">
     <h1>Plan List</h1>
     <div className="input-ctn">
       <input className="search-input" type="text" placeholder="Search" value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
     </div>
-    <Table data={plans} links={{academicPlanCode: "plan"}}/>
+    <Table data={displayedPlans} links={{academicPlanCode: "plan"}}/>
   </div>);
 
 }
