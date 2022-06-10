@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import React from 'react';
 import { useDocumentTitle } from './utils/helper';
-import SchoolList from './course/SchoolList';
+// import SchoolList from './course/SchoolList';
 import CourseList from './course/CourseList';
 import CoursePage from './course/CoursePage';
 import PlanPage from './plan/PlanPage';
@@ -70,9 +70,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<IndexPage />} />
-          <Route path="/course-index" element={<SchoolList />} />
+          <Route path="/course-index" element={<CourseList />} />
           <Route path="/plan-index" element={<PlanList />} />
-          <Route path="/school/:offering" element={<CourseList />} />
+          {/* <Route path="/school/:offering" element={<CourseList />} /> */}
           <Route path="/module/:code" element={<CoursePage />} />
           <Route path="/plan/:code" element={<PlanPage />} />
         </Routes>
