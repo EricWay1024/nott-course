@@ -42,7 +42,7 @@ function IndexPage() {
             here
           </a>
           . All the data on this website can be accessed publicly on the original website.
-          University of Nottingham hasthe copyright of all the data.
+          University of Nottingham has the copyright of all the data.
         </p>
         <p>
           The information contained in this website is for general information purposes
