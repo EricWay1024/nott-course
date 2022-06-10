@@ -50,6 +50,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<img src="img/Screenshot-CourseList.png" alt="Course List Screenshot" />
+
 Better UX for course catalogue of University of Nottingham. <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">The original website</a> contains abundant useful information regarding modules and academic plans, but is extremely frustrating to use. Built for potential or current students to better utilise publicly available data for their plan or module choices, this project, Nott Course, is featured with
 
 - FULL data of current year's catalogue;
