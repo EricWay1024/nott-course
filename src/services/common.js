@@ -1,5 +1,5 @@
-// export const baseUrl = 'https://mongo-realm-worker.ericway1024.workers.dev';
-export const baseUrl = 'http://localhost:8787';
+export const baseUrl = 'https://mongo-realm-worker.ericway1024.workers.dev';
+// export const baseUrl = 'http://localhost:8787';
 export const apiKey = 'B92PR3A2rwy5VQJgKjXxSffzDgjSZjthHghIXK1HGnZ6aYbUgGzdSX8jT4WS23M2';
 
 const headers = {
