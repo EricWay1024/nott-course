@@ -1,93 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { getCourseList } from '../services/course';
-import { useDocumentTitle, addKeys } from '../utils/helper';
+import { getAllValues, queryCourses } from '../services/course';
+import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
 
-let allCourses = [];
-let allSchools = [];
-let allCredits = [];
-let allLevels = [];
-let allSemesters = [];
 let schoolFilters = [];
 let creditFilters = [];
 let levelFilters = [];
 let semesterFilters = [];
-
-function generateList(courseData) {
-  allSchools = courseData
-    .map((course) => (course.offering))
-    .filter((x, i, a) => a.indexOf(x) === i)
-    .sort()
-    .map((school) => ({ value: school, label: school.replace('&amp;', '&') }));
-
-  allCredits = [...new Set(courseData.map((course) => (course.credits)))]
-    .sort((a, b) => a - b)
-    .map((credit) => ({ value: credit, label: credit }));
-
-  allLevels = [...new Set(courseData.map((course) => (course.level)))]
-    .sort((a, b) => a - b)
-    .map((level) => ({ value: level, label: level }));
-
-  allSemesters = [...new Set(courseData.map((course) => (course.semester)))]
-    .sort()
-    .map((semester) => ({ value: semester, label: semester }));
-}
 
 function CourseList() {
   useDocumentTitle('Course List');
 
   const [searched, setSearched] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [allSchools, setAllSchools] = useState([]);
+  const [allCredits, setAllCredits] = useState([]);
+  const [allLevels, setAllLevels] = useState([]);
+  const [allSemesters, setAllSemesters] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const fetchedCourses = addKeys(await getCourseList());
-      allCourses = fetchedCourses;
-      generateList(fetchedCourses);
-      setCourses(fetchedCourses);
+      const fetchedAllValues = await getAllValues();
+      setAllSchools(
+        fetchedAllValues.allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') })),
+      );
+      setAllCredits(
+        fetchedAllValues.allCredits.map((credit) => ({ value: credit, label: credit })),
+      );
+      setAllLevels(
+        fetchedAllValues.allLevels.map((level) => ({ value: level, label: level })),
+      );
+      setAllSemesters(
+        fetchedAllValues.allSemesters.map((semester) => ({ value: semester, label: semester })),
+      );
       setSearched(true);
     })();
   }, []);
 
-  const updateCourses = () => {
-    setCourses(allCourses
-      .filter((course) => {
-        if (schoolFilters.length === 0) return true;
-        return schoolFilters.includes(course.offering);
-      })
-      .filter((course) => {
-        if (creditFilters.length === 0) return true;
-        return creditFilters.includes(course.credits);
-      })
-      .filter((course) => {
-        if (levelFilters.length === 0) return true;
-        return levelFilters.includes(course.level);
-      })
-      .filter((course) => {
-        if (semesterFilters.length === 0) return true;
-        return semesterFilters.includes(course.semester);
-      }));
+  const updateCourses = async () => {
+    const fetchedCourses = await queryCourses({
+      offering: schoolFilters,
+      credits: creditFilters,
+      level: levelFilters,
+      semester: semesterFilters,
+    });
+    setCourses(fetchedCourses);
   };
 
   const schoolSelection = (selectedSchools) => {
     schoolFilters = selectedSchools.map((e) => e.value);
-    updateCourses();
   };
 
   const creditSelection = (selectedCredits) => {
     creditFilters = selectedCredits.map((e) => e.value);
-    updateCourses();
   };
 
   const levelSelection = (selectedLevels) => {
     levelFilters = selectedLevels.map((e) => e.value);
-    updateCourses();
   };
 
   const semesterSelection = (selectedSemesters) => {
     semesterFilters = selectedSemesters.map((e) => e.value);
-    updateCourses();
   };
 
   if (!searched) return (<div>Loading course list...</div>);
@@ -123,6 +97,9 @@ function CourseList() {
         onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
         options={allSemesters}
       />
+      <div className="btn-ctn">
+        <button className="submit-btn" onClick={updateCourses} type="submit">Search</button>
+      </div>
 
       <br />
 

@@ -2,6 +2,6 @@ import { request } from './common';
 
 export const getCourse = async (code) => request(`/api/course?code=${code}`);
 
-export const getCourseList = async () => request('/api/course');
+export const getAllValues = async () => request('/api/query/course/values');
 
-export const getSchoolList = async () => request('/api/school');
+export const queryCourses = async (query) => request('/api/query/course', 'POST', query);
