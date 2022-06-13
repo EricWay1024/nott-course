@@ -23,55 +23,35 @@ function CourseList() {
 
   const [searching, setSearching] = useState(false);
   const [courses, setCourses] = useState([]);
-  // const [allSchools, setAllSchools] = useState([]);
-  // const [allCredits, setAllCredits] = useState([]);
-  // const [allLevels, setAllLevels] = useState([]);
-  // const [allSemesters, setAllSemesters] = useState([]);
-  const [targetCode, setTargetCode] = useState(null);
-  const [targetName, setTargetName] = useState(null);
+  const [targetCode, setTargetCode] = useState('');
+  const [targetName, setTargetName] = useState('');
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const fetchedAllValues = await getAllValues();
-  //     setAllSchools(
-  // eslint-disable-next-line max-len
-  //       fetchedAllValues.allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') })),
-  //     );
-  //     setAllCredits(
-  //       fetchedAllValues.allCredits.map((credit) => ({ value: credit, label: credit })),
-  //     );
-  //     setAllLevels(
-  //       fetchedAllValues.allLevels.map((level) => ({ value: level, label: level })),
-  //     );
-  //     setAllSemesters(
-  //       fetchedAllValues.allSemesters.map((semester) => ({ value: semester, label: semester })),
-  //     );
-  //     setSearched(true);
-  //   })();
-  // }, []);
+  const [hide, setHide] = useState(false);
 
-  const updateCourses = async () => {
-    setSearching(true);
-    let fetchedCourses;
-    if (targetCode != null) {
-      fetchedCourses = await queryCourses({
-        code: targetCourseCode,
-      });
-    } else if (targetName != null) {
-      fetchedCourses = await queryCourses({
-        title: targetCourseName,
-      });
-    } else {
-      fetchedCourses = await queryCourses({
-        offering: schoolFilters,
-        credits: creditFilters,
-        level: levelFilters,
-        semester: semesterFilters,
-      });
-    }
-    setCourses(fetchedCourses);
-    setSearching(false);
-  };
+  const updateCourses = (mode) => (
+    async () => {
+      setSearching(true);
+      let fetchedCourses;
+      if (mode === 'code') {
+        fetchedCourses = await queryCourses({
+          code: targetCourseCode,
+        });
+      } else if (mode === 'title') {
+        fetchedCourses = await queryCourses({
+          title: targetCourseName,
+        });
+      } else {
+        fetchedCourses = await queryCourses({
+          offering: schoolFilters,
+          credits: creditFilters,
+          level: levelFilters,
+          semester: semesterFilters,
+        });
+      }
+      setCourses(fetchedCourses);
+      setSearching(false);
+      setHide(true);
+    });
 
   const schoolSelection = (selectedSchools) => {
     schoolFilters = selectedSchools.map((e) => e.value);
@@ -100,7 +80,6 @@ function CourseList() {
   };
 
   let loading;
-  // if (!searched) return (<div>Loading course list...</div>);
   if (searching) {
     loading = <div>Loading course list...</div>;
   } else {
@@ -109,77 +88,67 @@ function CourseList() {
 
   return (
     <div className="page-ctn">
+      {' '}
       <h1>Courses</h1>
-      <h3>Schools</h3>
-      <Select
-        closeMenuOnSelect={false}
-        isMulti
-        onChange={(selectedSchools) => schoolSelection(selectedSchools)}
-        options={allSchools}
-      />
-      <h3>Credit</h3>
-      <Select
-        closeMenuOnSelect={false}
-        isMulti
-        onChange={(selectedCredits) => creditSelection(selectedCredits)}
-        options={allCredits}
-      />
-      <h3>Level</h3>
-      <Select
-        closeMenuOnSelect={false}
-        isMulti
-        onChange={(selectedLevels) => levelSelection(selectedLevels)}
-        options={allLevels}
-      />
-      <h3>Semester</h3>
-      <Select
-        closeMenuOnSelect={false}
-        isMulti
-        onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
-        options={allSemesters}
-      />
-      <h3>Course Code</h3>
-      <input className="inputBox" placeholder="input course code..." type="text" value={targetCode} onChange={(event) => handleChange(event)} />
+      {!hide
+        ? (
+          <div>
+            <h3>Course Code</h3>
+            <input className="inputBox" placeholder="Input course code..." type="text" value={targetCode} onChange={(event) => handleChange(event)} />
+            <div className="btn-ctn">
+              <button className="submit-btn" onClick={updateCourses('code')} type="submit">Search</button>
+            </div>
+            <hr />
+            <h3>Course Name</h3>
+            <input className="inputBox" placeholder="Input course name..." type="text" value={targetName} onChange={(event) => courseNameInput(event)} />
+            <div className="btn-ctn">
+              <button className="submit-btn" onClick={updateCourses('title')} type="submit">Search</button>
+            </div>
+            <hr />
+            <h3>Schools</h3>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={(selectedSchools) => schoolSelection(selectedSchools)}
+              options={allSchools}
+            />
+            <h3>Credit</h3>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={(selectedCredits) => creditSelection(selectedCredits)}
+              options={allCredits}
+            />
+            <h3>Level</h3>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={(selectedLevels) => levelSelection(selectedLevels)}
+              options={allLevels}
+            />
+            <h3>Semester</h3>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
+              options={allSemesters}
+            />
+            <div className="btn-ctn">
+              <button className="submit-btn" onClick={updateCourses('fitlers')} type="submit">Search</button>
+            </div>
+          </div>
+        )
+        : (
+          <div>
+            <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
+            <div>{loading}</div>
+            <br />
+            <Table data={courses} links={{ code: 'module' }} />
+          </div>
+        )}
 
-      <h3>Course Name</h3>
-      <input className="inputBox" placeholder="input course name..." type="text" value={targetName} onChange={(event) => courseNameInput(event)} />
-
-      <div className="btn-ctn">
-        <button className="submit-btn" onClick={updateCourses} type="submit">Search</button>
-      </div>
-
-      <div>{loading}</div>
-
-      <br />
-
-      <Table data={courses} links={{ code: 'module' }} />
     </div>
   );
 }
-
-// function CourseList(props) {
-//   const { offering } = { ...useParams(), ...props };
-//   useDocumentTitle(`${processStr(offering)} - Course List - Nott Course`);
-
-//   const [courses, setCourses] = useState([]);
-//   const [searched, setSearched] = useState(false);
-
-//   useEffect(() => {
-//     (async () => {
-//       const fetchedCourses = await getCourseList(offering);
-//       setCourses(addKeys(fetchedCourses));
-//       setSearched(true);
-//     })();
-//   }, [offering]);
-
-//   return (
-//     <div className="page-ctn">
-//       <h1>{processStr(offering)}</h1>
-//       {!searched
-//         ? <div>Loading courses...</div>
-//         : <Table data={courses} links={{ code: 'module' }} />}
-//     </div>
-//   );
-// }
 
 export default CourseList;

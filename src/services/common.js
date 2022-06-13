@@ -1,10 +1,17 @@
-export const baseUrl = 'https://mongo-realm-worker.ericway1024.workers.dev';
-// export const baseUrl = 'http://localhost:8787';
-export const apiKey = 'B92PR3A2rwy5VQJgKjXxSffzDgjSZjthHghIXK1HGnZ6aYbUgGzdSX8jT4WS23M2';
+export const baseUrl = 'https://nott-course.ericway.xyz';
 
 const headers = {
-  authorization: `${apiKey}`,
   'Content-Type': 'application/json',
+};
+
+export const parseObjCols = (obj, cols) => {
+  const newObj = obj;
+  cols.forEach((col) => {
+    if (obj[col]) {
+      newObj[col] = JSON.parse(obj[col]);
+    }
+  });
+  return newObj;
 };
 
 export const request = async (url, method = 'GET', data = {}) => {
