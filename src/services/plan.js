@@ -1,17 +1,5 @@
-import { request, parseObjCols } from './common';
+import request from './common';
 
-const planObjCols = [
-  'school',
-  'planAccreditation',
-  'subjectBenchmark',
-  'modules',
-  'courseWeightings',
-  'degreeCalculationModel',
-];
-
-export const getPlan = async (code) => {
-  const plan = await request(`/api/plan?code=${code}`);
-  return parseObjCols(plan, planObjCols);
-};
+export const getPlan = async (code) => request(`/api/plan?code=${code}`);
 
 export const getPlanList = async () => request('/api/plan');

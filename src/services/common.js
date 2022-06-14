@@ -1,20 +1,8 @@
-export const baseUrl = 'https://nott-course.ericway.xyz';
-
-const headers = {
-  'Content-Type': 'application/json',
-};
-
-export const parseObjCols = (obj, cols) => {
-  const newObj = obj;
-  cols.forEach((col) => {
-    if (obj[col]) {
-      newObj[col] = JSON.parse(obj[col]);
-    }
-  });
-  return newObj;
-};
-
-export const request = async (url, method = 'GET', data = {}) => {
+const request = async (url, method = 'GET', data = {}) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   try {
     const res = await fetch(
       `${baseUrl}${url}`,
@@ -28,3 +16,5 @@ export const request = async (url, method = 'GET', data = {}) => {
     return {};
   }
 };
+
+export default request;
