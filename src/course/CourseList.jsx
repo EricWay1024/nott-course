@@ -22,6 +22,7 @@ let targetCourseName = null;
 
 function CourseList() {
   useDocumentTitle('Course List');
+  // eslint-disable-next-line no-plusplus
   const allSchools = values.allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') }));
   const allCredits = values.allCredits.map((credit) => ({ value: credit, label: credit }));
   const allLevels = values.allLevels.map((level) => ({ value: level, label: level }));
@@ -62,7 +63,10 @@ function CourseList() {
     });
 
   const schoolSelection = (selectedSchools) => {
+    // console.log(selectedSchools);
     schoolFilters = selectedSchools.map((e) => e.value);
+    // schoolFilters = selectedSchools.map((e) => ({ value: e.value, index: e.index }));
+    // console.log(schoolFilters);
   };
 
   const creditSelection = (selectedCredits) => {
@@ -78,6 +82,7 @@ function CourseList() {
   };
 
   const handleChange = (event) => {
+    // console.log(schoolFilters);
     setTargetCode(event.target.value);
     targetCourseCode = event.target.value;
   };
@@ -151,7 +156,7 @@ function CourseList() {
                   <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
                   <br />
                   <br />
-                  <hr color="rgba(27, 42, 107, 1)" />
+                  <br />
 
                   <div className="select-card">
                     <Grid className="grid" container spacing={2}>
@@ -163,6 +168,9 @@ function CourseList() {
                             isMulti
                             onChange={(selectedSchools) => schoolSelection(selectedSchools)}
                             options={allSchools}
+                            defaultValue={
+                              allSchools.filter((e) => (schoolFilters.includes(e.value)))
+                            }
                             styles={selectionStyles}
                           />
                         </div>
@@ -174,6 +182,9 @@ function CourseList() {
                             isMulti
                             onChange={(selectedLevels) => levelSelection(selectedLevels)}
                             options={allLevels}
+                            defaultValue={
+                              allLevels.filter((e) => (levelFilters.includes(e.value)))
+                            }
                             styles={selectionStyles}
                           />
                         </div>
@@ -186,6 +197,9 @@ function CourseList() {
                             isMulti
                             onChange={(selectedCredits) => creditSelection(selectedCredits)}
                             options={allCredits}
+                            defaultValue={
+                              allCredits.filter((e) => (creditFilters.includes(e.value)))
+                            }
                             styles={selectionStyles}
                           />
                         </div>
@@ -196,6 +210,9 @@ function CourseList() {
                             isMulti
                             onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
                             options={allSemesters}
+                            defaultValue={
+                              allSemesters.filter((e) => (semesterFilters.includes(e.value)))
+                            }
                             styles={selectionStyles}
                           />
                         </div>
