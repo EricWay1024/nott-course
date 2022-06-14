@@ -35,7 +35,7 @@ function Table(props) {
                   className={index === 0 && noHead && !noBold ? 'bold' : ''}
                 >
                   {links[key] ? (
-                    <Link to={`/${links[key]}/${item[key]}`}>
+                    <Link target="_blank" to={`/${links[key]}/${item[key]}`}>
                       {processStr(item[key])}
                     </Link>
                   ) : (
