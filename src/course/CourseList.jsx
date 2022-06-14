@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+// import IconButton from '@mui/material/IconButton';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import Select from '@mui/material/Select';
+// eslint-disable-next-line no-unused-vars
+import AppsIcon from '@mui/icons-material/Apps';
 import { queryCourses } from '../services/course';
 import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
@@ -79,6 +87,16 @@ function CourseList() {
     targetCourseName = event.target.value;
   };
 
+  // const appbarInput = () => {
+  //   navigation.navigate('Details');
+  // }
+
+  const selectionStyles = {
+    control: (styles) => ({
+      ...styles, color: 'white', minHeight: '56px', backgroundColor: 'rgba(255,255,255,1.0)',
+    }),
+  };
+
   let loading;
   if (searching) {
     loading = <div>Loading course list...</div>;
@@ -87,66 +105,128 @@ function CourseList() {
   }
 
   return (
-    <div className="page-ctn">
-      {' '}
-      <h1>Courses</h1>
-      {!hide
-        ? (
-          <div>
-            <h3>Course Code</h3>
-            <input className="inputBox" placeholder="Input course code..." type="text" value={targetCode} onChange={(event) => handleChange(event)} />
-            <div className="btn-ctn">
-              <button className="submit-btn" onClick={updateCourses('code')} type="submit">Search</button>
-            </div>
-            <hr />
-            <h3>Course Name</h3>
-            <input className="inputBox" placeholder="Input course name..." type="text" value={targetName} onChange={(event) => courseNameInput(event)} />
-            <div className="btn-ctn">
-              <button className="submit-btn" onClick={updateCourses('title')} type="submit">Search</button>
-            </div>
-            <hr />
-            <h3>Schools</h3>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={(selectedSchools) => schoolSelection(selectedSchools)}
-              options={allSchools}
-            />
-            <h3>Credit</h3>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={(selectedCredits) => creditSelection(selectedCredits)}
-              options={allCredits}
-            />
-            <h3>Level</h3>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={(selectedLevels) => levelSelection(selectedLevels)}
-              options={allLevels}
-            />
-            <h3>Semester</h3>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
-              options={allSemesters}
-            />
-            <div className="btn-ctn">
-              <button className="submit-btn" onClick={updateCourses('fitlers')} type="submit">Search</button>
-            </div>
-          </div>
-        )
-        : (
-          <div>
-            <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
-            <div>{loading}</div>
-            <br />
-            <Table data={courses} links={{ code: 'module' }} />
-          </div>
-        )}
+    <div className="page-wrapper">
+      <Grid container spacing={1}>
+        <Grid item xs={1} />
+        <Grid item xs={10}>
+          <div className="page-ctn">
+            {' '}
+            <h1 className="page-title">Courses</h1>
+            {!hide
+              ? (
+                <div>
+                  <h3 className="page-caption">Course Code</h3>
+                  <TextField
+                    label="Input Course Code..."
+                    variant="outlined"
+                    className="inputBox"
+                    placeholder="Input course code..."
+                    type="text"
+                    value={targetCode}
+                    onChange={(event) => handleChange(event)}
+                    sx={{
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none',
+                      },
+                    }}
+                  />
+                  <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('code')} type="submit">Search</Button>
+                  <br />
 
+                  <h3 className="page-caption">Course Name</h3>
+                  <TextField
+                    label="Input Course Name..."
+                    variant="outlined"
+                    className="inputBox"
+                    placeholder="Input course name..."
+                    type="text"
+                    value={targetName}
+                    onChange={(event) => courseNameInput(event)}
+                    sx={{
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none',
+                      },
+                    }}
+                  />
+                  <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
+                  <br />
+                  <br />
+                  <hr color="rgba(27, 42, 107, 1)" />
+
+                  <div className="select-card">
+                    <Grid className="grid" container spacing={2}>
+                      <Grid item xs={6}>
+                        <div className="select-block-left">
+                          <h3 className="card-caption">Schools</h3>
+                          <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            onChange={(selectedSchools) => schoolSelection(selectedSchools)}
+                            options={allSchools}
+                            styles={selectionStyles}
+                          />
+                        </div>
+
+                        <div className="select-block-left">
+                          <h3 className="card-caption">Level</h3>
+                          <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            onChange={(selectedLevels) => levelSelection(selectedLevels)}
+                            options={allLevels}
+                            styles={selectionStyles}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <div className="select-block-right">
+                          <h3 className="card-caption">Credit</h3>
+                          <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            onChange={(selectedCredits) => creditSelection(selectedCredits)}
+                            options={allCredits}
+                            styles={selectionStyles}
+                          />
+                        </div>
+                        <div className="select-block-right">
+                          <h3 className="card-caption">Semester</h3>
+                          <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
+                            options={allSemesters}
+                            styles={selectionStyles}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+
+                    {/* <Grid container spacing={2}>
+                      <Grid item xs={6}></Grid>
+                      <Grid item xs={6}> </Grid>
+                    </Grid> */}
+
+                    <div className="btn-ctn">
+                      <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
+                    </div>
+                  </div>
+
+                </div>
+              )
+              : (
+                <div>
+                  <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
+                  <div>{loading}</div>
+                  <br />
+                  <Table data={courses} links={{ code: 'module' }} />
+                </div>
+              )}
+
+          </div>
+        </Grid>
+        {/* <Grid item xs={1} /> */}
+      </Grid>
     </div>
   );
 }
