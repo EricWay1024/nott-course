@@ -16,6 +16,12 @@ table.greyGridTable tbody td {
 table.greyGridTable tr:nth-child(even) {
   background: #EBEBEB;
 }
+table.greyGridTable tr:nth-child(odd) {
+  background: #FFF;
+}
+table.greyGridTable th {
+  background: #EBEBEB;
+}
 table.greyGridTable thead {
   /* background: #FFFFFF; */
   background: #EBEBEB;
