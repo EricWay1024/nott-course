@@ -52,6 +52,7 @@ function CoursePage(props) {
           value: course.semester,
         },
         ])}
+        orderedKeys={['key', 'value']}
         noHead
       />
       <h2>Target Students</h2>
@@ -59,19 +60,33 @@ function CoursePage(props) {
       <h2>Summary of Content</h2>
       <RenderHtml html={course.summary} />
       <h2>Course Web Links</h2>
-      <Table data={course.courseWebLinks} />
+      <Table data={course.courseWebLinks} orderedKeys={['type', 'link']} />
       <h2>Education Aims</h2>
       <RenderHtml html={course.aims} />
       <h2>Convenor</h2>
-      <Table data={course.convenor} />
+      <Table data={course.convenor} orderedKeys={['name']} />
       <h2>Requisites</h2>
-      <Table data={course.requisites} links={{ subject: 'module' }} />
+      <Table
+        data={course.requisites}
+        orderedKeys={['subject', 'courseTitle']}
+        links={{ subject: 'module' }}
+        keyDisplay={{ subject: 'Course Code' }}
+      />
       <h2>Additional Requirements</h2>
-      <Table data={course.additionalRequirements} />
+      <Table
+        data={course.additionalRequirements}
+        orderedKeys={['operator', 'condition']}
+      />
       <h2>Method and Frequency of Class</h2>
-      <Table data={course.class} />
+      <Table
+        data={course.class}
+        orderedKeys={['activity', 'numOfWeeks', 'numOfSessions', 'sessionDuration']}
+      />
       <h2>Method of Assessment</h2>
-      <Table data={course.assessment} />
+      <Table
+        data={course.assessment}
+        orderedKeys={['type', 'weight', 'requirements']}
+      />
       <h2>Assessment Period</h2>
       <RenderHtml html={course.assessmentPeriod} />
       <h2>Learning Outcome</h2>

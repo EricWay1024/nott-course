@@ -143,7 +143,12 @@ function CourseList() {
             <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
             <div>{loading}</div>
             <br />
-            <Table data={courses} links={{ code: 'module' }} />
+            <Table
+              data={courses}
+              links={{ code: 'module' }}
+              orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
+              keyDisplay={{ offering: 'Offering School' }}
+            />
           </div>
         )}
 

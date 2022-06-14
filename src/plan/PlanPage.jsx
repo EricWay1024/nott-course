@@ -49,16 +49,30 @@ function PlanPage(props) {
           value: plan.deliveryMode,
         }]}
         noHead
+        orderedKeys={['key', 'value']}
       />
 
       <h3>School(s) Responsible For Management</h3>
-      <Table data={plan.school} />
+      <Table
+        data={plan.school}
+        orderedKeys={['school', 'percentage']}
+      />
 
       <h3>Plan Accreditation</h3>
-      <Table data={plan.planAccreditation} noHead noBold />
+      <Table
+        data={plan.planAccreditation}
+        orderedKeys={['accreditation']}
+        noHead
+        noBold
+      />
 
       <h3>Relevant QAA Subject Benchmark(s)</h3>
-      <Table data={plan.subjectBenchmark} noHead noBold />
+      <Table
+        data={plan.subjectBenchmark}
+        orderedKeys={['subject']}
+        noHead
+        noBold
+      />
 
       <h2>General Information</h2>
       <h3>Educational Aims</h3>
@@ -92,6 +106,8 @@ function PlanPage(props) {
           value: plan.ieltsRequirements,
         }]}
         noHead
+        noReverse
+        orderedKeys={['key', 'value']}
       />
       <h3>General Information</h3>
       <RenderHtml html={plan.generalInformation} />
@@ -106,7 +122,11 @@ function PlanPage(props) {
                 <h4>{processStr(`${group.title}`)}</h4>
                 <RenderHtml html={group.message} />
                 <div className="group-table-ctn">
-                  <Table data={group.modules} links={{ code: 'module' }} />
+                  <Table
+                    data={group.modules}
+                    links={{ code: 'module' }}
+                    orderedKeys={['code', 'title', 'credits', 'compensatable', 'taught']}
+                  />
                 </div>
               </div>
             ))}
@@ -131,9 +151,18 @@ function PlanPage(props) {
       <h3>Degree Information</h3>
       <RenderHtml html={plan.degreeInformation} />
       <h3>Course Weightings</h3>
-      <Table data={plan.courseWeightings} noHead />
+      <Table
+        data={plan.courseWeightings}
+        noHead
+        orderedKeys={['part', 'percentage']}
+      />
       <h3>Degree Calculation Model</h3>
-      <Table data={plan.degreeCalculationModel} noHead noBold />
+      <Table
+        data={plan.degreeCalculationModel}
+        noHead
+        noBold
+        orderedKeys={['model']}
+      />
 
       <h2>Other Regulations</h2>
       <RenderHtml html={plan.otherRegulations} />

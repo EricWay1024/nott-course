@@ -22,14 +22,7 @@ function PlanList() {
   const displayedPlans = plans
     .filter((plan) => contains(plan.title, keyword)
       || contains(plan.academicPlanCode, keyword)
-      || contains(plan.ucasCode, keyword))
-    .map((plan) => ({
-      title: plan.title,
-      academicPlanCode: plan.academicPlanCode,
-      ucasCode: plan.ucasCode,
-    }))
-    .sort((a, b) => a.ucasCode > b.ucasCode);
-
+      || contains(plan.ucasCode, keyword));
   if (!searched) return <div>Loading plans...</div>;
 
   return (
@@ -44,7 +37,12 @@ function PlanList() {
           onChange={(e) => setKeyword(e.target.value)}
         />
       </div>
-      <Table data={displayedPlans} links={{ academicPlanCode: 'plan' }} />
+      <Table
+        data={displayedPlans}
+        links={{ academicPlanCode: 'plan' }}
+        orderedKeys={['academicPlanCode', 'title', 'degreeType', 'ucasCode']}
+        keyDisplay={{ ucasCode: 'UCAS Code' }}
+      />
     </div>
   );
 }

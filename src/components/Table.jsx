@@ -6,14 +6,13 @@ import './Table.css';
 
 function Table(props) {
   const {
-    noHead, noBold, data, links, keyMap,
+    noHead, noBold, data, links, keyDisplay, orderedKeys,
   } = props;
   if (!data) return <div />;
   if (!data.length) return <div>None</div>;
   const dataWithId = addKeys(data);
-  const keys = Object.keys(dataWithId[0]).filter(
-    (key) => key !== 'id' && key !== '_id',
-  );
+  const existingKeys = Object.keys(dataWithId[0]);
+  const keys = orderedKeys.filter((key) => existingKeys.includes(key));
   return (
     <div className="table-ctn">
       <table className="greyGridTable">
@@ -21,7 +20,7 @@ function Table(props) {
         <thead>
           <tr>
             {keys.map((key) => (
-              <th key={key}>{keyMap[key] || camelCaseToWords(key)}</th>
+              <th key={key}>{keyDisplay[key] || camelCaseToWords(key)}</th>
             ))}
           </tr>
         </thead>
@@ -56,7 +55,7 @@ Table.defaultProps = {
   noHead: false,
   noBold: false,
   links: {},
-  keyMap: {},
+  keyDisplay: {},
 };
 
 Table.propTypes = {
@@ -64,7 +63,8 @@ Table.propTypes = {
   noHead: PropTypes.bool,
   noBold: PropTypes.bool,
   links: PropTypes.shape({}),
-  keyMap: PropTypes.shape({}),
+  keyDisplay: PropTypes.shape({}),
+  orderedKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Table;
