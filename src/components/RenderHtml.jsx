@@ -28,6 +28,7 @@ function RenderHtml(props) {
   id2class('win0divUN_QAA_LRN_OUTCGP\\$[0-9]+', 'hidden');
   id2class('win0divUN_QA_LRN_OUTCO_UN_TEACH_LRN_ASSMN\\$[0-9]+', 'lo-content');
 
+  // eslint-disable-next-line react/no-danger
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
 

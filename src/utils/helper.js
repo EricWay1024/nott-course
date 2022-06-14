@@ -40,9 +40,11 @@ export const processStr = (str) => {
 
   // remove HTML entities from str
   if (typeof str !== 'string') return str;
-  let res = str;
-  while (true) {
-    const newStr = res
+  let oldStr = '';
+  let newStr = str;
+  while (oldStr !== newStr) {
+    oldStr = newStr;
+    newStr = newStr
       .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
@@ -50,15 +52,12 @@ export const processStr = (str) => {
       .replace(/&#039;/g, "'")
       .replace(/&#x2F;/g, '/')
       .replace(/&nbsp;/g, ' ');
-    if (newStr === res) break;
-    else res = newStr;
   }
-  return decodeEntities(res);
+  return decodeEntities(newStr);
 };
 
 export const camelCaseToWords = (str) => {
   if (typeof str !== 'string') return str;
-  if (str === 'ucasCode') return 'UCAS Code';
   return str
     .match(/^[a-z]+|[A-Z][a-z]*/g)
     .map((x) => x[0].toUpperCase() + x.substring(1).toLowerCase())
