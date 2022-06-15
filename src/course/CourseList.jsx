@@ -109,8 +109,8 @@ function CourseList() {
     },
     palette: {
       neutral: {
-        main: 'rgba(27, 42, 107, 1)',
-        contrastText: '#FFF',
+        main: 'rgb(0, 155, 189)',
+        contrastText: 'black',
       },
     },
   });
@@ -140,7 +140,6 @@ function CourseList() {
                           <div className="search-card">
                             <h3 className="card-caption">Course Code</h3>
                             <TextField
-                              label="Input Course Code..."
                               variant="outlined"
                               className="inputBox"
                               placeholder="Input course code..."
@@ -148,11 +147,6 @@ function CourseList() {
                               value={targetCode}
                               color="neutral"
                               onChange={(event) => handleChange(event)}
-                              sx={{
-                                '& .MuiOutlinedInput-notchedOutline': {
-                                  border: 'none',
-                                },
-                              }}
                             />
                             <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('code')} type="submit">Search</Button>
                           </div>
@@ -162,7 +156,6 @@ function CourseList() {
                           <div className="search-card">
                             <h3 className="card-caption">Course Name</h3>
                             <TextField
-                              label="Input Course Name..."
                               variant="outlined"
                               className="inputBox"
                               placeholder="Input course name..."
@@ -170,11 +163,6 @@ function CourseList() {
                               value={targetName}
                               color="neutral"
                               onChange={(event) => courseNameInput(event)}
-                              sx={{
-                                '& .MuiOutlinedInput-notchedOutline': {
-                                  border: 'none',
-                                },
-                              }}
                             />
                             <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
                           </div>

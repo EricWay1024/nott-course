@@ -147,8 +147,10 @@ a:hover {
   width: 80%;
   margin-right: 50px;
   background-color: rgba(255, 255, 255, 1);
-  border: none !important;
-  border-radius: 5px;
+  border-radius: 4px;
+}
+.inputBox:hover {
+  border: #0069c2;
 }
 
 .inputButton {
@@ -205,8 +207,8 @@ a:hover {
   min-height: 350px;
   position: relative;
   top:15px;
-  /* background-image: linear-gradient(250deg, rgba(27, 42, 107, 0.92), rgba(27, 42, 107, 0.72));  */
-  background-image: linear-gradient(250deg, rgba(0, 86, 151, 0.6), rgba(0, 86, 151, 0.4)); 
+  background-image: linear-gradient(250deg, rgba(27, 42, 107, 0.92), rgba(27, 42, 107, 0.72)); 
+  /* background-image: linear-gradient(250deg, rgba(0, 86, 151, 0.6), rgba(0, 86, 151, 0.4));  */
 
   padding: 2%;
   border-radius: 8px;
@@ -234,7 +236,8 @@ a:hover {
 .search-card{
   width: 94%;
   height: auto;
-  background-image: linear-gradient(250deg, rgba(0, 86, 151, 0.6), rgba(0, 86, 151, 0.4)); 
+  background-image: linear-gradient(250deg, rgba(27, 42, 107, 0.9), rgba(27, 42, 107, 0.7)); 
+
   padding: 4%;
   padding-top: 2%;
   border-radius: 8px;
