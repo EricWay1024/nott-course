@@ -223,3 +223,11 @@ a:hover {
   margin: 30px 0px;
   border-bottom: #0069c2 solid;
 }
+
+.detail-page-wrapper {
+  background-color: white;
+}
+
+.detail-page-ctn {
+  background-color: white;
+}

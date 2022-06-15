@@ -26,11 +26,11 @@ function CoursePage(props) {
   if (!course && searched) return <div>Course code not found</div>;
 
   return (
-    <div className="page-wrapper">
+    <div className="detail-page-wrapper">
       <Grid container spacing={1}>
         <Grid item xs={1} />
         <Grid item xs={10}>
-          <div className="page-ctn">
+          <div className="detail-page-ctn">
             <h1>{`${course.code} - ${course.title}`}</h1>
             <Table
               data={([{
