@@ -26,11 +26,11 @@ function PlanPage(props) {
   if (!plan) return <div>Plan code not found</div>;
 
   return (
-    <div className="page-wrapper">
+    <div className="detail-page-wrapper">
       <Grid container spacing={1}>
         <Grid item xs={1} />
         <Grid item xs={10}>
-          <div className="page-ctn">
+          <div className="detail-page-ctn">
             <h1>{`${plan.title}`}</h1>
 
             <h2>Basic Information</h2>
