@@ -9,8 +9,14 @@ export function useDocumentTitle(title) {
 export const addKeys = (data) => {
   if (!data.length) return [];
   if (data[0].id) return data;
-  // eslint-disable-next-line no-underscore-dangle
-  return data.map((item, index) => ({ ...item, id: item._id || index }));
+  if (data[0].code) {
+    const codeMap = Object.fromEntries(data.map((item) => ([item.code, {
+      ...item,
+      id: item.code,
+    }])));
+    return Object.values(codeMap);
+  }
+  return data.map((item, index) => ({ ...item, id: item.code || index }));
 };
 
 const decodeEntities = (() => {
@@ -62,4 +68,15 @@ export const camelCaseToWords = (str) => {
     .match(/^[a-z]+|[A-Z][a-z]*/g)
     .map((x) => x[0].toUpperCase() + x.substring(1).toLowerCase())
     .join(' ');
+};
+
+export const getSelectedCourses = () => JSON.parse(localStorage.getItem('selectedCourses') || '{}');
+
+export const setSelectedCourses = (currentSelectedCourses) => {
+  const oldSelectedCourses = getSelectedCourses();
+  const selectedCourses = {
+    ...oldSelectedCourses,
+    ...currentSelectedCourses,
+  };
+  localStorage.setItem('selectedCourses', JSON.stringify(selectedCourses));
 };
