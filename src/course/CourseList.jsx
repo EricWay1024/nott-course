@@ -63,10 +63,7 @@ function CourseList() {
     });
 
   const schoolSelection = (selectedSchools) => {
-    // console.log(selectedSchools);
     schoolFilters = selectedSchools.map((e) => e.value);
-    // schoolFilters = selectedSchools.map((e) => ({ value: e.value, index: e.index }));
-    // console.log(schoolFilters);
   };
 
   const creditSelection = (selectedCredits) => {
@@ -82,7 +79,6 @@ function CourseList() {
   };
 
   const handleChange = (event) => {
-    // console.log(schoolFilters);
     setTargetCode(event.target.value);
     targetCourseCode = event.target.value;
   };
@@ -241,6 +237,8 @@ function CourseList() {
                     links={{ code: 'module' }}
                     orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
                     keyDisplay={{ offering: 'Offering School' }}
+                    enableSelection
+                    keyType={{ credits: 'number' }}
                   />
                 </div>
               )}

@@ -131,6 +131,8 @@ function PlanPage(props) {
                           data={group.modules}
                           links={{ code: 'module' }}
                           orderedKeys={['code', 'title', 'credits', 'compensatable', 'taught']}
+                          enableSelection
+                          keyType={{ credits: 'number' }}
                         />
                       </div>
                     </div>

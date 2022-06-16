@@ -21,6 +21,7 @@ import CourseList from './course/CourseList';
 import CoursePage from './course/CoursePage';
 import PlanPage from './plan/PlanPage';
 import PlanList from './plan/PlanList';
+import MyCourses from './course/MyCourses';
 
 function IndexPage() {
   useDocumentTitle('Nott Course');
@@ -118,6 +119,7 @@ function App() {
           {/* <Route path="/school/:offering" element={<CourseList />} /> */}
           <Route path="/module/:code" element={<CoursePage />} />
           <Route path="/plan/:code" element={<PlanPage />} />
+          <Route path="/my" element={<MyCourses />} />
         </Routes>
       </Router>
     </div>
