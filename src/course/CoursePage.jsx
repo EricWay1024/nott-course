@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { CircularProgress } from '@mui/material';
 import { getCourse } from '../services/course';
 import { useDocumentTitle } from '../utils/helper';
 import RenderHtml from '../components/RenderHtml';
 import Table from '../components/Table';
-// import './Course.css';
 
 function CoursePage(props) {
   const { code } = { ...useParams(), ...props };
@@ -22,7 +22,7 @@ function CoursePage(props) {
     })();
   }, [code]);
 
-  if (!course && !searched) return <div>Loading course...</div>;
+  if (!course && !searched) return <CircularProgress />;
   if (!course && searched) return <div>Course code not found</div>;
 
   return (

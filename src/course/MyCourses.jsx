@@ -42,7 +42,7 @@ const getAssessmentList = (courses) => {
         assessmentRequirements: assess.requirements,
         assessmentWeight: assess.weight,
         assessmentContribution:
-          (((1 * assess.weight) * (1 * course.credits)) / creditSum).toPrecision(2),
+          (((1 * assess.weight) * (1 * course.credits)) / creditSum).toFixed(2),
       });
     });
   });

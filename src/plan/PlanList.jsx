@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { CircularProgress } from '@mui/material';
 import { getPlanList } from '../services/plan';
 import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
@@ -24,7 +25,7 @@ function PlanList() {
     .filter((plan) => contains(plan.title, keyword)
       || contains(plan.academicPlanCode, keyword)
       || contains(plan.ucasCode, keyword));
-  if (!searched) return <div>Loading plans...</div>;
+  if (!searched) return <CircularProgress />;
 
   return (
     <div className="page-wrapper">

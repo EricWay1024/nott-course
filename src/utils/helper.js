@@ -9,6 +9,13 @@ export function useDocumentTitle(title) {
 export const addKeys = (data) => {
   if (!data.length) return [];
   if (data[0].id) return data;
+  if (data[0].code) {
+    const codeMap = Object.fromEntries(data.map((item) => ([item.code, {
+      ...item,
+      id: item.code,
+    }])));
+    return Object.values(codeMap);
+  }
   return data.map((item, index) => ({ ...item, id: item.code || index }));
 };
 

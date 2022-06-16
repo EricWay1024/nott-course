@@ -3,6 +3,7 @@ import Select from 'react-select';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 // import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
 // import Select from '@mui/material/Select';
@@ -110,13 +111,6 @@ function CourseList() {
       },
     },
   });
-
-  let loading;
-  if (searching) {
-    loading = <div>Loading course list...</div>;
-  } else {
-    loading = null;
-  }
 
   return (
     <div className="page-wrapper">
@@ -246,7 +240,7 @@ function CourseList() {
               : (
                 <div>
                   <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
-                  <div>{loading}</div>
+                  { searching && <CircularProgress /> }
                   <br />
                   <Table
                     data={courses}
