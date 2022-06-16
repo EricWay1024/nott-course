@@ -3,9 +3,6 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -15,6 +12,7 @@ import {
   BrowserRouter as Router, Routes, Route, Link,
 } from 'react-router-dom';
 import React from 'react';
+import NavBar from './components/NavBar';
 import { useDocumentTitle } from './utils/helper';
 // import SchoolList from './course/SchoolList';
 import CourseList from './course/CourseList';
@@ -43,13 +41,6 @@ function IndexPage() {
 
   return (
     <div className="page-wrapper">
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit" component="div">
-            Course
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Grid container spacing={1}>
         <Grid item xs={1} />
         <Grid item xs={10}>
@@ -111,6 +102,10 @@ function IndexPage() {
 function App() {
   return (
     <div className="App">
+      <div className="nav-bar">
+        <NavBar />
+      </div>
+
       <Router>
         <Routes>
           <Route path="/" element={<IndexPage />} />

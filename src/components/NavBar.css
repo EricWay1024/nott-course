@@ -1,0 +1,11 @@
+.nav-caption{
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 19px;
+    font-weight: bold !important;
+}
+
+
+.page-button:hover{
+    border-bottom: 2px solid white;
+    border-radius: 0;
+}
