@@ -64,6 +64,8 @@ This project is still under development. See the [open issues](https://github.co
 
 The backend server for this project can be found here: [EricWay1024/nott-course-server-cpp: C++ Web Server for Nott Course, an unofficial enhancement of the course catalogue offered by University of Nottingham.](https://github.com/EricWay1024/nott-course-server-cpp).
 
+The crawler for this project can be found here: [EricWay1024/uCourse-crawler: 🎒 Scrape the courses info from the University of Nottingham's website.](https://github.com/EricWay1024/uCourse-crawler).
+
 
 ### Built With
 
