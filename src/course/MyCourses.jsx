@@ -3,23 +3,14 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
-import { getCourse } from '../services/course';
-import { getSelectedCourses } from '../utils/helper';
+import { getCourses } from '../services/course';
+import { getSelectedCourses, addKeys } from '../utils/helper';
 import Table from '../components/Table';
 
-const getCourseList = async (codes) => Promise.all(codes.map(async (code) => {
-  const res = await getCourse(code);
-  return {
-    id: res.code,
-    code: res.code,
-    title: res.title,
-    offering: res.offering,
-    level: res.level,
-    credits: res.credits,
-    semester: res.semester,
-    assessment: res.assessment,
-  };
-}));
+const getCourseList = async (codes) => {
+  const res = await getCourses(codes);
+  return addKeys(res);
+};
 
 const getCreditSum = (courses) => {
   let creditSum = 0;
