@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import {
   addKeys, processStr, camelCaseToWords, getSelectedCourses, setSelectedCourses,
@@ -10,12 +11,13 @@ import './Table.css';
 function Table(props) {
   const {
     noHead, noBold, data, links, keyDisplay, orderedKeys, enableSelection, keyType, datagridProps,
+    onSelectionMapChange,
   } = props;
-  if (!data) return <div />;
-  if (!data.length) return <div>None</div>;
+  if (!data || !data.length) return <div />;
   const existingKeys = Object.keys(data[0]);
   const keys = orderedKeys.filter((key) => existingKeys.includes(key));
 
+  // handle column length
   const lengths = {};
   for (let i = 0; i < Math.min(10, data.length); i += 1) {
     const row = data[i];
@@ -26,6 +28,7 @@ function Table(props) {
     });
   }
 
+  // set column configs
   const columns = keys.map(
     (key, index) => {
       const colConfigs = {
@@ -49,6 +52,7 @@ function Table(props) {
     },
   );
 
+  // generate rows
   const rows = addKeys(data.map(
     (row) => {
       const newRow = {};
@@ -59,6 +63,7 @@ function Table(props) {
     },
   ));
 
+  // optional props
   const optionalProps = {};
   if (noHead) {
     optionalProps.headerHeight = 0;
@@ -69,6 +74,7 @@ function Table(props) {
     optionalProps.hideFooter = true;
   }
 
+  // handle course selection
   // eslint-disable-next-line react/prop-types
   const rowsId = rows.map((row) => row.id);
 
@@ -78,31 +84,36 @@ function Table(props) {
     enableSelection ? rowsId.filter((id) => selectionMap[id]) : [],
   );
 
+  const onSelectionModelChange = (newSelectionModel) => {
+    const addedCourses = newSelectionModel
+      .filter((course) => !selectionModel.includes(course));
+    const removedCourses = selectionModel
+      .filter((course) => !newSelectionModel.includes(course));
+    removedCourses.forEach((id) => { selectionMap[id] = 0; });
+    addedCourses.forEach((id) => { selectionMap[id] = 1; });
+    setSelectionModel(newSelectionModel);
+    setSelectedCourses(selectionMap);
+    onSelectionMapChange(selectionMap);
+  };
+
   return (
     <div className="table-ctn">
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        autoHeight
-        getRowHeight={() => 'auto'}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...optionalProps}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...datagridProps}
-        checkboxSelection={enableSelection}
-        disableSelectionOnClick
-        onSelectionModelChange={(newSelectionModel) => {
-          const addedCourses = newSelectionModel
-            .filter((course) => !selectionModel.includes(course));
-          const removedCourses = selectionModel
-            .filter((course) => !newSelectionModel.includes(course));
-          removedCourses.forEach((id) => { selectionMap[id] = 0; });
-          addedCourses.forEach((id) => { selectionMap[id] = 1; });
-          setSelectionModel(newSelectionModel);
-          setSelectedCourses(selectionMap);
-        }}
-        selectionModel={selectionModel}
-      />
+      <Box>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight
+          getRowHeight={() => 'auto'}
+          checkboxSelection={enableSelection}
+          disableSelectionOnClick
+          onSelectionModelChange={onSelectionModelChange}
+          selectionModel={selectionModel}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...optionalProps}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...datagridProps}
+        />
+      </Box>
     </div>
   );
 }
@@ -115,6 +126,7 @@ Table.defaultProps = {
   enableSelection: false,
   keyType: {},
   datagridProps: {},
+  onSelectionMapChange: () => {},
 };
 
 Table.propTypes = {
@@ -127,6 +139,7 @@ Table.propTypes = {
   enableSelection: PropTypes.bool,
   keyType: PropTypes.shape({}),
   datagridProps: PropTypes.shape({}),
+  onSelectionMapChange: PropTypes.func,
 };
 
 export default Table;

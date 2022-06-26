@@ -20,6 +20,8 @@ import CoursePage from './course/CoursePage';
 import PlanPage from './plan/PlanPage';
 import PlanList from './plan/PlanList';
 import MyCourses from './course/MyCourses';
+import CourseSolution from './course/CourseSolution';
+import MyAssessments from './course/MyAssessments';
 
 function IndexPage() {
   useDocumentTitle('Nott Course');
@@ -115,6 +117,8 @@ function App() {
           <Route path="/module/:code" element={<CoursePage />} />
           <Route path="/plan/:code" element={<PlanPage />} />
           <Route path="/my" element={<MyCourses />} />
+          <Route path="/solution" element={<CourseSolution />} />
+          <Route path="/my-assess" element={<MyAssessments />} />
         </Routes>
       </Router>
     </div>

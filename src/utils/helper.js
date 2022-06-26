@@ -70,7 +70,14 @@ export const camelCaseToWords = (str) => {
     .join(' ');
 };
 
-export const getSelectedCourses = () => JSON.parse(localStorage.getItem('selectedCourses') || '{}');
+export const getLocalStorage = (key, defaultValue = {}) => JSON.parse(localStorage.getItem(key))
+  || defaultValue;
+
+export const setLocalStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const getSelectedCourses = () => getLocalStorage('selectedCourses');
 
 export const setSelectedCourses = (currentSelectedCourses) => {
   const oldSelectedCourses = getSelectedCourses();
@@ -78,5 +85,57 @@ export const setSelectedCourses = (currentSelectedCourses) => {
     ...oldSelectedCourses,
     ...currentSelectedCourses,
   };
-  localStorage.setItem('selectedCourses', JSON.stringify(selectedCourses));
+  setLocalStorage('selectedCourses', selectedCourses);
+};
+
+export const generatePlanSettings = async (selectedYear, plan) => {
+  let { groups } = plan.modules[selectedYear.year];
+  if (groups.filter((group) => group.type === 'Additional').length === 0) {
+    groups.push({
+      title: 'Additional Course Choice',
+      type: 'Additional',
+      message: plan.modules[selectedYear.year].additionalCourseChoice || '',
+      modules: [],
+    });
+  }
+
+  groups = groups.map((group) => {
+    const res = group;
+    res.creditSum = 0;
+    res.modules.forEach((module) => {
+      res.creditSum += 1 * module.credits;
+    });
+
+    if (res.type === 'Compulsory') {
+      res.creditLow = res.creditSum;
+      res.creditHigh = res.creditSum;
+    } else if (res.type === 'Alternative') {
+      res.creditLow = 0;
+      res.creditHigh = 120;
+    } else {
+      const matchLow = res.message.match(/minimum of ([0-9]+)/);
+      const matchHigh = res.message.match(/maximum of ([0-9]+)/);
+      if (matchLow) res.creditLow = 1 * matchLow[1];
+      else res.creditLow = 0;
+      if (matchHigh) res.creditHigh = 1 * matchHigh[1];
+      else res.creditHigh = 120;
+    }
+    return res;
+  });
+
+  const creditSum = 120;
+  const semesterLow = 50;
+  const semesterHigh = 70;
+  const groupLow = groups.map((group) => group.creditLow);
+  const groupHigh = groups.map((group) => group.creditHigh);
+
+  return {
+    groups,
+    creditSum,
+    semesterHigh,
+    semesterLow,
+    groupHigh,
+    groupLow,
+    selectedYear,
+  };
 };
