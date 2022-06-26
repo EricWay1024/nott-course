@@ -8,7 +8,7 @@ import RenderHtml from '../components/RenderHtml';
 import Table from '../components/Table';
 import './course.css';
 
-export default function CourseSolution() {
+export default function CreditSettings() {
   const selectedYear = getLocalStorage('selectedYear', null);
   const planSettings = getLocalStorage('planSettings', null);
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import { CircularProgress } from '@mui/material';
 import { getPlanList } from '../services/plan';
 import { useDocumentTitle } from '../utils/helper';
@@ -35,12 +36,13 @@ function PlanList() {
           <div className="page-ctn">
             <h1>Plan List</h1>
             <div className="input-ctn">
-              <input
+              <TextField
                 className="search-input"
                 type="text"
                 placeholder="Search"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
+                variant="standard"
               />
             </div>
             <Table

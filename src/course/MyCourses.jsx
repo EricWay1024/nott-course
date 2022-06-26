@@ -235,7 +235,7 @@ function MyCourses() {
               <Grid>
 
                 <Button
-                  href="/solution"
+                  href="/credit-settings"
                 >
                   Edit Range
                 </Button>

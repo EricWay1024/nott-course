@@ -239,7 +239,10 @@ function CourseList() {
               )
               : (
                 <div>
-                  <button type="button" className="submit-btn" onClick={() => setHide(false)}>Back</button>
+                  <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
+                  <br />
+                  <br />
+                  <br />
                   { searching && <CircularProgress /> }
                   <br />
                   <Table
