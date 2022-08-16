@@ -40,9 +40,10 @@ function PlanList() {
                 className="search-input"
                 type="text"
                 placeholder="Search"
+                label="Search"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                variant="standard"
+                sx={{ backgroundColor: 'white' }}
               />
             </div>
             <Table

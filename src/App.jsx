@@ -3,10 +3,9 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import Grid from '@mui/material/Grid';
 
 import {
-  BrowserRouter as Router, Routes, Route, Link,
+  BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom';
 import React from 'react';
 import NavBar from './components/NavBar';
@@ -16,11 +15,24 @@ import CoursePage from './course/CoursePage';
 import PlanPage from './plan/PlanPage';
 import PlanList from './plan/PlanList';
 import MyCourses from './course/MyCourses';
-import CreditSettings from './course/CreditSettings';
-import MyAssessments from './course/MyAssessments';
 
 function IndexPage() {
   useDocumentTitle('Nott Course');
+  // const theme = createTheme({
+  //   status: {
+  //     danger: '#e53e3e',
+  //   },
+  //   palette: {
+  //     primary: {
+  //       main: '#0971f1',
+  //       darker: '#053e85',
+  //     },
+  //     neutral: {
+  //       main: 'rgba(27, 42, 107, 0.8)',
+  //       contrastText: '#FFF',
+  //     },
+  //   },
+  // });
 
   return (
     <div className="page-wrapper">
@@ -98,6 +110,7 @@ function App() {
           <Route path="/module/:code" element={<CoursePage />} />
           <Route path="/plan/:code" element={<PlanPage />} />
           <Route path="/my" element={<MyCourses />} />
+          <Route path="/about" element={<About />} />
           <Route path="/credit-settings" element={<CreditSettings />} />
           <Route path="/my-assess" element={<MyAssessments />} />
         </Routes>

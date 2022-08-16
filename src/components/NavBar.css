@@ -6,6 +6,6 @@
 
 
 .page-button:hover{
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid rgba(27, 42, 107, 0.8);
     border-radius: 0;
 }
