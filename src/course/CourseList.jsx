@@ -4,12 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import Select from '@mui/material/Select';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// eslint-disable-next-line no-unused-vars
-import AppsIcon from '@mui/icons-material/Apps';
 import { queryCourses } from '../services/course';
 import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
@@ -24,7 +19,6 @@ let targetCourseName = null;
 
 function CourseList() {
   useDocumentTitle('Course List');
-  // eslint-disable-next-line no-plusplus
   const allSchools = values.allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') }));
   const allCredits = values.allCredits.map((credit) => ({ value: credit, label: credit }));
   const allLevels = values.allLevels.map((level) => ({ value: level, label: level }));
@@ -233,43 +227,37 @@ function CourseList() {
                         </Grid>
                       </Grid>
 
-                      {/* <Grid container spacing={2}>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}> </Grid>
-                    </Grid> */}
-
                       <div className="btn-ctn">
                         <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
                       </div>
                     </div>
 
-                </div>
-              )
-              : (
-                <div>
-                  <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
-                  <br />
-                  <br />
-                  <br />
-                  { searching && <CircularProgress /> }
-                  <br />
-                  <Table
-                    data={courses}
-                    links={{ code: 'module' }}
-                    orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
-                    keyDisplay={{ offering: 'Offering School' }}
-                    enableSelection
-                    keyType={{ credits: 'number' }}
-                  />
-                </div>
-              )}
+                  </div>
+                )
+                : (
+                  <div>
+                    <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
+                    <br />
+                    <br />
+                    <br />
+                    { searching && <CircularProgress /> }
+                    <br />
+                    <Table
+                      data={courses}
+                      links={{ code: 'module' }}
+                      orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
+                      keyDisplay={{ offering: 'Offering School' }}
+                      enableSelection
+                      keyType={{ credits: 'number' }}
+                    />
+                  </div>
+                )}
+            </div>
 
           </div>
         </Grid>
-        {/* <Grid item xs={1} /> */}
       </Grid>
     </div>
   );
 }
-
 export default CourseList;
