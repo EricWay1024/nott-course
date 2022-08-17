@@ -3,19 +3,38 @@ import React from 'react';
 function About() {
   return (
     <div className="about-page-wrapper">
-      <h2>DISCLAIMER</h2>
       <p>
-        This is an
+        This website is an
         {' '}
         <b>UNOFFICIAL</b>
         {' '}
-        replicate of the course catalogue offered by University of Nottingham
+        enhancement of the course catalogue offered by University of Nottingham
         {' '}
         <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">
           here
         </a>
-        . All the data on this website can be accessed publicly on the original website.
+        , developed with the purpose of boosting user experience in browsing course and plan
+        details, and further allowing users to plan for course enrolment by ticking their
+        plan and courses of their interest.
+      </p>
+      <p>
+        The data on this website was last updated in June, 2022.
+      </p>
+      <p>
+        This website is deployed on Cloudflare Pages and is open-soucred under MIT license on
+        {' '}
+        <a href="https://github.com/EricWay1024/nott-course">GitHub</a>
+        . Please consider give the repo a star if you find this website useful.
+      </p>
+      <h2>DISCLAIMER</h2>
+      <p>
+        All the data on this website can be accessed publicly on the original website.
         University of Nottingham has the copyright of all the data.
+      </p>
+      <p>
+        Only essential data are transmitted to the server for database query and are not recorded
+        in any format. Your course/plan selections are processed locally on your browser and are not
+        transmitted to the server.
       </p>
       <p>
         The information contained in this website is for general information purposes
@@ -28,11 +47,12 @@ function About() {
         strictly at your own risk.
       </p>
       <p>
-        In no event will we be liable for any loss or damage includingwithout limitation,
+        In no event will we be liable for any loss or damage including without limitation,
         indirect or consequential loss or damage, or any loss or damage whatsoever arising
         from loss of data or profits arising out of, or in connection with, the use of this
         website.
       </p>
+
     </div>
   );
 }
