@@ -16,7 +16,7 @@ function About() {
         <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">
           the course catalogue offered by University of Nottingham
         </a>
-        , developed with the purpose of boosting user experience in browsing course and plan
+        , developed with the purpose of boosting user experience in browsing module and plan
         details, and further allowing users to draft their module selection conveniently.
       </p>
       <h2>How to view the details of a module?</h2>
