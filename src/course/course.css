@@ -6,3 +6,10 @@
 .group-detail-ctn {
   margin: 10px;
 }
+
+.plan-img {
+  width: 80%;
+  margin: 15px auto;
+  border: 2px solid #ccc;
+  display: block;
+}

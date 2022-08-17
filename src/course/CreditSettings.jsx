@@ -34,7 +34,6 @@ export default function CreditSettings() {
 
   return (
     <Box sx={{
-      width: '90%',
       margin: '0 auto',
       marginBottom: '50px',
     }}

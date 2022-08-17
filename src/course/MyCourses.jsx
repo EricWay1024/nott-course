@@ -11,6 +11,7 @@ import { getSelectedCourses, getLocalStorage } from '../utils/helper';
 import Table from '../components/Table';
 import CourseGroup from '../components/CourseGroup';
 import './course.css';
+import PlanScreenshot from '../assets/Screenshot-SelectPlan.png';
 
 const getCourseGroup = (course, planSettings) => {
   let courseGroup = planSettings.groups.length - 1;
@@ -132,12 +133,33 @@ function MyCourses() {
 
   if (!planSettings || !selectedYear) {
     return (
-      <div>
-        <Link to="/plan-index" target="_blank">
-          Find your academic plan
-        </Link>
+      <div className="detail-page-ctn">
+        <p>
+          You have not selected your current year!
+        </p>
+        <br />
+        STEP 1:
         {' '}
-        and choose your current year.
+        Find your academic plan by
+        {' '}
+        <Link to="/plan-index" target="_blank">
+          searching here
+        </Link>
+        .
+        {' '}
+        <br />
+        STEP 2:
+        {' '}
+        Choose your current year by ticking the corresponding checkbox, as shown below:
+        <img
+          src={PlanScreenshot}
+          alt="screen shot"
+          className="plan-img"
+        />
+        <br />
+        STEP 3:
+        {' '}
+        Come back to this page and reload.
       </div>
     );
   }
@@ -147,111 +169,106 @@ function MyCourses() {
   }
 
   return (
-    <div className="detail-page-wrapper">
-      <Grid container spacing={1}>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <div className="detail-page-ctn">
-            <Button
-              onClick={() => {
-                window.location.reload(false);
-              }}
-            >
-              Reload Page
-            </Button>
-            <h1>My Courses</h1>
-            <div>
-              {'You have selected: '}
-              <Link to={`/plan/${selectedYear.planCode}`}>{`${selectedYear.planTitle}, ${selectedYear.yearTitle}`}</Link>
-              .
-              <br />
-              <br />
-              Want to change your plan or year?
-              {' '}
-              <Link to="/plan-index" target="_blank">
-                Find your academic plan
-              </Link>
-              {' '}
-              and choose your current year.
-              <br />
-            </div>
-            {planSettings.groups.map((group, groupIndex) => (
-              <CourseGroup
-                group={group}
-                enableSelection
-                groupIndex={groupIndex}
-                key={group.title}
-                onSelectionMapChange={(sm) => { setSelectionMap(sm); }}
-              />
-            ))}
-            <Table
-              data={additionalCourses}
-              links={{ code: 'module' }}
-              orderedKeys={[
-                'code',
-                'title',
-                'offering',
-                'level',
-                'credits',
-                'semester',
-              ]}
-              keyDisplay={{ offering: 'Offering School' }}
-              enableSelection
-              onSelectionMapChange={(sm) => { setSelectionMap(sm); }}
-            />
-            <div>
-              <br />
-              Need additional modules?
-              {' '}
-              <Link to="/course-index" target="_blank">
-                Search for courses
-              </Link>
-              {' '}
-              and check the ones you would like to choose.
-            </div>
 
-            <h1>My Assessments</h1>
-            <Button variant="contained" href="/my-assess">Go to assessment list</Button>
+    <div className="detail-page-ctn">
+      <Button
+        onClick={() => {
+          window.location.reload(false);
+        }}
+      >
+        Reload Page
+      </Button>
+      <h1>My Courses</h1>
+      <div>
+        {'You have selected: '}
+        <Link to={`/plan/${selectedYear.planCode}`}>{`${selectedYear.planTitle}, ${selectedYear.yearTitle}`}</Link>
+        .
+        <br />
+        <br />
+        Want to change your plan or year?
+        {' '}
+        <Link to="/plan-index" target="_blank">
+          Find your academic plan
+        </Link>
+        {' '}
+        and choose your current year.
+        <br />
+      </div>
+      {planSettings.groups.map((group, groupIndex) => (
+        <CourseGroup
+          group={group}
+          enableSelection
+          groupIndex={groupIndex}
+          key={group.title}
+          onSelectionMapChange={(sm) => { setSelectionMap(sm); }}
+        />
+      ))}
+      <Table
+        data={additionalCourses}
+        links={{ code: 'module' }}
+        orderedKeys={[
+          'code',
+          'title',
+          'offering',
+          'level',
+          'credits',
+          'semester',
+        ]}
+        keyDisplay={{ offering: 'Offering School' }}
+        enableSelection
+        onSelectionMapChange={(sm) => { setSelectionMap(sm); }}
+      />
+      <div>
+        <br />
+        Need additional modules?
+        {' '}
+        <Link to="/course-index" target="_blank">
+          Search for courses
+        </Link>
+        {' '}
+        and check the ones you would like to choose.
+      </div>
 
-            <Fab
-              color="primary"
-              aria-label="expand"
-              onClick={() => setDrawerOpen(true)}
-              sx={{
-                position: 'fixed',
-                right: '4vw',
-                bottom: '8vh',
-              }}
-            >
-              <FunctionsIcon />
-            </Fab>
+      <h1>My Assessments</h1>
+      <Button variant="contained" href="/my-assess">Go to assessment list</Button>
 
-            <Drawer
-              anchor="bottom"
-              open={drawerOpen}
-              onClose={() => { setDrawerOpen(false); }}
-            >
+      <Fab
+        color="primary"
+        aria-label="expand"
+        onClick={() => setDrawerOpen(true)}
+        sx={{
+          position: 'fixed',
+          right: '4vw',
+          bottom: '8vh',
+        }}
+      >
+        <FunctionsIcon />
+      </Fab>
 
-              <Grid>
+      <Drawer
+        anchor="bottom"
+        open={drawerOpen}
+        onClose={() => { setDrawerOpen(false); }}
+      >
 
-                <Button
-                  href="/credit-settings"
-                >
-                  Edit Range
-                </Button>
-                <Table
-                  data={getCreditSummary()}
-                  orderedKeys={['key', 'range', 'status']}
-                  keyDisplay={{ status: 'Current' }}
-                />
-              </Grid>
+        <Grid>
 
-            </Drawer>
-
-          </div>
+          <Button
+            href="/credit-settings"
+          >
+            Edit Range
+          </Button>
+          <Table
+            data={getCreditSummary()}
+            orderedKeys={['key', 'range', 'status']}
+            keyDisplay={{ status: 'Current' }}
+          />
         </Grid>
-      </Grid>
+
+      </Drawer>
+
     </div>
+
   );
 }
 

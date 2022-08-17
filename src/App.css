@@ -31,7 +31,7 @@ body{
 .page-wrapper{
   background-color: #F3F6F9;
   width: 100%;
-  min-height: 100fr;
+  min-height: 100vh;
   margin: 0 auto 0px auto;
   padding-top: 60px;
   
@@ -270,14 +270,9 @@ a:hover {
   border-bottom: rgb(27, 42, 107) solid;
 }
 
-.detail-page-wrapper {
-  background-color: white;
-  margin-bottom: 60px;
-  padding-top: 80px;
-}
-
 .detail-page-ctn {
-  background-color: white;
+  margin-top: 30px;
+  margin-bottom: 60px;
 }
 
 .search-card{

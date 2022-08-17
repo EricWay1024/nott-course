@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { queryCourses } from '../services/course';
 import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
-import values from '../asserts/values.json';
+import values from '../assets/values.json';
 
 let schoolFilters = [];
 let creditFilters = [];
@@ -103,160 +103,153 @@ function CourseList() {
   });
 
   return (
-    <div className="page-wrapper">
-      <Grid container spacing={1}>
-        <Grid item xs={1} sx={{ display: { xs: 'none', sm: 'block' } }} />
-        <Grid item xs={12} sm={10}>
-          <div className="replace-ctn">
-            <div className="course-ctn">
-              <h1 className="page-title">Courses</h1>
-              {!hide
-                ? (
-                  <div className="input-field">
-                    <div className="search-field">
-                      <ThemeProvider theme={theme}>
-                        <Grid container spacing={4}>
-                          <Grid item xs={12} sm={6}>
-                            <div className="search-card">
-                              <h3 className="card-caption">Course Code</h3>
-                              <Grid container spacing={0}>
-                                <Grid item xs={12} sm={8}>
-                                  <TextField
-                                    variant="outlined"
-                                    className="inputBox"
-                                    placeholder="Input course code..."
-                                    type="text"
-                                    value={targetCode}
-                                    color="neutral"
-                                    onChange={(event) => handleChange(event)}
-                                  />
-                                </Grid>
-                                <Grid item xs={12} sm={3}>
-                                  <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('code')} type="submit">Search</Button>
-                                </Grid>
-                              </Grid>
-                            </div>
+    <div className="replace-ctn">
+      <div className="course-ctn">
+        <h1 className="page-title">Courses</h1>
+        {!hide
+          ? (
+            <div className="input-field">
+              <div className="search-field">
+                <ThemeProvider theme={theme}>
+                  <Grid container spacing={4}>
+                    <Grid item xs={12} sm={6}>
+                      <div className="search-card">
+                        <h3 className="card-caption">Course Code</h3>
+                        <Grid container spacing={0}>
+                          <Grid item xs={12} sm={8}>
+                            <TextField
+                              variant="outlined"
+                              className="inputBox"
+                              placeholder="Input course code..."
+                              type="text"
+                              value={targetCode}
+                              color="neutral"
+                              onChange={(event) => handleChange(event)}
+                            />
                           </Grid>
-
-                          <Grid item xs={12} sm={6}>
-                            <div className="search-card">
-                              <h3 className="card-caption">Course Name</h3>
-                              <Grid container spacing={0}>
-                                <Grid item xs={12} sm={8}>
-                                  <TextField
-                                    variant="outlined"
-                                    className="inputBox"
-                                    placeholder="Input course name..."
-                                    type="text"
-                                    value={targetName}
-                                    color="neutral"
-                                    onChange={(event) => courseNameInput(event)}
-                                  />
-                                </Grid>
-                                <Grid item xs={12} sm={3}>
-                                  <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
-                                </Grid>
-                              </Grid>
-                            </div>
+                          <Grid item xs={12} sm={3}>
+                            <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('code')} type="submit">Search</Button>
                           </Grid>
                         </Grid>
-                      </ThemeProvider>
-                    </div>
+                      </div>
+                    </Grid>
 
-                    <br />
-                    <br />
+                    <Grid item xs={12} sm={6}>
+                      <div className="search-card">
+                        <h3 className="card-caption">Course Name</h3>
+                        <Grid container spacing={0}>
+                          <Grid item xs={12} sm={8}>
+                            <TextField
+                              variant="outlined"
+                              className="inputBox"
+                              placeholder="Input course name..."
+                              type="text"
+                              value={targetName}
+                              color="neutral"
+                              onChange={(event) => courseNameInput(event)}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={3}>
+                            <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
+                          </Grid>
+                        </Grid>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </ThemeProvider>
+              </div>
 
-                    <div className="select-card">
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                          <div className="select-block-left">
-                            <h3 className="card-caption">Schools</h3>
-                            <Select
-                              closeMenuOnSelect={false}
-                              isMulti
-                              onChange={(selectedSchools) => schoolSelection(selectedSchools)}
-                              options={allSchools}
-                              defaultValue={
+              <br />
+              <br />
+
+              <div className="select-card">
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <div className="select-block-left">
+                      <h3 className="card-caption">Schools</h3>
+                      <Select
+                        closeMenuOnSelect={false}
+                        isMulti
+                        onChange={(selectedSchools) => schoolSelection(selectedSchools)}
+                        options={allSchools}
+                        defaultValue={
                               allSchools.filter((e) => (schoolFilters.includes(e.value)))
                             }
-                              styles={selectionStyles}
-                            />
-                          </div>
-
-                          <div className="select-block-left">
-                            <h3 className="card-caption">Level</h3>
-                            <Select
-                              closeMenuOnSelect={false}
-                              isMulti
-                              onChange={(selectedLevels) => levelSelection(selectedLevels)}
-                              options={allLevels}
-                              defaultValue={
-                              allLevels.filter((e) => (levelFilters.includes(e.value)))
-                            }
-                              styles={selectionStyles}
-                            />
-                          </div>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <div className="select-block-right">
-                            <h3 className="card-caption">Credit</h3>
-                            <Select
-                              closeMenuOnSelect={false}
-                              isMulti
-                              onChange={(selectedCredits) => creditSelection(selectedCredits)}
-                              options={allCredits}
-                              defaultValue={
-                              allCredits.filter((e) => (creditFilters.includes(e.value)))
-                            }
-                              styles={selectionStyles}
-                            />
-                          </div>
-                          <div className="select-block-right">
-                            <h3 className="card-caption">Semester</h3>
-                            <Select
-                              closeMenuOnSelect={false}
-                              isMulti
-                              onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
-                              options={allSemesters}
-                              defaultValue={
-                              allSemesters.filter((e) => (semesterFilters.includes(e.value)))
-                            }
-                              styles={selectionStyles}
-                            />
-                          </div>
-                        </Grid>
-                      </Grid>
-
-                      <div className="btn-ctn">
-                        <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
-                      </div>
+                        styles={selectionStyles}
+                      />
                     </div>
 
-                  </div>
-                )
-                : (
-                  <div>
-                    <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
-                    <br />
-                    <br />
-                    <br />
-                    { searching && <CircularProgress /> }
-                    <br />
-                    <Table
-                      data={courses}
-                      links={{ code: 'module' }}
-                      orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
-                      keyDisplay={{ offering: 'Offering School' }}
-                      enableSelection
-                      keyType={{ credits: 'number' }}
-                    />
-                  </div>
-                )}
-            </div>
+                    <div className="select-block-left">
+                      <h3 className="card-caption">Level</h3>
+                      <Select
+                        closeMenuOnSelect={false}
+                        isMulti
+                        onChange={(selectedLevels) => levelSelection(selectedLevels)}
+                        options={allLevels}
+                        defaultValue={
+                              allLevels.filter((e) => (levelFilters.includes(e.value)))
+                            }
+                        styles={selectionStyles}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <div className="select-block-right">
+                      <h3 className="card-caption">Credit</h3>
+                      <Select
+                        closeMenuOnSelect={false}
+                        isMulti
+                        onChange={(selectedCredits) => creditSelection(selectedCredits)}
+                        options={allCredits}
+                        defaultValue={
+                              allCredits.filter((e) => (creditFilters.includes(e.value)))
+                            }
+                        styles={selectionStyles}
+                      />
+                    </div>
+                    <div className="select-block-right">
+                      <h3 className="card-caption">Semester</h3>
+                      <Select
+                        closeMenuOnSelect={false}
+                        isMulti
+                        onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
+                        options={allSemesters}
+                        defaultValue={
+                              allSemesters.filter((e) => (semesterFilters.includes(e.value)))
+                            }
+                        styles={selectionStyles}
+                      />
+                    </div>
+                  </Grid>
+                </Grid>
 
-          </div>
-        </Grid>
-      </Grid>
+                <div className="btn-ctn">
+                  <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
+                </div>
+              </div>
+
+            </div>
+          )
+          : (
+            <div>
+              <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
+              <br />
+              <br />
+              <br />
+              { searching && <CircularProgress /> }
+              <br />
+              <Table
+                data={courses}
+                links={{ code: 'module' }}
+                orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
+                keyDisplay={{ offering: 'Offering School' }}
+                enableSelection
+                keyType={{ credits: 'number' }}
+              />
+            </div>
+          )}
+      </div>
+
     </div>
   );
 }
