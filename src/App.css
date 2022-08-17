@@ -301,9 +301,10 @@ a:hover {
 
 .about-page-wrapper{
   padding: 50px;
+  color: rgba(27, 42, 107, 1);
 }
 
-.about-page-wrapper > p {
+.about-page-wrapper > p, li {
   margin-bottom: 10px;
 }
 

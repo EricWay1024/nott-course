@@ -17,10 +17,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Course', 'Plan', 'My', 'About'];
+const navItems = ['Home', 'Module', 'Plan', 'My', 'About'];
 const navPage = {
   Home: '/',
-  Course: '/course-index',
+  Module: '/course-index',
   Plan: '/plan-index',
   My: '/my',
   About: '/about',

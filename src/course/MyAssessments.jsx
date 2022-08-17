@@ -61,7 +61,7 @@ function MyAssessments() {
     <div className="detail-page-ctn">
       <h1>My Assessments</h1>
       <p>
-        Generated from your selected courses. The last column stands for
+        Generated from your selected modules. The last column stands for
         the percentage contribution of an assessment to your final score
         of the academic year.
       </p>
@@ -84,6 +84,11 @@ function MyAssessments() {
         }}
         datagridProps={{
           components: { Toolbar: CustomToolbar },
+        }}
+        keyDisplay={{
+          courseCode: 'Module Code',
+          courseTitle: 'Module Title',
+          courseCredits: 'Module Credits',
         }}
       />
     </div>

@@ -40,16 +40,16 @@
 
   .caption-wrapper{
     width: 480px;
-    height: 350px;
+    /* height: 350px; */
     /* background-color: #0069c2; */
     text-align: left;
-    margin-top: 40px;
+    margin-top: 5px;
   }
 
   .index-caption{
-    font-size: 72px;
-    width: auto;
-    height: auto;
+    font-size: 64px;
+    /* width: auto; */
+    /* height: auto; */
     position: relative;
     text-align: left;
     font-weight: 900;
@@ -117,8 +117,9 @@
   .index-icon{
     float: left;
     position: absolute;
-    bottom:220px;
-    left: 160px;
+    /* bottom: 220px; */
+    top: -30vh;
+    left: 30vw;
     z-index: 0;
   }
 

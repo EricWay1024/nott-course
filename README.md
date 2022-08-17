@@ -32,7 +32,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-<h3 align="center"><a href="https://nott-course.pages.dev/">Nott Course</a></h3>
+<h3 align="center"><a href="https://nott-course.uk/">Nott Course</a></h3>
 
   <p align="center">
     An UNOFFICIAL enhancement of the course catalogue offered by University of Nottingham
@@ -40,7 +40,7 @@
     <!-- <a href="https://github.com/EricWay1024/nott-course"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
-    <a href="https://nott-course.pages.dev/">View Current Build</a>
+    <a href="https://nott-course.uk/">View Current Build</a>
     ·
     <a href="https://github.com/EricWay1024/nott-course/issues">Open Issues</a>
   </p>
@@ -50,15 +50,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="img/Screenshot-CourseList.png" alt="Course List Screenshot" />
+<!-- <img src="img/Screenshot_Index.png" alt="Course List Screenshot" /> -->
 
 Better UX for course catalogue of University of Nottingham. <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">The original website</a> contains abundant useful information regarding modules and academic plans, but is extremely frustrating to use. Built for potential or current students to better utilise publicly available data for their plan or module choices, this project, Nott Course, is featured with
 
 - FULL data of current year's catalogue;
 - Responsive UI design;
 - Free navigation from plans to modules;
-- Advanced filters for modules and plans (available soon);
-- and more.
+- Advanced filters for modules and plans;
+- Helping users draft their module selection;
+- Generating a list of assessments according to selected modules.
 
 This project is still under development. See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
 

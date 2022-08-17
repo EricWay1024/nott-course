@@ -105,7 +105,7 @@ function CourseList() {
   return (
     <div className="replace-ctn">
       <div className="course-ctn">
-        <h1 className="page-title">Courses</h1>
+        <h1 className="page-title">Modules</h1>
         {!hide
           ? (
             <div className="input-field">
@@ -114,13 +114,13 @@ function CourseList() {
                   <Grid container spacing={4}>
                     <Grid item xs={12} sm={6}>
                       <div className="search-card">
-                        <h3 className="card-caption">Course Code</h3>
+                        <h3 className="card-caption">Module Code</h3>
                         <Grid container spacing={0}>
                           <Grid item xs={12} sm={8}>
                             <TextField
                               variant="outlined"
                               className="inputBox"
-                              placeholder="Input course code..."
+                              placeholder="Input module code..."
                               type="text"
                               value={targetCode}
                               color="neutral"
@@ -136,13 +136,13 @@ function CourseList() {
 
                     <Grid item xs={12} sm={6}>
                       <div className="search-card">
-                        <h3 className="card-caption">Course Name</h3>
+                        <h3 className="card-caption">Module Name</h3>
                         <Grid container spacing={0}>
                           <Grid item xs={12} sm={8}>
                             <TextField
                               variant="outlined"
                               className="inputBox"
-                              placeholder="Input course name..."
+                              placeholder="Input module name..."
                               type="text"
                               value={targetName}
                               color="neutral"

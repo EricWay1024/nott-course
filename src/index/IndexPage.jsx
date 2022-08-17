@@ -12,7 +12,11 @@ function IndexPage() {
       <div className="icon-wrapper">
         <AllInclusiveIcon
           sx={{
-            display: { xs: 'none', sm: 'block' }, fontSize: 800, opacity: 0.8, color: 'white', overflow: 'hidden',
+            display: { xs: 'none', sm: 'block' },
+            fontSize: 800,
+            opacity: 0.8,
+            color: 'white',
+            overflow: 'hidden',
           }}
           className="index-icon"
         />
@@ -31,15 +35,15 @@ function IndexPage() {
         </div>
         <div className="subtitle-wrapper">
           <div className="index-subtitle">
-            This catalogue provides details of the curriculum content – both plans and courses
-            (modules) delivered to students in current and previous academic sessions.
+            This catalogue provides details of the curriculum content – both plans and
+            modules delivered to students in current academic sessions.
           </div>
         </div>
         <div className="cards-wrapper">
           <div className="index-card course-card">
             <RadioButtonCheckedIcon className="content-bullet" sx={{ fontSize: { xs: '20px', sm: '30px' }, color: 'white' }} />
             <div className="index-content">
-              Find and view your courses
+              Find and view your modules
             </div>
             <Button
               sx={{
@@ -57,7 +61,7 @@ function IndexPage() {
               className="index-button"
               href="/course-index"
             >
-              COURSE
+              MODULE
             </Button>
           </div>
           <div className="index-card">
@@ -84,18 +88,10 @@ function IndexPage() {
               PLAN
             </Button>
           </div>
-          <div className="index-card my-card">
-            <RadioButtonCheckedIcon className="content-bullet my-bullet" sx={{ fontSize: { xs: '20px', sm: '30px' }, color: 'white' }} />
+          <div className="index-card">
+            <RadioButtonCheckedIcon className="content-bullet" sx={{ fontSize: { xs: '20px', sm: '30px' }, color: 'white' }} />
             <div className="index-content">
-              View the courses you have ticked in
-              {' '}
-              <b>COURSE</b>
-              {' '}
-              and
-              {' '}
-              <b>PLAN</b>
-              {' '}
-              for your course selection
+              Draft your module selection
             </div>
             <Button
               sx={{
@@ -110,7 +106,7 @@ function IndexPage() {
                   color: 'white',
                 },
               }}
-              className="index-button my-button"
+              className="index-button"
               href="/my"
             >
               MY
