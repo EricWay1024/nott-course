@@ -125,6 +125,9 @@ function CourseList() {
                               value={targetCode}
                               color="neutral"
                               onChange={(event) => handleChange(event)}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') updateCourses('code')();
+                              }}
                             />
                           </Grid>
                           <Grid item xs={12} sm={3}>
@@ -147,6 +150,9 @@ function CourseList() {
                               value={targetName}
                               color="neutral"
                               onChange={(event) => courseNameInput(event)}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') updateCourses('title')();
+                              }}
                             />
                           </Grid>
                           <Grid item xs={12} sm={3}>
