@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Grid from '@mui/material/Grid';
 import { GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { getCourseList } from '../services/course';
 import { getSelectedCourses } from '../utils/helper';
@@ -58,42 +57,37 @@ function MyAssessments() {
   }, []);
 
   return (
-    <div className="detail-page-wrapper">
-      <Grid container spacing={1}>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <div className="detail-page-ctn">
-            <h1>My Assessments</h1>
-            <p>
-              Generated from your selected courses. The last column stands for
-              the percentage contribution of an assessment to your final score
-              of the academic year.
-            </p>
-            <br />
-            <Table
-              data={assessment}
-              orderedKeys={[
-                'courseCode',
-                'courseTitle',
-                'courseCredits',
-                'assessmentType',
-                'assessmentRequirements',
-                'assessmentWeight',
-                'assessmentContribution',
-              ]}
-              keyType={{
-                courseCredits: 'number',
-                assessmentWeight: 'number',
-                assessmentContribution: 'number',
-              }}
-              datagridProps={{
-                components: { Toolbar: CustomToolbar },
-              }}
-            />
-          </div>
-        </Grid>
-      </Grid>
+
+    <div className="detail-page-ctn">
+      <h1>My Assessments</h1>
+      <p>
+        Generated from your selected courses. The last column stands for
+        the percentage contribution of an assessment to your final score
+        of the academic year.
+      </p>
+      <br />
+      <Table
+        data={assessment}
+        orderedKeys={[
+          'courseCode',
+          'courseTitle',
+          'courseCredits',
+          'assessmentType',
+          'assessmentRequirements',
+          'assessmentWeight',
+          'assessmentContribution',
+        ]}
+        keyType={{
+          courseCredits: 'number',
+          assessmentWeight: 'number',
+          assessmentContribution: 'number',
+        }}
+        datagridProps={{
+          components: { Toolbar: CustomToolbar },
+        }}
+      />
     </div>
+
   );
 }
 
