@@ -17,12 +17,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Course', 'Plan', 'My'];
+const navItems = ['Home', 'Course', 'Plan', 'My', 'About'];
 const navPage = {
   Home: '/',
   Course: '/course-index',
   Plan: '/plan-index',
   My: '/my',
+  About: '/about',
 };
 
 function NavBar(props) {
@@ -31,12 +32,13 @@ function NavBar(props) {
       danger: '#e53e3e',
     },
     palette: {
-      primary: {
-        main: '#0971f1',
+      nott: {
+        main: 'rgba(255,255,255,0.5)',
+        contrastText: 'rgba(27, 42, 107, 0.8)',
         darker: '#053e85',
       },
       neutral: {
-        main: 'rgba(27, 42, 107, 0.95)',
+        main: 'rgba(27, 42, 107, 0.8)',
         contrastText: '#FFF',
       },
     },
@@ -54,7 +56,7 @@ function NavBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Nott-Course
+        Nott Course
       </Typography>
       <Divider />
       <List>
@@ -72,7 +74,7 @@ function NavBar(props) {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <AppBar position="static" color="neutral" component="nav">
+        <AppBar position="fixed" color="nott" component="nav">
           <Toolbar>
             <IconButton
               color="inherit"
@@ -88,11 +90,11 @@ function NavBar(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              Nott-Course
+              Nott Course
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
-                <Button href={navPage[item]} className="page-button" id={item} key={item} sx={{ color: '#fff' }}>
+                <Button href={navPage[item]} className="page-button" id={item} key={item} sx={{ color: 'rgba(27, 42, 107, 0.8)' }}>
                   {item}
                 </Button>
               ))}

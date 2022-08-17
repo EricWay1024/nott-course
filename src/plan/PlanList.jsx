@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import { CircularProgress } from '@mui/material';
 import { getPlanList } from '../services/plan';
 import { useDocumentTitle } from '../utils/helper';
@@ -28,31 +28,28 @@ function PlanList() {
   if (!searched) return <CircularProgress />;
 
   return (
-    <div className="page-wrapper">
-      <Grid container spacing={1}>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <div className="page-ctn">
-            <h1>Plan List</h1>
-            <div className="input-ctn">
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Search"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-              />
-            </div>
-            <Table
-              data={displayedPlans}
-              links={{ academicPlanCode: 'plan' }}
-              orderedKeys={['academicPlanCode', 'title', 'degreeType', 'ucasCode']}
-              keyDisplay={{ ucasCode: 'UCAS Code' }}
-            />
-          </div>
-        </Grid>
-      </Grid>
+
+    <div className="page-ctn">
+      <h1>Plan List</h1>
+      <div className="input-ctn">
+        <TextField
+          className="search-input"
+          type="text"
+          placeholder="Plan keywords (plan title, academic plan code, or UCAS code)"
+          label="Search"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          sx={{ backgroundColor: 'white' }}
+        />
+      </div>
+      <Table
+        data={displayedPlans}
+        links={{ academicPlanCode: 'plan' }}
+        orderedKeys={['academicPlanCode', 'title', 'degreeType', 'ucasCode']}
+        keyDisplay={{ ucasCode: 'UCAS Code' }}
+      />
     </div>
+
   );
 }
 

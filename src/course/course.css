@@ -1,0 +1,15 @@
+.settings-input {
+  margin: 10px 1%;
+  width: 48%;
+}
+
+.group-detail-ctn {
+  margin: 10px;
+}
+
+.plan-img {
+  width: 80%;
+  margin: 15px auto;
+  border: 2px solid #ccc;
+  display: block;
+}

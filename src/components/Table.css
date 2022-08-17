@@ -1,16 +1,14 @@
-.table-ctn {
-  overflow-x: auto;
-}
+
 .MuiDataGrid-row:nth-of-type(even) {
-  background-color: #f5f5f5;
+  background-color: #e7edf3;
 }
 
 .MuiDataGrid-row:nth-of-type(odd) {
-  background-color: #ffffff;
+  background-color: #f4f6f9;
 }
 
 .MuiDataGrid-columnHeaders {
-  background-color: #f5f5f5;
+  background-color: #e7edf3;
   
 }
 
