@@ -19,7 +19,6 @@ import { getPlan } from '../services/plan';
 
 function PlanPage(props) {
   const { code } = { ...useParams(), ...props };
-  useDocumentTitle(`${code} - Plan Details - Nott Course`);
 
   const [plan, setPlan] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -60,6 +59,8 @@ function PlanPage(props) {
     if (event.target.type !== 'checkbox') setExpanded(isExpanded ? yearIndex : false);
   };
 
+  const title = plan ? `${plan ? plan.title : ''} - ${code} - Plan Details - Nott Course` : 'Nott Course';
+  useDocumentTitle(title);
   if (!searched) return <CircularProgress />;
   if (!plan) return <div>Plan code not found</div>;
 

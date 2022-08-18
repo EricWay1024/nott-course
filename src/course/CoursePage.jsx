@@ -8,7 +8,6 @@ import Table from '../components/Table';
 
 function CoursePage(props) {
   const { code } = { ...useParams(), ...props };
-  useDocumentTitle(`${code} - Module Details - Nott Course`);
 
   const [course, setCourse] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -21,12 +20,13 @@ function CoursePage(props) {
     })();
   }, [code]);
 
+  const title = course ? `${course.title} - ${code} - Module Details - Nott Course` : 'Nott Course';
+  useDocumentTitle(title);
+
   if (!course && !searched) return <CircularProgress />;
   if (!course && searched) return <div>Course code not found</div>;
 
   return (
-  // <div className="detail-page-wrapper">
-
     <div className="detail-page-ctn">
       <h1>{`${course.code} - ${course.title}`}</h1>
       <Table
@@ -95,8 +95,6 @@ function CoursePage(props) {
       <h2>Learning Outcome</h2>
       <RenderHtml html={course.outcome} />
     </div>
-
-  // </div>
   );
 }
 

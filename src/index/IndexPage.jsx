@@ -86,18 +86,23 @@ function IndexPage() {
         <div className="cards-wrapper">
           <IndexCard
             buttonHref="/course-index"
-            buttonCaption="COURSE"
-            label="Find and view your modules"
+            buttonCaption="MODULE"
+            label="Find and view modules"
           />
           <IndexCard
             buttonHref="/plan-index"
             buttonCaption="PLAN"
-            label="Find and view your degree plan"
+            label="Find and view degree plans"
           />
           <IndexCard
             buttonHref="/my"
             buttonCaption="MY"
             label="Draft your module selection"
+          />
+          <IndexCard
+            buttonHref="/about"
+            buttonCaption="ABOUT"
+            label="See intructions on how to use"
           />
         </div>
       </div>

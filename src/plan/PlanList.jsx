@@ -30,7 +30,7 @@ function PlanList() {
   return (
 
     <div className="page-ctn">
-      <h1>Plan List</h1>
+      <h1>Plans</h1>
       <div className="input-ctn">
         <TextField
           className="search-input"
