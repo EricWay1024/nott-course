@@ -85,9 +85,10 @@ function About() {
         {' '}
         a star if you find this website useful.
       </p>
-      <h2>Wait, but is information on Nott Course accurate?</h2>
+      <h2>Wait, but is the data on Nott Course accurate?</h2>
       <p>
-        We obtained all data from University of Nottingham.
+        We obtain all the data from University of Nottingham. We restructure the data
+        and present them in a more user-friendly way without tampering with their content.
         Please note that while we try to keep the data on this website accurate and up
         to date, there is no guarantee of that. Please beware and use with care. There
         is also a lengthy disclaimer at the end of this
@@ -97,20 +98,28 @@ function About() {
         The data on this website was last updated in June, 2022.
       </p>
       <p>
-        If you ever spot an informational error, please create an issue on
+        If you ever spot any informational errors
+        (by which we mean informational discrepancies between this website and
+        {' '}
+        <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">
+          the original course catalogue
+        </a>
+        )
+        , please create an issue on
         {' '}
         <a href="https://github.com/EricWay1024/nott-course">GitHub</a>
         {' '}
         or simply
         {' '}
         <a href="mailto:ericway1024@gmail.com">email Eric, the main developer</a>
-        .
+        . Please note that if the original catalogue contains anything different from the actual
+        situation, there is nothing we can do.
       </p>
       <h2>I hate to ask, but do you collect user data?</h2>
       <p>
         No. Only essential data (e.g. the module code you typed in the search bar)
-        are transmitted to our server for database query
-        and are not recorded in any format.
+        is transmitted to our server for database query
+        and is not recorded in any format.
         Your course/plan selections are processed locally on your browser and are
         not transmitted to the server.
       </p>
