@@ -229,8 +229,8 @@ function MyCourses() {
         and check the ones you would like to choose.
       </div>
 
-      <h1>My Assessments</h1>
-      <Button variant="contained" href="/my-assess">Go to assessment list</Button>
+      <h1>Summary Lists of Selected Modules and Assessments</h1>
+      <Button variant="contained" href="/my-assess">Go to summary lists</Button>
 
       <Fab
         color="primary"

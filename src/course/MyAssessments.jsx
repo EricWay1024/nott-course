@@ -21,6 +21,7 @@ const getAssessmentList = (courses) => {
         courseCode: course.code,
         courseTitle: course.title,
         courseCredits: course.credits,
+        courseSemester: course.semester,
         assessmentType: assess.type,
         assessmentRequirements: assess.requirements,
         assessmentWeight: assess.weight,
@@ -45,6 +46,8 @@ function CustomToolbar() {
 
 function MyAssessments() {
   const [assessment, setAssessment] = useState([]);
+  const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     (async () => {
       const initialSelectionMap = getSelectedCourses();
@@ -53,12 +56,36 @@ function MyAssessments() {
       const courseDetails = await getCourseList(selectedCourses);
       const assess = getAssessmentList(courseDetails);
       setAssessment(assess);
+      setCourses(courseDetails);
     })();
   }, []);
 
   return (
 
     <div className="detail-page-ctn">
+      <h1>Selected Modules</h1>
+      <p>Here is a table of all your selected modules.</p>
+      <br />
+      <Table
+        data={courses}
+        orderedKeys={[
+          'code',
+          'title',
+          'credits',
+          'semester',
+          'offering',
+        ]}
+        keyType={{
+          credits: 'number',
+        }}
+        datagridProps={{
+          components: { Toolbar: CustomToolbar },
+        }}
+        keyDisplay={{
+          offering: 'Offering School',
+        }}
+        links={{ code: 'module' }}
+      />
       <h1>My Assessments</h1>
       <p>
         Generated from your selected modules. The last column stands for
@@ -72,6 +99,7 @@ function MyAssessments() {
           'courseCode',
           'courseTitle',
           'courseCredits',
+          'courseSemester',
           'assessmentType',
           'assessmentRequirements',
           'assessmentWeight',
@@ -89,6 +117,7 @@ function MyAssessments() {
           courseCode: 'Module Code',
           courseTitle: 'Module Title',
           courseCredits: 'Module Credits',
+          courseSemester: 'Module Semester',
         }}
       />
     </div>
