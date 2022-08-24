@@ -1,10 +1,12 @@
 import React from 'react';
+import GitHubButton from 'react-github-btn';
 import FunctionsIcon from '@mui/icons-material/Functions';
 import ScreenshotCourseFilter from '../assets/Screenshot-CourseFilter.png';
 
 function About() {
   return (
     <div className="about-page-wrapper">
+      <h1>About</h1>
       <h2>{'What\'s Nott Course?'}</h2>
       <p>
         This website, Nott Course, is an
@@ -19,6 +21,22 @@ function About() {
         , developed with the purpose of boosting user experience in browsing module and plan
         details, and further allowing users to draft their module selection conveniently.
       </p>
+      <p>
+        The project is free and open-soucred on
+        {' '}
+        <a href="https://github.com/EricWay1024/nott-course">GitHub</a>
+        . Give it a star if it helps you.
+      </p>
+      <div>
+        <GitHubButton
+          href="https://github.com/EricWay1024/nott-course"
+          data-size="large"
+          data-show-count="true"
+          aria-label="Star EricWay1024/nott-course on GitHub"
+        >
+          Star
+        </GitHubButton>
+      </div>
       <h2>How to view the details of a module?</h2>
       <p>
         Go to MODULE and search the module using its code or title.
@@ -77,14 +95,14 @@ function About() {
         <a href="/my-assess">My Assessments</a>
         . You can also find an entry on MY page.
       </p>
-      <h2>{'OK. I\'m a bit impressed.'}</h2>
+      {/* <h2>{'OK. I\'m a bit impressed.'}</h2>
       <p>
         Please consider giving
         {' '}
         <a href="https://github.com/EricWay1024/nott-course">our repo on GitHub</a>
         {' '}
         (open-sourced under MIT license) a star if you find this website useful.
-      </p>
+      </p> */}
       <h2>Wait, but is the data on Nott Course accurate?</h2>
       <p>
         We obtain all the data from University of Nottingham. We restructure the data
