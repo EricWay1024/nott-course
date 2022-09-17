@@ -13,7 +13,7 @@ import RenderHtml from '../components/RenderHtml';
 import CourseGroup from '../components/CourseGroup';
 import {
   useDocumentTitle, getLocalStorage, setLocalStorage,
-  generatePlanSettings,
+  generatePlanSettings, processStr,
 } from '../utils/helper';
 import { getPlan } from '../services/plan';
 
@@ -27,6 +27,9 @@ function PlanPage(props) {
   useEffect(() => {
     (async () => {
       const fetchedPlan = await getPlan(code);
+      if (fetchedPlan && fetchedPlan.title) {
+        fetchedPlan.title = processStr(fetchedPlan.title);
+      }
       setSearched(true);
       setPlan(fetchedPlan);
     })();

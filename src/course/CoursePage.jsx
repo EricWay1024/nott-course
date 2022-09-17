@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { getCourse } from '../services/course';
-import { useDocumentTitle } from '../utils/helper';
+import { useDocumentTitle, processStr } from '../utils/helper';
 import RenderHtml from '../components/RenderHtml';
 import Table from '../components/Table';
 
@@ -15,6 +15,9 @@ function CoursePage(props) {
   useEffect(() => {
     (async () => {
       const fetchedCourse = await getCourse(code);
+      if (fetchedCourse && fetchedCourse.title) {
+        fetchedCourse.title = processStr(fetchedCourse.title);
+      }
       setSearched(true);
       setCourse(fetchedCourse);
     })();
