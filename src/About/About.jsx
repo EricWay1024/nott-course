@@ -79,7 +79,7 @@ function About() {
         {' '}
         and search for the plan using its title, academic plan code, or UCAS code.
       </p>
-      <h2>How do I draft my module selection?</h2>
+      <h2>How do I draft my module choices?</h2>
       <p>
         <ol>
           <li>
