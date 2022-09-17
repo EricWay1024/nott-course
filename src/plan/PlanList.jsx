@@ -1,53 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
+import React, { useState } from 'react';
 import { CircularProgress } from '@mui/material';
-import { getPlanList } from '../services/plan';
+import { queryPlans } from '../services/plan';
 import { useDocumentTitle } from '../utils/helper';
 import Table from '../components/Table';
+import SearchBar from '../components/SearchBar';
 
 function PlanList() {
   useDocumentTitle('Plan List - Nott Course');
   const [keyword, setKeyword] = useState('');
-  const contains = (str, word) => str.toLowerCase().includes(word.toLowerCase());
 
   const [plans, setPlans] = useState([]);
-  const [searched, setSearched] = useState(false);
+  const [searched, setSearched] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      const fetchedPlans = await getPlanList();
-      setSearched(true);
-      setPlans(fetchedPlans);
-    })();
-  }, []);
-
-  const displayedPlans = plans
-    .filter((plan) => contains(plan.title, keyword)
-      || contains(plan.academicPlanCode, keyword)
-      || contains(plan.ucasCode, keyword));
-  if (!searched) return <CircularProgress />;
+  const handleSearch = async () => {
+    setSearched(false);
+    const fetchedPlans = await queryPlans({ keyword });
+    setPlans(fetchedPlans);
+    setSearched(true);
+  };
 
   return (
 
     <div className="page-ctn">
       <h1>Plans</h1>
-      <div className="input-ctn">
-        <TextField
-          className="search-input"
-          type="text"
-          placeholder="Plan keywords (plan title, academic plan code, or UCAS code)"
-          label="Search"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          sx={{ backgroundColor: 'white' }}
-        />
-      </div>
-      <Table
-        data={displayedPlans}
-        links={{ academicPlanCode: 'plan' }}
-        orderedKeys={['academicPlanCode', 'title', 'degreeType', 'ucasCode']}
-        keyDisplay={{ ucasCode: 'UCAS Code' }}
+      <SearchBar
+        value={keyword}
+        handleChange={(e) => setKeyword(e.target.value)}
+        handleSearch={handleSearch}
+        placeholder="Input academic plan code, UCAS code, or plan title..."
+        title="Academic Plan Code / UCAS Code / Plan Title"
+        isHalf={false}
       />
+      <br />
+      <br />
+      {
+        searched
+          ? (
+            <Table
+              data={plans}
+              links={{ academicPlanCode: 'plan' }}
+              orderedKeys={['academicPlanCode', 'title', 'degreeType', 'ucasCode']}
+              keyDisplay={{ ucasCode: 'UCAS Code' }}
+            />
+          )
+          : <CircularProgress />
+      }
     </div>
 
   );

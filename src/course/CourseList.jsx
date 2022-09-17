@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { queryCourses } from '../services/course';
 import { useDocumentTitle } from '../utils/helper';
+
 import Table from '../components/Table';
+import SearchBar from '../components/SearchBar';
 import values from '../assets/values.json';
 
 let schoolFilters = [];
@@ -74,12 +74,12 @@ function CourseList() {
     semesterFilters = selectedSemesters.map((e) => e.value);
   };
 
-  const handleChange = (event) => {
+  const handleCodeChange = (event) => {
     setTargetCode(event.target.value);
     targetCourseCode = event.target.value;
   };
 
-  const courseNameInput = (event) => {
+  const handleNameChange = (event) => {
     setTargetName(event.target.value);
     targetCourseName = event.target.value;
   };
@@ -90,18 +90,6 @@ function CourseList() {
     }),
   };
 
-  const theme = createTheme({
-    status: {
-      danger: '#e53e3e',
-    },
-    palette: {
-      neutral: {
-        main: 'rgb(0, 155, 189)',
-        contrastText: 'black',
-      },
-    },
-  });
-
   return (
     <div className="replace-ctn">
       <div className="course-ctn">
@@ -110,59 +98,23 @@ function CourseList() {
           ? (
             <div className="input-field">
               <div className="search-field">
-                <ThemeProvider theme={theme}>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6}>
-                      <div className="search-card">
-                        <h3 className="card-caption">Module Code</h3>
-                        <Grid container spacing={0}>
-                          <Grid item xs={12} sm={8}>
-                            <TextField
-                              variant="outlined"
-                              className="inputBox"
-                              placeholder="Input module code..."
-                              type="text"
-                              value={targetCode}
-                              color="neutral"
-                              onChange={(event) => handleChange(event)}
-                              onKeyPress={(e) => {
-                                if (e.key === 'Enter') updateCourses('code')();
-                              }}
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={3}>
-                            <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('code')} type="submit">Search</Button>
-                          </Grid>
-                        </Grid>
-                      </div>
-                    </Grid>
+                <Grid container spacing={4}>
+                  <SearchBar
+                    value={targetCode}
+                    handleChange={handleCodeChange}
+                    placeholder="Input module code..."
+                    handleSearch={updateCourses('code')}
+                    title="Module Code"
+                  />
 
-                    <Grid item xs={12} sm={6}>
-                      <div className="search-card">
-                        <h3 className="card-caption">Module Name</h3>
-                        <Grid container spacing={0}>
-                          <Grid item xs={12} sm={8}>
-                            <TextField
-                              variant="outlined"
-                              className="inputBox"
-                              placeholder="Input module name..."
-                              type="text"
-                              value={targetName}
-                              color="neutral"
-                              onChange={(event) => courseNameInput(event)}
-                              onKeyPress={(e) => {
-                                if (e.key === 'Enter') updateCourses('title')();
-                              }}
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={3}>
-                            <Button variant="contained" className="submit-btn inputButton" onClick={updateCourses('title')} type="submit">Search</Button>
-                          </Grid>
-                        </Grid>
-                      </div>
-                    </Grid>
-                  </Grid>
-                </ThemeProvider>
+                  <SearchBar
+                    value={targetName}
+                    handleChange={handleNameChange}
+                    placeholder="Input module name..."
+                    handleSearch={updateCourses('title')}
+                    title="Module Name"
+                  />
+                </Grid>
               </div>
 
               <br />

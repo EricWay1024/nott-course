@@ -20,11 +20,21 @@ function CoursePage(props) {
     })();
   }, [code]);
 
-  const title = course ? `${course.title} - ${code} - Module Details - Nott Course` : 'Nott Course';
+  const title = (course && !course.error) ? `${course.title} - ${code} - Module Details - Nott Course` : 'Nott Course';
   useDocumentTitle(title);
 
   if (!course && !searched) return <CircularProgress />;
-  if (!course && searched) return <div>Course code not found</div>;
+  if (course && course.error && searched) {
+    return (
+      <div className="detail-page-ctn">
+        🤯 Sorry, no module with code
+        {' '}
+        {code}
+        {' '}
+        has been found.
+      </div>
+    );
+  }
 
   return (
     <div className="detail-page-ctn">

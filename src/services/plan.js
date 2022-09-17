@@ -29,3 +29,5 @@ export const getPlan = async (code) => {
 };
 
 export const getPlanList = async () => request('/api/plan');
+
+export const queryPlans = async (query) => request('/api/query/plan', 'POST', query);

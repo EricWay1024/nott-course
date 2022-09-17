@@ -178,7 +178,7 @@ function MyCourses() {
       >
         Reload Page
       </Button>
-      <h1>My Courses</h1>
+      <h1>My Modules</h1>
       <div>
         {'You have selected: '}
         <Link to={`/plan/${selectedYear.planCode}`}>{`${selectedYear.planTitle}, ${selectedYear.yearTitle}`}</Link>

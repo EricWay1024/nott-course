@@ -59,10 +59,20 @@ function PlanPage(props) {
     if (event.target.type !== 'checkbox') setExpanded(isExpanded ? yearIndex : false);
   };
 
-  const title = plan ? `${plan ? plan.title : ''} - ${code} - Plan Details - Nott Course` : 'Nott Course';
+  const title = (plan && !plan.error) ? `${plan ? plan.title : ''} - ${code} - Plan Details - Nott Course` : 'Nott Course';
   useDocumentTitle(title);
   if (!searched) return <CircularProgress />;
-  if (!plan) return <div>Plan code not found</div>;
+  if (plan && plan.error) {
+    return (
+      <div className="detail-page-ctn">
+        🤯 Sorry, no plan with code
+        {' '}
+        {code}
+        {' '}
+        has been found.
+      </div>
+    );
+  }
 
   return (
 
