@@ -113,7 +113,7 @@ function About() {
         page saying basically the same thing.
       </p>
       <p>
-        The data on this website was last updated in June, 2022.
+        The data on this website was last updated on 17 Sept, 2022.
       </p>
       <p>
         If you ever spot any informational errors
