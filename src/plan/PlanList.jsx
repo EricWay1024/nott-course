@@ -27,8 +27,8 @@ function PlanList() {
         value={keyword}
         handleChange={(e) => setKeyword(e.target.value)}
         handleSearch={handleSearch}
-        placeholder="Input academic plan code, UCAS code, or plan title..."
-        title="Academic Plan Code / UCAS Code / Plan Title"
+        placeholder="Input plan title, academic plan code, or UCAS code..."
+        title="Plan Title / Academic Plan Code / UCAS Code"
         isHalf={false}
       />
       <br />
