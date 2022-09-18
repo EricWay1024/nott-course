@@ -59,28 +59,6 @@ function About() {
         {' '}
         with your classmates.
       </p>
-      <h2>Who contributed to Nott Course?</h2>
-      <p>
-        Nott Course is developed by
-        {' '}
-        <a href="https://github.com/EricWay1024">Eric</a>
-        {' '}
-        (full-stack development, product management, data processing, and server maintenance)
-        {' '}
-        and
-        {' '}
-        <a href="https://github.com/AugustineFu">Augustine</a>
-        {' '}
-        (front-end deveopment and visual design).
-        The web scraper used in data collection is built on
-        {' '}
-        <a href="https://github.com/uFair-Tech/uCourse-crawler">a project</a>
-        {' '}
-        by
-        {' '}
-        <a href="https://github.com/Songkeys">Songkeys</a>
-        .
-      </p>
       <h2>How to view the details of a module?</h2>
       <p>
         Go to
@@ -217,6 +195,28 @@ function About() {
         and is not recorded in any format.
         Your course/plan selections are processed locally on your browser and are
         not transmitted to the server.
+      </p>
+      <h2>Who contributed to Nott Course?</h2>
+      <p>
+        Nott Course is developed by
+        {' '}
+        <a href="https://github.com/EricWay1024">Eric</a>
+        {' '}
+        (full-stack development, product management, data processing, and server maintenance)
+        {' '}
+        and
+        {' '}
+        <a href="https://github.com/AugustineFu">Augustine</a>
+        {' '}
+        (front-end deveopment and visual design).
+        The web scraper used in data collection is built on
+        {' '}
+        <a href="https://github.com/uFair-Tech/uCourse-crawler">a project</a>
+        {' '}
+        by
+        {' '}
+        <a href="https://github.com/Songkeys">Songkeys</a>
+        . All contributors are current or former students of Unversity of Nottingham.
       </p>
       <h2>DISCLAIMER</h2>
       <p>
