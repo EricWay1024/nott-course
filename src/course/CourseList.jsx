@@ -91,123 +91,119 @@ function CourseList() {
   };
 
   return (
-    <div className="replace-ctn">
-      <div className="course-ctn">
-        <h1 className="page-title">Modules</h1>
-        {!hide
-          ? (
-            <div className="input-field">
-              <div className="search-field">
-                <Grid container spacing={4}>
-                  <SearchBar
-                    value={targetCode}
-                    handleChange={handleCodeChange}
-                    placeholder="Input module code..."
-                    handleSearch={updateCourses('code')}
-                    title="Module Code"
-                  />
+    <div className="page-ctn">
+      <h1 className="page-title">Modules</h1>
+      {!hide
+        ? (
+          <div className="input-field">
+            <div className="search-field">
+              <Grid container spacing={4}>
+                <SearchBar
+                  value={targetCode}
+                  handleChange={handleCodeChange}
+                  placeholder="Input module code..."
+                  handleSearch={updateCourses('code')}
+                  title="Module Code"
+                />
 
-                  <SearchBar
-                    value={targetName}
-                    handleChange={handleNameChange}
-                    placeholder="Input module name..."
-                    handleSearch={updateCourses('title')}
-                    title="Module Name"
-                  />
-                </Grid>
-              </div>
+                <SearchBar
+                  value={targetName}
+                  handleChange={handleNameChange}
+                  placeholder="Input module name..."
+                  handleSearch={updateCourses('title')}
+                  title="Module Name"
+                />
+              </Grid>
+            </div>
 
-              <br />
-              <br />
+            <br />
 
-              <div className="select-card">
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <div className="select-block-left">
-                      <h3 className="card-caption">Schools</h3>
-                      <Select
-                        closeMenuOnSelect={false}
-                        isMulti
-                        onChange={(selectedSchools) => schoolSelection(selectedSchools)}
-                        options={allSchools}
-                        defaultValue={
+            <div className="select-card">
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <div className="select-block-left">
+                    <h3 className="card-caption">Schools</h3>
+                    <Select
+                      closeMenuOnSelect={false}
+                      isMulti
+                      onChange={(selectedSchools) => schoolSelection(selectedSchools)}
+                      options={allSchools}
+                      defaultValue={
                               allSchools.filter((e) => (schoolFilters.includes(e.value)))
                             }
-                        styles={selectionStyles}
-                      />
-                    </div>
+                      styles={selectionStyles}
+                    />
+                  </div>
 
-                    <div className="select-block-left">
-                      <h3 className="card-caption">Level</h3>
-                      <Select
-                        closeMenuOnSelect={false}
-                        isMulti
-                        onChange={(selectedLevels) => levelSelection(selectedLevels)}
-                        options={allLevels}
-                        defaultValue={
+                  <div className="select-block-left">
+                    <h3 className="card-caption">Level</h3>
+                    <Select
+                      closeMenuOnSelect={false}
+                      isMulti
+                      onChange={(selectedLevels) => levelSelection(selectedLevels)}
+                      options={allLevels}
+                      defaultValue={
                               allLevels.filter((e) => (levelFilters.includes(e.value)))
                             }
-                        styles={selectionStyles}
-                      />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <div className="select-block-right">
-                      <h3 className="card-caption">Credit</h3>
-                      <Select
-                        closeMenuOnSelect={false}
-                        isMulti
-                        onChange={(selectedCredits) => creditSelection(selectedCredits)}
-                        options={allCredits}
-                        defaultValue={
+                      styles={selectionStyles}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <div className="select-block-right">
+                    <h3 className="card-caption">Credit</h3>
+                    <Select
+                      closeMenuOnSelect={false}
+                      isMulti
+                      onChange={(selectedCredits) => creditSelection(selectedCredits)}
+                      options={allCredits}
+                      defaultValue={
                               allCredits.filter((e) => (creditFilters.includes(e.value)))
                             }
-                        styles={selectionStyles}
-                      />
-                    </div>
-                    <div className="select-block-right">
-                      <h3 className="card-caption">Semester</h3>
-                      <Select
-                        closeMenuOnSelect={false}
-                        isMulti
-                        onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
-                        options={allSemesters}
-                        defaultValue={
+                      styles={selectionStyles}
+                    />
+                  </div>
+                  <div className="select-block-right">
+                    <h3 className="card-caption">Semester</h3>
+                    <Select
+                      closeMenuOnSelect={false}
+                      isMulti
+                      onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
+                      options={allSemesters}
+                      defaultValue={
                               allSemesters.filter((e) => (semesterFilters.includes(e.value)))
                             }
-                        styles={selectionStyles}
-                      />
-                    </div>
-                  </Grid>
+                      styles={selectionStyles}
+                    />
+                  </div>
                 </Grid>
+              </Grid>
 
-                <div className="btn-ctn">
-                  <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
-                </div>
+              <div className="btn-ctn">
+                <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
               </div>
-
             </div>
-          )
-          : (
-            <div>
-              <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
-              <br />
-              <br />
-              <br />
-              { searching && <CircularProgress /> }
-              <br />
-              <Table
-                data={courses}
-                links={{ code: 'module' }}
-                orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
-                keyDisplay={{ offering: 'Offering School' }}
-                enableSelection
-                keyType={{ credits: 'number' }}
-              />
-            </div>
-          )}
-      </div>
 
+          </div>
+        )
+        : (
+          <div>
+            <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
+            <br />
+            <br />
+            <br />
+            { searching && <CircularProgress /> }
+            <br />
+            <Table
+              data={courses}
+              links={{ code: 'module' }}
+              orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
+              keyDisplay={{ offering: 'Offering School' }}
+              enableSelection
+              keyType={{ credits: 'number' }}
+            />
+          </div>
+        )}
     </div>
   );
 }

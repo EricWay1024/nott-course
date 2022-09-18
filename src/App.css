@@ -267,7 +267,8 @@ a:hover {
   height: auto;
   color: rgb(27, 42, 107);
   margin: 30px 0px;
-  border-bottom: rgb(27, 42, 107) solid;
+  text-decoration: underline;
+  /* border-bottom: rgb(27, 42, 107) solid; */
 }
 
 .detail-page-ctn {
@@ -293,7 +294,7 @@ a:hover {
 }
 
 .search-field{
-  margin-top: 6%;
+  margin-top: 3%;
   width: 98%;
 }
 
@@ -314,8 +315,3 @@ a:hover {
   }
 }
 
-.course-ctn{
-  /* margin-top: 50px; */
-  position: relative;
-  top: 30px;
-}

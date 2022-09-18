@@ -22,7 +22,7 @@ function PlanList() {
   return (
 
     <div className="page-ctn">
-      <h1>Plans</h1>
+      <h1 className="page-title">Plans</h1>
       <SearchBar
         value={keyword}
         handleChange={(e) => setKeyword(e.target.value)}

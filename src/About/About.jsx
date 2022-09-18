@@ -7,6 +7,25 @@ function About() {
   return (
     <div className="about-page-wrapper">
       <h1>About</h1>
+      <div>
+        <GitHubButton
+          href="https://github.com/EricWay1024/nott-course"
+          data-size="large"
+          data-show-count="true"
+          aria-label="Star EricWay1024/nott-course on GitHub"
+        >
+          Star
+        </GitHubButton>
+        {' '}
+        <GitHubButton
+          href="https://github.com/sponsors/EricWay1024"
+          data-icon="octicon-heart"
+          data-size="large"
+          aria-label="Sponsor @EricWay1024 on GitHub"
+        >
+          Sponsor
+        </GitHubButton>
+      </div>
       <h2>{'What\'s Nott Course?'}</h2>
       <p>
         This website, Nott Course, is an
@@ -22,25 +41,24 @@ function About() {
         details, and allowing users to easily draft their module choices.
       </p>
       <p>
-        Nott Course is free and open-soucred on
+        Nott Course is free and open-soucred on GitHub.
+        Give
         {' '}
-        <a href="https://github.com/EricWay1024/nott-course">GitHub</a>
-        . Give it a star if it helps you. You may also want to share our domain name
+        <a href="https://github.com/EricWay1024/nott-course">the repo</a>
+        {' '}
+        a star or
+        {' '}
+        <a href="https://github.com/sponsors/EricWay1024">sponsor us</a>
+        {' '}
+        if this project helps you.
+      </p>
+      <p>
+        You may also want to share our domain name
         {' '}
         <a href="https://nott-course.uk/">nott-course.uk</a>
         {' '}
         with your classmates.
       </p>
-      <div>
-        <GitHubButton
-          href="https://github.com/EricWay1024/nott-course"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star EricWay1024/nott-course on GitHub"
-        >
-          Star
-        </GitHubButton>
-      </div>
       <h2>Who contributed to Nott Course?</h2>
       <p>
         Nott Course is developed by
