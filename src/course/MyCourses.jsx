@@ -134,6 +134,13 @@ function MyCourses() {
   if (!planSettings || !selectedYear) {
     return (
       <div className="detail-page-ctn">
+        <Button
+          onClick={() => {
+            window.location.reload(false);
+          }}
+        >
+          Reload Page
+        </Button>
         <p>
           You have not selected your current year!
         </p>
@@ -150,7 +157,7 @@ function MyCourses() {
         <br />
         STEP 2:
         {' '}
-        Choose your current year by ticking the corresponding checkbox, as shown below:
+        Choose your current year by ticking the corresponding checkbox:
         <img
           src={PlanScreenshot}
           alt="screen shot"
@@ -223,10 +230,10 @@ function MyCourses() {
         Need additional modules?
         {' '}
         <Link to="/course-index" target="_blank">
-          Search for courses
+          Search for modules
         </Link>
         {' '}
-        and check the ones you would like to choose.
+        and tick the ones you need.
       </div>
 
       <h1>Summary Lists of Selected Modules and Assessments</h1>
