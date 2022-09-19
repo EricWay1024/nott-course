@@ -95,14 +95,14 @@ function NavBar(props) {
               Nott Course
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              <CampusSelect fontSx={{ color: 'rgba(27, 42, 107, 0.8)' }} />
-            </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
                 <Button href={navPage[item]} className="page-button" id={item} key={item} sx={{ color: 'rgba(27, 42, 107, 0.8)' }}>
                   {item}
                 </Button>
               ))}
+            </Box>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <CampusSelect fontSx={{ color: 'rgba(27, 42, 107, 0.8)' }} />
             </Box>
           </Toolbar>
         </AppBar>
