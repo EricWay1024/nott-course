@@ -28,6 +28,4 @@ export const getPlan = async (code) => {
   return res;
 };
 
-export const getPlanList = async () => request('/api/plan');
-
 export const queryPlans = async (query) => request('/api/query/plan', 'POST', query);

@@ -15,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import CampusSelect from './CampusSelect';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Module', 'Plan', 'My', 'About'];
@@ -68,6 +69,7 @@ function NavBar(props) {
           </ListItem>
         ))}
       </List>
+      <CampusSelect />
     </Box>
   );
 
@@ -92,6 +94,9 @@ function NavBar(props) {
             >
               Nott Course
             </Typography>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <CampusSelect fontSx={{ color: 'rgba(27, 42, 107, 0.8)' }} />
+            </Box>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
                 <Button href={navPage[item]} className="page-button" id={item} key={item} sx={{ color: 'rgba(27, 42, 107, 0.8)' }}>
