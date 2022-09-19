@@ -34,7 +34,7 @@ function CoursePage(props) {
         {' '}
         {code}
         {' '}
-        has been found.
+        has been found within the current campus.
       </div>
     );
   }

@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import { queryCourses } from '../services/course';
-import { useDocumentTitle } from '../utils/helper';
+import { useDocumentTitle, getLocalStorage } from '../utils/helper';
 
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
-import values from '../assets/values.json';
+import values from '../assets/all_values.json';
 
 let schoolFilters = [];
 let creditFilters = [];
@@ -19,10 +19,11 @@ let targetCourseName = null;
 
 function CourseList() {
   useDocumentTitle('Course List');
-  const allSchools = values.allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') }));
-  const allCredits = values.allCredits.map((credit) => ({ value: credit, label: credit }));
-  const allLevels = values.allLevels.map((level) => ({ value: level, label: level }));
-  const allSemesters = values.allSemesters.map(
+  const campus = getLocalStorage('campus', 'U');
+  const allSchools = values[campus].allSchools.map((school) => ({ value: school, label: school.replace('&amp;', '&') }));
+  const allCredits = values[campus].allCredits.map((credit) => ({ value: credit, label: credit }));
+  const allLevels = values[campus].allLevels.map((level) => ({ value: level, label: level }));
+  const allSemesters = values[campus].allSemesters.map(
     (semester) => ({ value: semester, label: semester }),
   );
 
