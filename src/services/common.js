@@ -4,7 +4,7 @@ const request = async (url, method = 'GET', data = {}) => {
   const campus = getLocalStorage('campus', 'U');
   const headers = {
     'Content-Type': 'application/json',
-    campus,
+    Authorization: campus,
   };
   const baseUrl = process.env.REACT_APP_BASE_URL;
   try {
