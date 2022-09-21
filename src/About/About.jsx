@@ -1,31 +1,15 @@
 import FunctionsIcon from '@mui/icons-material/Functions';
 import React from 'react';
-import GitHubButton from 'react-github-btn';
+import SupportButtons from '../components/SupportButtons';
+import BMCButton from '../components/BMCButton';
 import ScreenshotCourseFilter from '../assets/Screenshot-CourseFilter.png';
 
 function About() {
   return (
     <div className="about-page-wrapper">
+      <SupportButtons />
+      <BMCButton />
       <h1>About</h1>
-      <div>
-        <GitHubButton
-          href="https://github.com/EricWay1024/nott-course"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star EricWay1024/nott-course on GitHub"
-        >
-          Star
-        </GitHubButton>
-        {' '}
-        <GitHubButton
-          href="https://github.com/sponsors/EricWay1024"
-          data-icon="octicon-heart"
-          data-size="large"
-          aria-label="Sponsor @EricWay1024 on GitHub"
-        >
-          Sponsor
-        </GitHubButton>
-      </div>
       <h2>{'What\'s Nott Course?'}</h2>
       <p>
         This website, Nott Course, is an
@@ -42,14 +26,15 @@ function About() {
       </p>
       <p>
         Nott Course is free and open-soucred on GitHub.
-        Give
         {' '}
-        <a href="https://github.com/EricWay1024/nott-course">the repo</a>
-        {' '}
-        a star or
+        <a href="https://github.com/EricWay1024/nott-course">Give the repo a star</a>
+        ,
         {' '}
         <a href="https://github.com/sponsors/EricWay1024">sponsor us</a>
+        , or
         {' '}
+        <a href="https://www.buymeacoffee.com/ericway1024">buy me a coffee</a>
+        ,
         if this project helps you.
       </p>
       <p>
