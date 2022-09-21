@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { getCourseList } from '../services/course';
 import { getSelectedCourses, getLocalStorage } from '../utils/helper';
 import Table from '../components/Table';
+import SupportButtons from '../components/SupportButtons';
 import CourseGroup from '../components/CourseGroup';
 import './course.css';
 import PlanScreenshot from '../assets/Screenshot-SelectPlan.png';
@@ -178,6 +179,7 @@ function MyCourses() {
   return (
 
     <div className="detail-page-ctn">
+      <SupportButtons />
       <Button
         onClick={() => {
           window.location.reload(false);

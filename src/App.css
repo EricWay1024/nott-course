@@ -315,3 +315,18 @@ a:hover {
   }
 }
 
+.about-btn-ctn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.supportFromHome {
+  bottom: 15px;
+}
+

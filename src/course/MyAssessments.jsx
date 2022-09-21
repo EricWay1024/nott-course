@@ -3,6 +3,7 @@ import { GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { getCourseList } from '../services/course';
 import { getSelectedCourses } from '../utils/helper';
 import Table from '../components/Table';
+import SupportButtons from '../components/SupportButtons';
 
 const getCreditSum = (courses) => {
   let creditSum = 0;
@@ -63,6 +64,7 @@ function MyAssessments() {
   return (
 
     <div className="detail-page-ctn">
+      <SupportButtons />
       <h1>Selected Modules</h1>
       <p>Here is a table of all your selected modules.</p>
       <br />
