@@ -1,10 +1,32 @@
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { getCourse } from '../services/course';
 import { useDocumentTitle, processStr } from '../utils/helper';
 import RenderHtml from '../components/RenderHtml';
 import Table from '../components/Table';
+
+function SelectTable(props) {
+  const { code } = props;
+  return (
+    <Table
+      data={[
+        {
+          code,
+        },
+      ]}
+      orderedKeys={['code']}
+      enableSelection
+      noHead
+      noBold
+    />
+  );
+}
+
+SelectTable.propTypes = {
+  code: PropTypes.bool.isRequired,
+};
 
 function CoursePage(props) {
   const { code } = { ...useParams(), ...props };
@@ -71,6 +93,8 @@ function CoursePage(props) {
         orderedKeys={['key', 'value']}
         noHead
       />
+      <br />
+      <SelectTable code={course.code} />
       <h2>Target Students</h2>
       <RenderHtml html={course.targetStudents} />
       <h2>Summary of Content</h2>

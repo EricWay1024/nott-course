@@ -32,7 +32,7 @@ function CourseList() {
   const [targetCode, setTargetCode] = useState('');
   const [targetName, setTargetName] = useState('');
 
-  const [hide, setHide] = useState(false);
+  const [layoutMode, setLayoutMode] = useState('init');
 
   const updateCourses = (mode) => (
     async () => {
@@ -56,7 +56,7 @@ function CourseList() {
       }
       setCourses(fetchedCourses);
       setSearching(false);
-      setHide(true);
+      setLayoutMode(mode);
     });
 
   const schoolSelection = (selectedSchools) => {
@@ -94,31 +94,39 @@ function CourseList() {
   return (
     <div className="page-ctn">
       <h1 className="page-title">Modules</h1>
-      {!hide
-        ? (
-          <div className="input-field">
-            <div className="search-field">
-              <Grid container spacing={4}>
+      <div className="input-field">
+        <div className="search-field">
+          <Grid container spacing={4}>
+            {
+              (layoutMode === 'init' || layoutMode === 'code') && (
                 <SearchBar
                   value={targetCode}
                   handleChange={handleCodeChange}
                   placeholder="Input module code..."
                   handleSearch={updateCourses('code')}
                   title="Module Code"
+                  isHalf={layoutMode === 'init'}
                 />
-
+              )
+            }
+            {
+              (layoutMode === 'init' || layoutMode === 'title') && (
                 <SearchBar
                   value={targetName}
                   handleChange={handleNameChange}
                   placeholder="Input module name..."
                   handleSearch={updateCourses('title')}
                   title="Module Name"
+                  isHalf={layoutMode === 'init'}
                 />
-              </Grid>
-            </div>
+              )
+            }
+          </Grid>
+        </div>
 
-            <br />
-
+        <br />
+        {
+          (layoutMode === 'init' || layoutMode === 'filters') && (
             <div className="select-card">
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -130,8 +138,8 @@ function CourseList() {
                       onChange={(selectedSchools) => schoolSelection(selectedSchools)}
                       options={allSchools}
                       defaultValue={
-                              allSchools.filter((e) => (schoolFilters.includes(e.value)))
-                            }
+                                  allSchools.filter((e) => (schoolFilters.includes(e.value)))
+                                }
                       styles={selectionStyles}
                     />
                   </div>
@@ -144,8 +152,8 @@ function CourseList() {
                       onChange={(selectedLevels) => levelSelection(selectedLevels)}
                       options={allLevels}
                       defaultValue={
-                              allLevels.filter((e) => (levelFilters.includes(e.value)))
-                            }
+                                  allLevels.filter((e) => (levelFilters.includes(e.value)))
+                                }
                       styles={selectionStyles}
                     />
                   </div>
@@ -159,8 +167,8 @@ function CourseList() {
                       onChange={(selectedCredits) => creditSelection(selectedCredits)}
                       options={allCredits}
                       defaultValue={
-                              allCredits.filter((e) => (creditFilters.includes(e.value)))
-                            }
+                                  allCredits.filter((e) => (creditFilters.includes(e.value)))
+                                }
                       styles={selectionStyles}
                     />
                   </div>
@@ -172,8 +180,8 @@ function CourseList() {
                       onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
                       options={allSemesters}
                       defaultValue={
-                              allSemesters.filter((e) => (semesterFilters.includes(e.value)))
-                            }
+                                  allSemesters.filter((e) => (semesterFilters.includes(e.value)))
+                                }
                       styles={selectionStyles}
                     />
                   </div>
@@ -181,30 +189,32 @@ function CourseList() {
               </Grid>
 
               <div className="btn-ctn">
-                <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('fitlers')} type="submit">Search</Button>
+                <Button variant="contained" className="submit-btn select-button" onClick={updateCourses('filters')} type="submit">Search</Button>
               </div>
             </div>
+          )
+        }
 
-          </div>
-        )
-        : (
-          <div>
-            <Button variant="contained" className="submit-btn select-button" onClick={() => setHide(false)}>Back</Button>
-            <br />
-            <br />
-            <br />
-            { searching && <CircularProgress /> }
-            <br />
-            <Table
-              data={courses}
-              links={{ code: 'module' }}
-              orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
-              keyDisplay={{ offering: 'Offering School' }}
-              enableSelection
-              keyType={{ credits: 'number' }}
-            />
-          </div>
-        )}
+      </div>
+      {layoutMode !== 'init'
+      && (
+      <div>
+        <Button variant="contained" className="submit-btn select-button" onClick={() => setLayoutMode('init')}>Back</Button>
+        <br />
+        <br />
+        <br />
+        { searching && <CircularProgress /> }
+        <br />
+        <Table
+          data={courses}
+          links={{ code: 'module' }}
+          orderedKeys={['code', 'title', 'offering', 'level', 'credits', 'semester']}
+          keyDisplay={{ offering: 'Offering School' }}
+          enableSelection
+          keyType={{ credits: 'number' }}
+        />
+      </div>
+      )}
     </div>
   );
 }
