@@ -147,7 +147,7 @@ function About() {
       <p>
         The data on this website was last updated on
         {' '}
-        <b>17 Sept, 2022.</b>
+        <b>03 May, 2023.</b>
       </p>
       <p>
         If you ever spot any
