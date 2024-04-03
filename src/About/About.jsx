@@ -25,7 +25,7 @@ function About() {
         details, and allowing users to easily draft their module choices.
       </p>
       <p>
-        Nott Course is free and open-soucred on GitHub.
+        Nott Course is free and open-sourced on GitHub.
         {' '}
         <a href="https://github.com/EricWay1024/nott-course">Give the repo a star</a>
         ,
@@ -193,7 +193,7 @@ function About() {
         {' '}
         <a href="https://github.com/AugustineFu">Augustine</a>
         {' '}
-        (front-end deveopment and visual design).
+        (front-end development and visual design).
         The web scraper used in data collection is built on
         {' '}
         <a href="https://github.com/uFair-Tech/uCourse-crawler">a project</a>
@@ -201,7 +201,7 @@ function About() {
         by
         {' '}
         <a href="https://github.com/Songkeys">Songkeys</a>
-        . All contributors are current or former students of Unversity of Nottingham.
+        . All contributors are current or former students of University of Nottingham.
       </p>
       <h2>DISCLAIMER</h2>
       <p>

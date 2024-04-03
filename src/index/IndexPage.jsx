@@ -78,7 +78,7 @@ function IndexPage() {
         </div>
         <div className="subtitle-wrapper">
           <div className="index-subtitle">
-            Welcome to Nott Course. This is an unoffical version of University
+            Welcome to Nott Course. This is an unofficial version of University
             {' of Nottingham\'s course catalogue, which provides details of the '}
             curriculum content – both plans and modules delivered to students in the
             {' '}
@@ -105,7 +105,7 @@ function IndexPage() {
           <IndexCard
             buttonHref="/about"
             buttonCaption="ABOUT"
-            label="See intructions on how to use"
+            label="See instructions on how to use"
           />
         </div>
       </div>
