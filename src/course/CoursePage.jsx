@@ -5,6 +5,7 @@ import { CircularProgress } from '@mui/material';
 import { getCourse } from '../services/course';
 import { useDocumentTitle, processStr } from '../utils/helper';
 import RenderHtml from '../components/RenderHtml';
+import Tips from '../components/Tips';
 import Table from '../components/Table';
 
 function SelectTable(props) {
@@ -65,54 +66,82 @@ function CoursePage(props) {
     <div className="detail-page-ctn">
       <h1>{`${course.code} - ${course.title}`}</h1>
       <Table
-        data={([{
-          key: 'Code',
-          value: course.code,
-        },
-        {
-          key: 'Title',
-          value: course.title,
-        },
-        {
-          key: 'Credits',
-          value: course.credits,
-        },
-        {
-          key: 'Level',
-          value: course.level,
-        },
-        {
-          key: 'Offering School',
-          value: course.offering,
-        },
-        {
-          key: 'Semester',
-          value: course.semester,
-        },
+        data={([
+          {
+            key: 'Academic Year',
+            value: course.year,
+          },
+          {
+            key: 'Module Code',
+            value: course.code,
+          },
+          {
+            key: 'Title',
+            value: course.title,
+          },
+          {
+            key: 'Total Credits',
+            value: Math.round(Number(course.credits)),
+          },
+          {
+            key: 'Level',
+            value: Math.round(Number(course.level)),
+          },
+          {
+            key: 'Offering School',
+            value: course.offering,
+          },
+          {
+            key: 'Module Convenor',
+            value: course.convenor,
+          },
+          {
+            key: 'Taught Semester(s)',
+            value: course.semester,
+          },
+          {
+            key: 'Target Students',
+            value: course.targetStudents,
+          },
         ])}
         orderedKeys={['key', 'value']}
         noHead
       />
       <br />
       <SelectTable code={course.code} />
-      <h2>Target Students</h2>
-      <RenderHtml html={course.targetStudents} />
       <h2>Summary of Content</h2>
       <RenderHtml html={course.summary} />
-      <h2>Course Web Links</h2>
-      <Table data={course.courseWebLinks} orderedKeys={['type', 'link']} />
-      <h2>Education Aims</h2>
+      <h2>Educational Aims</h2>
       <RenderHtml html={course.aims} />
-      <h2>Convenor</h2>
-      <Table data={course.convenor} orderedKeys={['name']} />
-      <h2>Requisites</h2>
+      {course.requisites.length
+        ? (
+          <h2>
+            Pre-Requisites
+            <Tips tip="Modules that a student must have already successfully completed before they can enrol on this module." />
+          </h2>
+        )
+        : <div />}
       <Table
         data={course.requisites}
-        orderedKeys={['subject', 'courseTitle']}
-        links={{ subject: 'module' }}
-        keyDisplay={{ subject: 'Course Code' }}
+        orderedKeys={['code', 'title']}
+        links={{ code: 'module' }}
+        keyDisplay={{ code: 'Course Code' }}
       />
-      <h2>Additional Requirements</h2>
+      {course.corequisites.length
+        ? (
+          <h2>
+            Co-Requisites
+            <Tips tip="Modules that a student must be taking in the same academic year, or have taken in a previous academic year, to enable them to enrol on this module." />
+          </h2>
+        )
+        : <div />}
+      <Table
+        data={course.corequisites}
+        orderedKeys={['code', 'title']}
+        links={{ code: 'module' }}
+        keyDisplay={{ code: 'Course Code' }}
+      />
+      {course.additionalRequirements.length ? <h2>Additional Requirements</h2> : <div />}
       <Table
         data={course.additionalRequirements}
         orderedKeys={['operator', 'condition']}
@@ -122,14 +151,15 @@ function CoursePage(props) {
         data={course.class}
         orderedKeys={['activity', 'numOfWeeks', 'numOfSessions', 'sessionDuration']}
       />
-      <h2>Method of Assessment</h2>
+      <RenderHtml html={course.classComment} />
+      <h2>Assessment</h2>
       <Table
         data={course.assessment}
-        orderedKeys={['type', 'weight', 'requirements']}
+        orderedKeys={['assessment', 'type', 'weight', 'duration', 'requirements']}
       />
-      <h2>Assessment Period</h2>
+      <h3>Assessment Period</h3>
       <RenderHtml html={course.assessmentPeriod} />
-      <h2>Learning Outcome</h2>
+      <h2>Learning Outcomes</h2>
       <RenderHtml html={course.outcome} />
     </div>
   );

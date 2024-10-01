@@ -90,9 +90,10 @@ function MyAssessments() {
       />
       <h1>My Assessments</h1>
       <p>
-        Generated from your selected modules. The last column stands for
-        the percentage contribution of an assessment to your final score
-        of the academic year.
+        All your assessments this academic year, generated from your selected modules.
+        The last column stands for
+        the percentage contribution of each assessment to your final mark
+        of the academic year. Be sure to prepare for them all!
       </p>
       <br />
       <Table

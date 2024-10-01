@@ -1,0 +1,19 @@
+[id^="win0divUN_QAAL_OTC_TBLrowcnt$"] {
+    display: none;
+}
+
+[id^="win0divUN_QAAL_OTC_TBLhdr$"] {
+    display: none;
+}
+
+[id^="UN_QLRN_OTC_TBL_UN_LEARN_OUTCOME_T$"] {
+    font-size: 1.25em;  /* Adjust to match the typical size of h4 */
+    font-weight: normal;  /* Make the text bold like h4 */
+    margin: 1.33em 0;   /* Add spacing similar to an h4 */
+    display: block;     /* Make the span behave like a block-level element */
+  }
+
+  [id^="UN_PAM_PLAN_WRK_$"][id$="$lbl"] {
+    font-size: 0.8em;  /* Adjust this value to make it smaller */
+    font-weight: normal;  /* Optionally adjust the weight if needed */
+  }
