@@ -12,17 +12,17 @@ function About() {
       <h1>About</h1>
       <h2>{'What\'s Nott Course?'}</h2>
       <p>
-        This website, Nott Course, is an
+        Nott Course is an
         {' '}
         <b>UNOFFICIAL</b>
         {' '}
         enhancement of
         {' '}
         <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">
-          the course catalogue offered by University of Nottingham
+          the University of Nottingham course catalogue
         </a>
-        , developed with the purpose of boosting user experience in browsing module and plan
-        details, and allowing users to easily draft their module choices.
+        , developed for better experience in browsing details of modules and academic plans
+        and easy drafting of module choices.
       </p>
       <p>
         Nott Course is free and open-sourced on GitHub.
@@ -36,9 +36,14 @@ function About() {
         <a href="https://www.buymeacoffee.com/ericway1024">buy me a coffee</a>
         ,
         if this project helps you.
+        {' '}
+        <b>
+          Help is wanted from anyone that would like to maintain this project
+          and keep the data updated.
+        </b>
       </p>
       <p>
-        You may also want to share our domain name
+        Remember to share the link
         {' '}
         <a href="https://nott-course.uk/">nott-course.uk</a>
         {' '}
@@ -147,7 +152,7 @@ function About() {
       <p>
         The data on this website was last updated on
         {' '}
-        <b>03 May, 2023.</b>
+        <b>01 October, 2024.</b>
       </p>
       <p>
         If you ever spot any
@@ -185,23 +190,40 @@ function About() {
       <p>
         Nott Course is developed by
         {' '}
-        <a href="https://github.com/EricWay1024">Eric</a>
+        <a href="https://github.com/EricWay1024">Yuhang &quot;Eric&quot; Wei</a>
         {' '}
         (full-stack development, product management, data processing, and server maintenance)
         {' '}
         and
         {' '}
-        <a href="https://github.com/AugustineFu">Augustine</a>
+        <a href="https://github.com/AugustineFu">Ao &quot;Augustine&quot; Fu</a>
         {' '}
         (front-end development and visual design).
-        The web scraper used in data collection is built on
+        All contributors are former students of University of Nottingham.
+      </p>
+      <h2>Why did you develop this website?</h2>
+      <p>
+        When
+        my friends and I were selecting our modules for the final year at UoN,
+        we had a difficult time navigating
+        through the official catalog.
+        We wanted to explore additional modules from other departments,
+        but we could not conveniently browse all the possible options
+        (e.g., in a certain semester, with certain credits, or within a certain level range).
+        This project started as a Python script to filter modules in a JSON file obtained by
         {' '}
-        <a href="https://github.com/uFair-Tech/uCourse-crawler">a project</a>
+        <a href="https://github.com/uFair-Tech/uCourse-crawler">a web crawler</a>
         {' '}
-        by
+        developed by
         {' '}
         <a href="https://github.com/Songkeys">Songkeys</a>
-        . All contributors are current or former students of University of Nottingham.
+        , and eventually evolved into a full-stack web development project that
+        occupied a big part of my 2022 summer.
+        {' '}
+        <b>
+          Choosing your modules is one of the most important decisions you will make at university,
+          and you deserve to be well-informed.
+        </b>
       </p>
       <h2>DISCLAIMER</h2>
       <p>

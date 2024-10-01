@@ -78,12 +78,15 @@ function IndexPage() {
         </div>
         <div className="subtitle-wrapper">
           <div className="index-subtitle">
-            Welcome to Nott Course. This is an unofficial version of University
-            {' of Nottingham\'s course catalogue, which provides details of the '}
-            curriculum content – both plans and modules delivered to students in the
+            Welcome to Nott Course.
+            View details of modules and academic plans from University of Nottingham
+            here, and easily draft your module choices.
+            The data for the
             {' '}
-            <b>2023 academic year</b>
-            . The data was last updated on 3 May, 2023.
+            <b>2024-25 academic year</b>
+            {' '}
+            was last updated on 01 October, 2024.
+            Developed by alumni.
           </div>
         </div>
         <div className="cards-wrapper">
