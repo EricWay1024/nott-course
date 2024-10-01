@@ -132,7 +132,7 @@ function PlanPage(props) {
 
       <h2>
         Plan Structure
-        <Tips tip="Click on each year to expand its modules. Tick your current year and modules you want to choose, then go to My." />
+        <Tips tip="Click on each year to expand its modules. Tick your current year and modules you want to choose, then go to MY." />
       </h2>
       <div className="struct-ctn">
 
