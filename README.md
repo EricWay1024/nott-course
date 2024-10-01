@@ -63,9 +63,9 @@ Better UX for course catalogue of University of Nottingham. <a href="https://cam
 
 This project is still under development. See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
 
-The backend server for this project can be found here: [EricWay1024/nott-course-server-cpp: C++ Web Server for Nott Course, an unofficial enhancement of the course catalogue offered by University of Nottingham.](https://github.com/EricWay1024/nott-course-server-cpp).
+The backend server for this project can be found [here](https://github.com/EricWay1024/nott-course-server-cpp).
 
-The crawler for this project can be found here: [EricWay1024/uCourse-crawler: 🎒 Scrape the courses info from the University of Nottingham's website.](https://github.com/EricWay1024/uCourse-crawler).
+The new (as of October 2024) crawler for this project can be found [here](https://github.com/EricWay1024/nottCrawlerNew).
 
 
 ### Built With
