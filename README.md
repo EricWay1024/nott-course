@@ -1,22 +1,5 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -28,14 +11,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <!-- <a href="https://github.com/EricWay1024/nott-course">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a> -->
-
-<h3 align="center"><a href="https://nott-course.uk/">Nott Course</a></h3>
+    <img src="public/logo512.png" alt="Logo" width="100" height="100">
+    <h3 align="center">Nott Course</h3>
 
   <p align="center">
-    An UNOFFICIAL enhancement of the course catalogue offered by University of Nottingham
+    An unofficial enhancement of the University of Nottingham course catalogue 
     <!-- <br /> -->
     <!-- <a href="https://github.com/EricWay1024/nott-course"><strong>Explore the docs »</strong></a> -->
     <br />
@@ -50,43 +30,40 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- <img src="img/Screenshot_Index.png" alt="Course List Screenshot" /> -->
+<img src="img/Screenshot-filter.png" alt="Module Filter Screenshot" />
 
-Better UX for course catalogue of University of Nottingham. <a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">The original website</a> contains abundant useful information regarding modules and academic plans, but is extremely frustrating to use. Built for potential or current students to better utilise publicly available data for their plan or module choices, this project, Nott Course, is featured with
+Better UX for the UoN course catalogue. 
+<a href="https://campus.nottingham.ac.uk/psp/csprd_pub/EMPLOYEE/HRMS/c/UN_PROG_AND_MOD_EXTRACT.UN_PAM_CRSE_EXTRCT.GBL">The official catalogue</a> contains abundant useful information regarding modules and academic plans, but is extremely frustrating to use.
+Built for potential or current students to better utilise publicly available data for their plan or module choices, Nott Course is featured with
 
 - FULL data of current year's catalogue;
 - Responsive UI design;
 - Free navigation from plans to modules;
 - Advanced filters for modules and plans;
-- Helping users draft their module selection;
-- Generating a list of assessments according to selected modules.
+- Easy drafting of module selections;
+- Generating a list of assessments based on selected modules.
 
-This project is still under development. See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a full list of proposed features and known issues.
+
+**The current developers have graduated from UoN. If you would like to take over this project, please contact me via the email at the bottom of this page.**
+
+### Built With
+
+* [React.js](https://reactjs.org/);
+* [Material UI](https://mui.com);
+* Hosted on [Cloudflare Pages](https://pages.dev/).
 
 The backend server for this project can be found [here](https://github.com/EricWay1024/nott-course-server-cpp).
 
 The new (as of October 2024) crawler for this project can be found [here](https://github.com/EricWay1024/nottCrawlerNew).
 
-
-### Built With
-
-* [React.js](https://reactjs.org/)
-
-This repo is hosted on [Cloudflare Pages](https://pages.dev/).
-
-
-
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -103,10 +80,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-   
-
-
-
+  
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -116,8 +90,10 @@ Start a local server:
 npm start
 ```
 
-
-
+Production build:
+```sh
+npm run build
+```
 
 
 <!-- ROADMAP -->
@@ -162,11 +138,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Eric Way - ericway1024@gmail.com
-
-Project Link: [https://github.com/EricWay1024/nott-course](https://github.com/EricWay1024/nott-course)
-
-
+Yuhang "Eric" Wei - ericway1024@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
