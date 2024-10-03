@@ -26,6 +26,7 @@ const getAssessmentList = (courses) => {
         assessmentType: assess.type,
         assessmentRequirements: assess.requirements,
         assessmentWeight: assess.weight,
+        assessmentDuration: assess.duration,
         assessmentContribution: (
           (1 * assess.weight * (1 * course.credits))
           / creditSum
@@ -105,6 +106,7 @@ function MyAssessments() {
           'courseSemester',
           'assessmentType',
           'assessmentRequirements',
+          'assessmentDuration',
           'assessmentWeight',
           'assessmentContribution',
         ]}
