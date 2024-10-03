@@ -53,9 +53,12 @@ See the [open issues](https://github.com/EricWay1024/nott-course/issues) for a f
 * [Material UI](https://mui.com);
 * Hosted on [Cloudflare Pages](https://pages.dev/).
 
-The backend server for this project can be found [here](https://github.com/EricWay1024/nott-course-server-cpp).
+### Sister Repos
 
-The new (as of October 2024) crawler for this project can be found [here](https://github.com/EricWay1024/nottCrawlerNew).
+This repo only contains the frontend of this web project. It is built in conjunction with the following:
+
+- [The C++ backend server](https://github.com/EricWay1024/nott-course-server-cpp) and 
+- [The new (as of October 2024) Python crawler](https://github.com/EricWay1024/nottCrawlerNew).
 
 <!-- GETTING STARTED -->
 ## Getting Started
