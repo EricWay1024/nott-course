@@ -152,7 +152,7 @@ function About() {
       <p>
         The data on this website was last updated on
         {' '}
-        <b>01 October, 2024.</b>
+        <b>25 June, 2025.</b>
       </p>
       <p>
         If you ever spot any

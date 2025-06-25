@@ -85,7 +85,7 @@ function IndexPage() {
             {' '}
             <b>2024-25 academic year</b>
             {' '}
-            was last updated on 01 October, 2024.
+            was last updated on 25 June, 2025.
             Developed by alumni.
           </div>
         </div>
