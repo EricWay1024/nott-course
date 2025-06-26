@@ -83,7 +83,7 @@ function IndexPage() {
             here, and easily draft your module choices.
             The data for the
             {' '}
-            <b>2024-25 academic year</b>
+            <b>2025-26 academic year</b>
             {' '}
             was last updated on 25 June, 2025.
             Developed by alumni.
