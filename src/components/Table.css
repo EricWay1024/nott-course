@@ -21,9 +21,11 @@
 .MuiDataGrid-cell {
   white-space: initial !important;
   text-align: center;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
 }
 
 .MuiDataGrid-cellContent {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }

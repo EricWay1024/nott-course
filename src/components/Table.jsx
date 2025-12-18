@@ -108,6 +108,16 @@ function Table(props) {
           disableSelectionOnClick
           onSelectionModelChange={onSelectionModelChange}
           selectionModel={selectionModel}
+          sx={{
+            '& .MuiDataGrid-cell': {
+              py: 1.5,
+            },
+            '& .MuiDataGrid-row': {
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            },
+          }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...optionalProps}
           // eslint-disable-next-line react/jsx-props-no-spreading
