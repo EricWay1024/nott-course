@@ -6,7 +6,7 @@ const request = async (url, method = 'GET', data = {}) => {
     'Content-Type': 'application/json',
     Authorization: campus,
   };
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   try {
     const res = await fetch(
       `${baseUrl}${url}`,
