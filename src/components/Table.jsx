@@ -66,7 +66,7 @@ function Table(props) {
   // optional props
   const optionalProps = {};
   if (noHead) {
-    optionalProps.headerHeight = 0;
+    optionalProps.columnHeaderHeight = 0;
     optionalProps.hideFooter = true;
   }
 
@@ -105,9 +105,9 @@ function Table(props) {
           autoHeight
           getRowHeight={() => 'auto'}
           checkboxSelection={enableSelection}
-          disableSelectionOnClick
-          onSelectionModelChange={onSelectionModelChange}
-          selectionModel={selectionModel}
+          disableRowSelectionOnClick
+          onRowSelectionModelChange={onSelectionModelChange}
+          rowSelectionModel={selectionModel}
           sx={{
             '& .MuiDataGrid-cell': {
               py: 1.5,

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DOMPurify from 'dompurify';
 
 function RenderHtml(props) {
   // convert html to a react element
@@ -7,6 +8,8 @@ function RenderHtml(props) {
   if (!html) {
     return <div />;
   }
+
+  // cosmetic clean-up of the catalogue's PeopleSoft markup
   html = html.replace(/(style|face|color|width|height|class)="[^"]*"/g, ''); // remove styles
   html = html.replace(/<img[^>]*>/g, ''); // remove images
   html = html.replace(/(<br>)+/g, '<br>'); // remove multiple brs
@@ -28,8 +31,12 @@ function RenderHtml(props) {
   id2class('win0divUN_QAA_LRN_OUTCGP\\$[0-9]+', 'hidden');
   id2class('win0divUN_QA_LRN_OUTCO_UN_TEACH_LRN_ASSMN\\$[0-9]+', 'lo-content');
 
+  // Sanitise as the actual security boundary: strips scripts, event
+  // handlers and other XSS vectors that the cosmetic regexes above miss.
+  const clean = DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
+
   // eslint-disable-next-line react/no-danger
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div dangerouslySetInnerHTML={{ __html: clean }} />;
 }
 
 RenderHtml.propTypes = {

@@ -10,6 +10,7 @@ export const getCourses = async (codes) => request('/api/courses', 'POST', { cod
 export const getCourseList = async (codes) => {
   if (!codes || codes.length === 0) return [];
   const res = await getCourses(codes);
+  if (!Array.isArray(res)) return [];
   return addKeys(res);
 };
 

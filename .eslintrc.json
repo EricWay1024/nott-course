@@ -1,10 +1,12 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended"
+        "airbnb",
+        "airbnb/hooks"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -13,9 +15,32 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "plugins": [
         "react"
     ],
     "rules": {
-    }
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "react/react-in-jsx-scope": "off",
+        "import/extensions": ["error", "ignorePackages", { "js": "never", "jsx": "never" }],
+        "import/no-unresolved": ["error", { "ignore": ["\\.css$", "\\.png$"] }],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    },
+    "overrides": [
+        {
+            "files": ["**/*.test.{js,jsx}"],
+            "globals": {
+                "describe": "readonly",
+                "it": "readonly",
+                "expect": "readonly",
+                "vi": "readonly",
+                "beforeEach": "readonly",
+                "afterEach": "readonly"
+            }
+        }
+    ]
 }

@@ -13,6 +13,7 @@
     "@mui/material": "^6.2.1",
     "@mui/x-data-grid": "^7.28.0",
     "axios": "^1.13.2",
+    "dompurify": "^3.4.9",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -25,7 +26,9 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.1",
@@ -35,6 +38,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "vite": "^8.0.7"
+    "jsdom": "^29.1.1",
+    "vite": "^8.0.7",
+    "vitest": "^4.1.8"
   }
 }

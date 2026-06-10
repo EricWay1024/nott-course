@@ -330,3 +330,8 @@ a:hover {
   bottom: 15px;
 }
 
+.search-error {
+  color: #d32f2f;
+  font-weight: 500;
+}
+

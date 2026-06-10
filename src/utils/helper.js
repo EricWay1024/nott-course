@@ -19,27 +19,21 @@ export const addKeys = (data) => {
   return data.map((item, index) => ({ ...item, id: item.code || index }));
 };
 
-const decodeEntities = (() => {
-  // https://stackoverflow.com/questions/5796718/html-entity-decode
-  // this prevents any overhead from creating the object each time
-  const element = document.createElement('div');
+const domParser = new DOMParser();
 
-  const decodeHTMLEntities = (oldStr) => {
-    let str = oldStr;
-    if (str && typeof str === 'string') {
-      // strip script/html tags
-      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-      element.innerHTML = str;
-      str = element.textContent;
-      element.textContent = '';
-    }
+const decodeEntities = (oldStr) => {
+  let str = oldStr;
+  if (str && typeof str === 'string') {
+    // strip script/html tags
+    str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+    str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+    // DOMParser decodes entities without executing scripts or loading
+    // resources (unlike assigning to element.innerHTML).
+    str = domParser.parseFromString(str, 'text/html').documentElement.textContent;
+  }
 
-    return str;
-  };
-
-  return decodeHTMLEntities;
-})();
+  return str;
+};
 
 export const processStr = (str) => {
   // convert HTML to text only

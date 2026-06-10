@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Select from 'react-select';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -10,13 +10,6 @@ import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
 import values from '../assets/all_values.json';
 
-let schoolFilters = [];
-let creditFilters = [];
-let levelFilters = [];
-let semesterFilters = [];
-let targetCourseCode = null;
-let targetCourseName = null;
-
 function CourseList() {
   useDocumentTitle('Course List');
   const campus = getLocalStorage('campus', 'U');
@@ -27,8 +20,17 @@ function CourseList() {
     (semester) => ({ value: semester, label: semester }),
   );
 
+  // Filter selections are only read at search time, so refs keep them scoped
+  // to this component instance without re-rendering on every change. (These
+  // were previously module-level variables shared across the whole app.)
+  const schoolFilters = useRef([]);
+  const creditFilters = useRef([]);
+  const levelFilters = useRef([]);
+  const semesterFilters = useRef([]);
+
   const [searching, setSearching] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [error, setError] = useState(null);
   const [targetCode, setTargetCode] = useState('');
   const [targetName, setTargetName] = useState('');
 
@@ -37,52 +39,56 @@ function CourseList() {
   const updateCourses = (mode) => (
     async () => {
       setSearching(true);
+      setError(null);
       let fetchedCourses;
       if (mode === 'code') {
         fetchedCourses = await queryCourses({
-          code: targetCourseCode,
+          code: targetCode,
         });
       } else if (mode === 'title') {
         fetchedCourses = await queryCourses({
-          title: targetCourseName,
+          title: targetName,
         });
       } else {
         fetchedCourses = await queryCourses({
-          offering: schoolFilters,
-          credits: creditFilters,
-          level: levelFilters,
-          semester: semesterFilters,
+          offering: schoolFilters.current,
+          credits: creditFilters.current,
+          level: levelFilters.current,
+          semester: semesterFilters.current,
         });
       }
-      setCourses(fetchedCourses);
+      if (Array.isArray(fetchedCourses)) {
+        setCourses(fetchedCourses);
+      } else {
+        setCourses([]);
+        setError('Something went wrong while searching. Please try again later.');
+      }
       setSearching(false);
       setLayoutMode(mode);
     });
 
   const schoolSelection = (selectedSchools) => {
-    schoolFilters = selectedSchools.map((e) => e.value);
+    schoolFilters.current = selectedSchools.map((e) => e.value);
   };
 
   const creditSelection = (selectedCredits) => {
-    creditFilters = selectedCredits.map((e) => e.value);
+    creditFilters.current = selectedCredits.map((e) => e.value);
   };
 
   const levelSelection = (selectedLevels) => {
-    levelFilters = selectedLevels.map((e) => e.value);
+    levelFilters.current = selectedLevels.map((e) => e.value);
   };
 
   const semesterSelection = (selectedSemesters) => {
-    semesterFilters = selectedSemesters.map((e) => e.value);
+    semesterFilters.current = selectedSemesters.map((e) => e.value);
   };
 
   const handleCodeChange = (event) => {
     setTargetCode(event.target.value);
-    targetCourseCode = event.target.value;
   };
 
   const handleNameChange = (event) => {
     setTargetName(event.target.value);
-    targetCourseName = event.target.value;
   };
 
   const selectionStyles = {
@@ -138,7 +144,7 @@ function CourseList() {
                       onChange={(selectedSchools) => schoolSelection(selectedSchools)}
                       options={allSchools}
                       defaultValue={
-                                  allSchools.filter((e) => (schoolFilters.includes(e.value)))
+                                  allSchools.filter((e) => (schoolFilters.current.includes(e.value)))
                                 }
                       styles={selectionStyles}
                     />
@@ -152,7 +158,7 @@ function CourseList() {
                       onChange={(selectedLevels) => levelSelection(selectedLevels)}
                       options={allLevels}
                       defaultValue={
-                                  allLevels.filter((e) => (levelFilters.includes(e.value)))
+                                  allLevels.filter((e) => (levelFilters.current.includes(e.value)))
                                 }
                       styles={selectionStyles}
                     />
@@ -167,7 +173,7 @@ function CourseList() {
                       onChange={(selectedCredits) => creditSelection(selectedCredits)}
                       options={allCredits}
                       defaultValue={
-                                  allCredits.filter((e) => (creditFilters.includes(e.value)))
+                                  allCredits.filter((e) => (creditFilters.current.includes(e.value)))
                                 }
                       styles={selectionStyles}
                     />
@@ -180,7 +186,9 @@ function CourseList() {
                       onChange={(selectedSemesters) => semesterSelection(selectedSemesters)}
                       options={allSemesters}
                       defaultValue={
-                                  allSemesters.filter((e) => (semesterFilters.includes(e.value)))
+                                  allSemesters.filter(
+                                    (e) => (semesterFilters.current.includes(e.value)),
+                                  )
                                 }
                       styles={selectionStyles}
                     />
@@ -204,6 +212,7 @@ function CourseList() {
         <br />
         <br />
         { searching && <CircularProgress /> }
+        { error && <p className="search-error">{error}</p> }
         <br />
         <Table
           data={courses}

@@ -13,11 +13,17 @@ const request = async (url, method = 'GET', data = {}) => {
       method === 'GET'
         ? { headers }
         : { headers, method, body: JSON.stringify(data) },
-    ).then((r) => r.json());
-    return res;
+    );
+    if (!res.ok) {
+      // Surface HTTP errors instead of masking them as empty results.
+      return { error: { status: res.status, message: `Request failed with status ${res.status}` } };
+    }
+    return await res.json();
   } catch (e) {
-    // console.error(e);
-    return {};
+    // Network failure or invalid JSON: report it rather than swallowing.
+    // eslint-disable-next-line no-console
+    console.error(`Request to ${url} failed:`, e);
+    return { error: { status: 0, message: e.message || 'Network error' } };
   }
 };
 
